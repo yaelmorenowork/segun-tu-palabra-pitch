@@ -6,39 +6,48 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <style>
   /* ===== DESIGN SYSTEM ===========================================
-     Deliberately single-theme (a projected deck, not an adaptive app):
-     fondo blanco fijo, tal y como pide el brief. Paleta y escala abajo.
+     Fiel a las referencias: fondo blanco de base con "atmósfera" de
+     degradado azul-acero → crema cálido (nunca a pantalla completa),
+     glassmorphism en tags/botones, navy oscuro como tinta principal,
+     píldoras redondeadas, tipografía de sistema estilo Apple.
      ================================================================ */
   :root{
     --paper:      #FFFFFF;
-    --paper-alt:  #F5F3EF;
-    --ink:        #14151C;
-    --ink-85:     rgba(20,21,28,.85);
-    --ink-70:     rgba(20,21,28,.68);
-    --ink-55:     rgba(20,21,28,.52);
-    --ink-35:     rgba(20,21,28,.32);
-    --ink-16:     rgba(20,21,28,.14);
-    --ink-08:     rgba(20,21,28,.07);
-    --blue:       #33517E;
-    --blue-soft:  #C7D2E3;
-    --terracotta: #BE4F2C;
-    --terracotta-soft: #F1D9CD;
 
-    --f-display: "Bricolage Grotesque", "Arial Narrow", sans-serif;
-    --f-body:    "IBM Plex Sans", Arial, sans-serif;
-    --f-mono:    "IBM Plex Mono", "Courier New", monospace;
+    --navy:       #1B2740;
+    --navy-82:    rgba(27,39,64,.82);
+    --navy-70:    rgba(27,39,64,.70);
+    --navy-55:    rgba(27,39,64,.55);
+    --navy-38:    rgba(27,39,64,.38);
+    --navy-16:    rgba(27,39,64,.14);
+    --navy-08:    rgba(27,39,64,.06);
+
+    --steel:      #7E97BC;
+    --steel-dark: #4F6A93;
+    --sky:        #D8E2EE;
+    --cream:      #F3E6DC;
+
+    --chip-fill:  #F1F3F6;
+    --chip-line:  rgba(27,39,64,.07);
+
+    --glass-fill:   rgba(255,255,255,.62);
+    --glass-fill-2: rgba(255,255,255,.78);
+    --glass-line:   rgba(255,255,255,.85);
+    --glass-shadow: 0 10px 30px rgba(27,39,64,.10);
+
+    --f-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
   }
 
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{
     background:var(--paper);
-    color:var(--ink);
-    font-family:var(--f-body);
+    color:var(--navy);
+    font-family:var(--f-sans);
     overflow:hidden;
     height:100vh;
     width:100vw;
@@ -58,160 +67,179 @@
     background:var(--paper);
     transform:translate(-50%,-50%);
     overflow:hidden;
-    box-shadow:0 0 0 1px var(--ink-08);
+    box-shadow:0 0 0 1px var(--navy-08);
+  }
+
+  /* ================= ATMOSPHERE (soft gradient blobs, never full-bleed) ================= */
+  #atmosphere{position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0;}
+  .blob{
+    position:absolute; top:0; left:0; border-radius:50%;
+    filter:blur(90px); will-change:transform;
+  }
+  .blob-a{width:820px; height:820px; background:radial-gradient(circle at 32% 30%, rgba(126,151,188,.60), rgba(126,151,188,0) 68%);}
+  .blob-b{width:760px; height:760px; background:radial-gradient(circle at 60% 45%, rgba(243,230,220,.95), rgba(243,230,220,0) 70%);}
+  .blob-c{width:520px; height:520px; background:radial-gradient(circle at 50% 50%, rgba(216,226,238,.85), rgba(216,226,238,0) 70%);}
+
+  @media (prefers-reduced-motion: no-preference){
+    .blob{animation:drift 22s ease-in-out infinite alternate;}
+    .blob-b{animation-duration:26s;}
+    .blob-c{animation-duration:19s;}
+  }
+  @keyframes drift{
+    from{ margin-left:0px; margin-top:0px; }
+    to{ margin-left:18px; margin-top:-14px; }
   }
 
   /* ================= CHROME (persistent across slides) ================= */
   .progressbar{
-    position:absolute; left:96px; top:40px; width:1408px; height:3px;
-    display:flex; gap:6px;
+    position:absolute; left:96px; top:44px; width:1408px; height:5px;
+    display:flex; gap:6px; z-index:2;
   }
   .progressbar i{
-    flex:1; height:100%; background:var(--ink-16); border-radius:2px; overflow:hidden; position:relative;
+    flex:1; height:100%; background:var(--chip-fill); border-radius:999px; overflow:hidden; position:relative;
   }
   .progressbar i em{
-    display:block; position:absolute; inset:0; background:var(--ink); transform:scaleX(0); transform-origin:left;
+    display:block; position:absolute; inset:0; background:var(--navy); border-radius:999px;
+    transform:scaleX(0); transform-origin:left;
   }
 
   .chrome-brand{
-    position:absolute; left:96px; top:66px; display:flex; align-items:center; gap:10px;
+    position:absolute; left:96px; top:72px; display:flex; align-items:center; gap:9px; color:var(--navy); z-index:2;
   }
   .chrome-brand svg{display:block;}
   .chrome-brand span{
-    font-family:var(--f-mono); font-size:12px; letter-spacing:.14em; color:var(--ink-70); font-weight:500;
+    font-size:12.5px; letter-spacing:.05em; color:var(--navy-55); font-weight:600;
   }
 
   .chrome-run{
-    position:absolute; right:96px; top:66px; text-align:right;
-    font-family:var(--f-mono); font-size:12px; letter-spacing:.14em; color:var(--ink-35);
+    position:absolute; right:96px; top:72px; text-align:right; z-index:2;
+    font-size:12.5px; letter-spacing:.02em; color:var(--navy-38);
   }
-  .chrome-run b{color:var(--ink-70); font-weight:500;}
+  .chrome-run b{color:var(--navy-55); font-weight:600;}
 
   .chrome-footer{
-    position:absolute; left:96px; bottom:44px;
-    font-family:var(--f-mono); font-size:11px; letter-spacing:.1em; color:var(--ink-35);
+    position:absolute; left:96px; bottom:44px; z-index:2;
+    font-size:12px; letter-spacing:.02em; color:var(--navy-38);
   }
 
-  /* ================= TYPOGRAPHY HELPERS ================= */
-  .mono{font-family:var(--f-mono);}
-  .display{font-family:var(--f-display);}
-
-  .tag{
-    font-family:var(--f-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--ink-55);
+  /* ================= SHARED: glass pill tag (kicker / small tags) ================= */
+  .pill-tag{
+    display:inline-flex; align-items:center; padding:9px 18px; border-radius:999px;
+    background:var(--navy); color:#fff; font-size:13px; font-weight:600; letter-spacing:.005em;
+    box-shadow:0 6px 18px rgba(27,39,64,.18);
   }
 
-  .kicker{
-    font-family:var(--f-mono); font-size:13px; letter-spacing:.12em; text-transform:uppercase;
-    font-weight:500; color:var(--blue);
+  /* glass pill (over the atmosphere, translucent + blurred) */
+  .pill-glass{
+    display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:999px;
+    background:var(--glass-fill); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+    border:1px solid var(--glass-line); box-shadow:var(--glass-shadow);
+    color:var(--navy-82); font-size:13.5px; font-weight:600;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
   }
+  .pill-glass svg{flex:none; color:var(--navy-70);}
+  .pill-glass:hover{transform:translateY(-2px); box-shadow:0 14px 34px rgba(27,39,64,.16);}
 
   /* ================= SLIDE 1 — COVER ================= */
-  #slide1{position:absolute; inset:0;}
+  #slide1{position:absolute; inset:0; z-index:1;}
 
   .s1-divider{
-    position:absolute; left:520px; top:190px; width:1px; height:570px;
-    background:var(--ink-16); transform:scaleY(0); transform-origin:top;
+    position:absolute; left:520px; top:200px; width:1px; height:540px;
+    background:var(--navy-16); transform:scaleY(0); transform-origin:top;
   }
 
-  .s1-left{position:absolute; left:96px; top:230px; width:364px;}
-  .s1-tagrow{display:flex; flex-wrap:wrap; gap:6px 0; margin-bottom:34px;}
-  .s1-tagrow span{font-family:var(--f-mono); font-size:11.5px; letter-spacing:.1em; color:var(--ink-55); text-transform:uppercase;}
-  .s1-tagrow span+span::before{content:" · "; }
+  .s1-left{position:absolute; left:96px; top:240px; width:364px;}
+  .s1-tagrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:34px;}
+  .s1-tagrow span{
+    font-size:12px; font-weight:600; color:var(--navy-70); background:var(--chip-fill);
+    border:1px solid var(--chip-line); border-radius:999px; padding:6px 13px;
+  }
 
   .s1-para{
-    font-size:19px; line-height:1.55; color:var(--ink-70); max-width:340px; font-weight:400;
+    font-size:19px; line-height:1.55; color:var(--navy-70); max-width:340px; font-weight:400;
   }
 
-  .s1-stats{display:flex; gap:40px; margin-top:64px;}
+  .s1-stats{display:flex; gap:40px; margin-top:60px;}
   .s1-stat b{
-    display:block; font-family:var(--f-mono); font-size:32px; font-weight:600; color:var(--ink);
+    display:block; font-size:32px; font-weight:800; color:var(--navy); letter-spacing:-.01em;
   }
   .s1-stat span{
-    display:block; margin-top:6px; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.1em;
-    color:var(--ink-35); text-transform:uppercase;
+    display:block; margin-top:6px; font-size:11px; letter-spacing:.06em;
+    color:var(--navy-38); text-transform:uppercase; font-weight:600;
   }
 
-  .s1-right{position:absolute; left:592px; top:242px; width:900px;}
+  .s1-right{position:absolute; left:592px; top:238px; width:900px;}
   .s1-word{
-    font-family:var(--f-display); font-weight:700; font-size:112px; line-height:.98; letter-spacing:-.01em;
-    margin:0;
+    font-weight:800; font-size:110px; line-height:1; letter-spacing:-.02em;
+    margin:0; color:var(--navy);
   }
   .s1-word .cut{display:inline-block; overflow:hidden; clip-path:inset(0 100% 0 0);}
   .s1-word .cut span{display:inline-block;}
-  .s1-word .accent{color:var(--blue);}
+  .s1-word .accent{color:var(--steel-dark);}
 
-  .s1-pills{display:flex; gap:12px; margin-top:38px;}
-  .s1-pill{
-    font-family:var(--f-mono); font-size:11px; letter-spacing:.12em; padding:8px 16px;
-    border:1px solid var(--ink-16); border-radius:999px; color:var(--ink-55);
-  }
-
-  .s1-ghost{
-    position:absolute; right:-46px; bottom:-96px; font-family:var(--f-display); font-weight:700;
-    font-size:400px; color:var(--ink); opacity:.045; letter-spacing:-.02em; line-height:1;
-  }
+  .s1-pills{display:flex; gap:12px; margin-top:40px;}
 
   .s1-navhint{
-    position:absolute; right:96px; bottom:44px; text-align:right;
-    font-family:var(--f-mono); font-size:11.5px; letter-spacing:.12em; color:var(--ink-55);
-    display:flex; align-items:center; gap:8px;
+    position:absolute; right:96px; bottom:44px;
   }
-  .s1-navhint .arrow{display:inline-block;}
+  .s1-navhint .pill-glass{padding:10px 20px 10px 22px;}
+  .s1-navhint .arrow{display:inline-block; transform:translateX(0); transition:transform .25s ease;}
+  .s1-navhint .pill-glass:hover .arrow{transform:translateX(4px);}
 
   /* ================= SLIDE 2 — BÚSQUEDA ================= */
-  #slide2{position:absolute; inset:0;}
-  .s2-left{position:absolute; left:96px; top:200px; width:364px;}
+  #slide2{position:absolute; inset:0; z-index:1;}
+  .s2-left{position:absolute; left:96px; top:210px; width:364px;}
   .s2-headline{
-    font-family:var(--f-display); font-weight:700; font-size:44px; line-height:1.16; color:var(--ink);
-    margin:22px 0 0 0; letter-spacing:-.005em;
+    font-weight:800; font-size:44px; line-height:1.16; color:var(--navy);
+    margin:22px 0 0 0; letter-spacing:-.01em;
   }
   .s2-caption{
-    margin-top:36px; font-size:17px; line-height:1.6; color:var(--ink-55); max-width:330px;
+    margin-top:36px; font-size:17px; line-height:1.6; color:var(--navy-55); max-width:330px; font-weight:400;
   }
 
   /* ================= WORD FIELD (slide 2 → slide 3, shared layer) ============ */
-  #wordfield{position:absolute; inset:0; pointer-events:none;}
+  #wordfield{position:absolute; inset:0; pointer-events:none; z-index:1;}
   .chip{
     position:absolute; top:0; left:0; white-space:nowrap;
-    font-family:var(--f-body); font-size:18px; font-weight:500; color:var(--ink-70);
-    border:1px solid var(--ink-16); border-radius:999px; padding:13px 22px; background:var(--paper);
+    font-size:17px; font-weight:600; color:var(--navy-82);
+    border:1px solid var(--chip-line); border-radius:999px; padding:13px 22px;
+    background:var(--chip-fill); box-shadow:0 2px 8px rgba(27,39,64,.05);
   }
   .seed{
     position:absolute; top:0; left:0; white-space:nowrap;
-    font-family:var(--f-display); font-weight:800; color:var(--ink); letter-spacing:-.01em;
+    font-weight:800; color:var(--navy); letter-spacing:-.01em;
   }
-  .seed.warm{color:var(--terracotta);}
+  .seed.warm{color:var(--steel-dark);}
 
   /* ================= SLIDE 3 — DESCUBRIMIENTO ================= */
-  #slide3{position:absolute; inset:0;}
-  .s3-left{position:absolute; left:96px; top:200px; width:364px;}
+  #slide3{position:absolute; inset:0; z-index:1;}
+  .s3-left{position:absolute; left:96px; top:210px; width:364px;}
 
   .s3-line2{
     position:absolute; left:592px; top:452px; width:600px;
-    font-family:var(--f-display); font-weight:600; font-size:40px; line-height:1.2; color:var(--ink-70);
+    font-weight:600; font-size:40px; line-height:1.2; color:var(--navy-55);
   }
   .s3-line3{
     position:absolute; left:592px; top:596px; width:600px;
-    font-family:var(--f-display); font-weight:700; font-size:40px; line-height:1.24; color:var(--ink);
+    font-weight:800; font-size:40px; line-height:1.24; color:var(--navy);
   }
   .hl{position:relative; display:inline-block; white-space:nowrap;}
   .hl-bg{
-    position:absolute; left:-4px; top:6px; bottom:2px; width:calc(100% + 8px); background:var(--terracotta-soft);
-    transform:scaleX(0); transform-origin:left; z-index:0; border-radius:3px;
+    position:absolute; left:-4px; top:6px; bottom:2px; width:calc(100% + 8px); background:var(--sky);
+    transform:scaleX(0); transform-origin:left; z-index:0; border-radius:6px;
   }
   .hl-text{position:relative; z-index:1;}
 
   .s3-bridge{
     position:absolute; left:592px; top:764px; width:600px;
-    font-size:19px; line-height:1.5; color:var(--ink-55); font-weight:500;
+    font-size:19px; line-height:1.5; color:var(--navy-55); font-weight:500;
   }
 
-  .ruler{position:absolute; left:1440px; top:420px; width:1px; height:308px; background:var(--ink-16); transform:scaleY(0); transform-origin:top;}
-  .ruler-tick{position:absolute; left:-4px; width:9px; height:9px; border-radius:50%; background:var(--blue); transform:translate(-50%,-50%); margin-left:4.5px;}
-  .ruler-label{position:absolute; right:20px; width:130px; text-align:right; font-family:var(--f-mono); font-size:12px; letter-spacing:.06em; color:var(--ink-55); transform:translateY(-50%);}
-  .ruler-end{position:absolute; left:-6px; width:13px; height:13px; border-radius:50%; background:var(--terracotta); transform:translate(-50%,-50%); margin-left:4.5px;}
-  .ruler-endlabel{position:absolute; left:1360px; top:740px; width:160px; text-align:center; font-family:var(--f-mono); font-size:13px; font-weight:600; letter-spacing:.06em; color:var(--ink);}
+  .ruler{position:absolute; left:1440px; top:420px; width:1px; height:308px; background:var(--navy-16); transform:scaleY(0); transform-origin:top;}
+  .ruler-tick{position:absolute; left:-4px; width:9px; height:9px; border-radius:50%; background:var(--steel-dark); transform:translate(-50%,-50%); margin-left:4.5px;}
+  .ruler-label{position:absolute; right:20px; width:130px; text-align:right; font-size:13px; font-weight:500; letter-spacing:0; color:var(--navy-55); transform:translateY(-50%);}
+  .ruler-end{position:absolute; left:-6px; width:13px; height:13px; border-radius:50%; background:var(--navy); transform:translate(-50%,-50%); margin-left:4.5px;}
+  .ruler-endlabel{position:absolute; left:1360px; top:740px; width:160px; text-align:center; font-size:14px; font-weight:700; letter-spacing:0; color:var(--navy);}
 
   /* ================= NAV CONTROLS (viewport-fixed, not scaled) ================= */
   .navctl{
@@ -219,22 +247,26 @@
     display:flex; align-items:center; gap:14px; z-index:50;
   }
   .navbtn{
-    width:44px; height:44px; border-radius:50%; border:1px solid var(--ink-16); background:var(--paper);
-    color:var(--ink); font-family:var(--f-body); font-size:18px; cursor:pointer;
-    display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s, opacity .15s;
+    width:46px; height:46px; border-radius:50%; border:1px solid var(--glass-line);
+    background:var(--glass-fill-2); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    color:var(--navy); font-family:var(--f-sans); font-size:18px; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; box-shadow:var(--glass-shadow);
+    transition:background .15s ease, color .15s ease, transform .12s ease, box-shadow .15s ease;
   }
-  .navbtn:hover{background:var(--ink); color:var(--paper);}
-  .navbtn:disabled{opacity:.28; cursor:default;}
-  .navbtn:disabled:hover{background:var(--paper); color:var(--ink);}
-  .navbtn:focus-visible{outline:2px solid var(--blue); outline-offset:2px;}
+  .navbtn:hover{background:var(--navy); color:#fff; transform:translateY(-2px); box-shadow:0 14px 30px rgba(27,39,64,.22);}
+  .navbtn:active{transform:scale(.92);}
+  .navbtn:disabled{opacity:.32; cursor:default;}
+  .navbtn:disabled:hover{background:var(--glass-fill-2); color:var(--navy); transform:none; box-shadow:var(--glass-shadow);}
+  .navbtn:focus-visible{outline:2px solid var(--steel-dark); outline-offset:2px;}
   .navdots{display:flex; gap:7px;}
-  .navdots i{width:6px; height:6px; border-radius:50%; background:var(--ink-16); display:block;}
-  .navdots i.on{background:var(--ink);}
+  .navdots i{width:6px; height:6px; border-radius:50%; background:var(--navy-16); display:block; transition:background .2s;}
+  .navdots i.on{background:var(--navy);}
 
   .toast{
-    position:fixed; left:50%; bottom:88px; transform:translate(-50%,8px);
-    font-family:var(--f-mono); font-size:12px; letter-spacing:.08em; color:var(--ink-70);
-    background:var(--paper-alt); border:1px solid var(--ink-16); padding:10px 18px; border-radius:999px;
+    position:fixed; left:50%; bottom:90px; transform:translate(-50%,8px);
+    font-size:12.5px; font-weight:600; letter-spacing:.01em; color:var(--navy-70);
+    background:var(--glass-fill-2); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    border:1px solid var(--glass-line); padding:11px 20px; border-radius:999px; box-shadow:var(--glass-shadow);
     opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:50;
   }
   .toast.show{opacity:1; transform:translate(-50%,0);}
@@ -249,9 +281,15 @@
 <div class="wrap">
   <div class="stage" id="stage">
 
+    <div id="atmosphere">
+      <div class="blob blob-a" id="blobA"></div>
+      <div class="blob blob-b" id="blobB"></div>
+      <div class="blob blob-c" id="blobC"></div>
+    </div>
+
     <div class="progressbar" id="progressbar"></div>
     <div class="chrome-brand">
-      <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="4" cy="16" r="3" fill="#14151C"/><circle cx="16" cy="4" r="3" fill="#14151C"/><circle cx="14" cy="14" r="2.2" fill="#14151C"/></svg>
+      <svg width="20" height="20" viewBox="0 0 20 20"><circle cx="4" cy="16" r="3" fill="currentColor"/><circle cx="16" cy="4" r="3" fill="currentColor"/><circle cx="14" cy="14" r="2.2" fill="currentColor"/></svg>
       <span>SEGÚN TU PALABRA</span>
     </div>
     <div class="chrome-run" id="chromeRun"><b>PORTADA</b></div>
@@ -274,17 +312,20 @@
         <p class="s1-word"><span class="cut"><span>Según</span></span></p>
         <p class="s1-word"><span class="cut"><span>tu</span></span> <span class="cut"><span class="accent">Palabra.</span></span></p>
         <div class="s1-pills">
-          <span class="s1-pill">Leer</span><span class="s1-pill">Comprender</span><span class="s1-pill">Vivir</span>
+          <span class="pill-glass"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4.5c2-1 4-1 6 .5v10c-2-1.5-4-1.5-6-.5V4.5Z"/><path d="M18 4.5c-2-1-4-1-6 .5v10c2-1.5 4-1.5 6-.5V4.5Z"/></svg>Leer</span>
+          <span class="pill-glass"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5a4.5 4.5 0 0 0-2.5 8.24c.4.28.5.6.5 1.06v.7h4v-.7c0-.46.1-.78.5-1.06A4.5 4.5 0 0 0 10 2.5Z"/><path d="M8 16.3h4M8.5 18.3h3"/></svg>Comprender</span>
+          <span class="pill-glass"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17s-6.2-3.8-6.2-8.4A3.6 3.6 0 0 1 10 6.2 3.6 3.6 0 0 1 16.2 8.6C16.2 13.2 10 17 10 17Z"/></svg>Vivir</span>
         </div>
       </div>
-      <div class="s1-ghost">1:1</div>
-      <div class="s1-navhint"><span>Pulsa</span><span class="arrow">→</span><span>para empezar</span></div>
+      <div class="s1-navhint">
+        <span class="pill-glass"><span>Pulsa</span><span class="arrow">→</span><span>para empezar</span></span>
+      </div>
     </section>
 
     <!-- SLIDE 2 -->
     <section id="slide2">
       <div class="s2-left">
-        <div class="kicker" id="kicker1">01 — El punto de partida</div>
+        <div class="pill-tag" id="kicker1">01 — El punto de partida</div>
         <h2 class="s2-headline">Cada persona busca a Dios de una forma distinta.</h2>
         <p class="s2-caption">Seis razones reales por las que alguien, hoy, decide abrir la Biblia por primera vez.</p>
       </div>
@@ -293,7 +334,7 @@
     <!-- SLIDE 3 -->
     <section id="slide3">
       <div class="s3-left">
-        <div class="kicker" id="kicker2">02 — El descubrimiento</div>
+        <div class="pill-tag" id="kicker2">02 — El descubrimiento</div>
       </div>
       <p class="s3-line2">Buscamos de mil formas distintas.</p>
       <p class="s3-line3">Pero seguimos leyendo la Biblia <span class="hl"><span class="hl-bg"></span><span class="hl-text">de una sola.</span></span></p>
@@ -313,26 +354,26 @@
 
     <!-- WORD FIELD (persists across slide 2 → 3) -->
     <div id="wordfield">
-      <div class="chip" id="chip1" style="font-size:18px">Conocer mejor a Dios</div>
-      <div class="chip" id="chip2" style="font-size:18px">Tener un momento de oración</div>
-      <div class="chip" id="chip3" style="font-size:18px">Profundizar en mi fe</div>
-      <div class="chip" id="chip4" style="font-size:18px">Resolver dudas</div>
-      <div class="chip" id="chip5" style="font-size:18px">Encontrar paz en momentos difíciles</div>
-      <div class="chip" id="chip6" style="font-size:18px">Sentirme parte de una comunidad</div>
+      <div class="chip" id="chip1">Conocer mejor a Dios</div>
+      <div class="chip" id="chip2">Tener un momento de oración</div>
+      <div class="chip" id="chip3">Profundizar en mi fe</div>
+      <div class="chip" id="chip4">Resolver dudas</div>
+      <div class="chip" id="chip5">Encontrar paz en momentos difíciles</div>
+      <div class="chip" id="chip6">Sentirme parte de una comunidad</div>
 
-      <div class="seed" id="seedDios">Dios<span style="color:var(--terracotta)">.</span></div>
-      <div class="seed" id="seedPaz">Paz<span style="color:var(--terracotta)">.</span></div>
-      <div class="seed" id="seedComunidad">Comunidad<span style="color:var(--terracotta)">.</span></div>
+      <div class="seed" id="seedDios">Dios<span style="color:var(--steel-dark)">.</span></div>
+      <div class="seed" id="seedPaz">Paz<span style="color:var(--steel-dark)">.</span></div>
+      <div class="seed" id="seedComunidad">Comunidad<span style="color:var(--steel-dark)">.</span></div>
       <div class="seed warm" id="seedFe">Fe<span>.</span></div>
     </div>
 
     <!-- invisible ruler used once to measure real headline word-spacing (real font metrics,
          not guessed pixels) — never painted, removed from flow via visibility:hidden -->
     <div id="measureHeadline" style="position:absolute; left:592px; top:340px; display:flex; align-items:baseline; gap:30px; visibility:hidden; white-space:nowrap; pointer-events:none;">
-      <span style="font-family:var(--f-display); font-weight:800; font-size:74px;">Dios.</span>
-      <span style="font-family:var(--f-display); font-weight:800; font-size:74px;">Paz.</span>
-      <span style="font-family:var(--f-display); font-weight:800; font-size:74px;">Comunidad.</span>
-      <span style="font-family:var(--f-display); font-weight:800; font-size:74px;">Fe.</span>
+      <span style="font-family:var(--f-sans); font-weight:800; font-size:74px;">Dios.</span>
+      <span style="font-family:var(--f-sans); font-weight:800; font-size:74px;">Paz.</span>
+      <span style="font-family:var(--f-sans); font-weight:800; font-size:74px;">Comunidad.</span>
+      <span style="font-family:var(--f-sans); font-weight:800; font-size:74px;">Fe.</span>
     </div>
 
   </div>
@@ -370,6 +411,14 @@
     pb.appendChild(i);
     segs.push(em);
   }
+
+  /* ---------- atmosphere blobs: drift to a new resting spot per slide,
+     the one piece of "set dressing" that visibly carries across slides ---------- */
+  var blobStates = [
+    {a:{x:1180,y:120,s:1},   b:{x:220, y:760,s:.9}, c:{x:1400,y:640,s:.8}},  // slide 1
+    {a:{x:120, y:80, s:.85}, b:{x:1420,y:200,s:1.05},c:{x:1100,y:780,s:.9}}, // slide 2
+    {a:{x:1500,y:760,s:.95}, b:{x:160, y:620,s:.95}, c:{x:120, y:120,s:.75}} // slide 3
+  ];
 
   /* ---------- word-field coordinates ---------- */
   var chipCoords = {
@@ -419,14 +468,22 @@
     var c = seedScatter[id];
     gsap.set('#'+id, {x:c.x, y:c.y, rotate:c.r, fontSize:c.size, opacity:0, scale:.8, xPercent:-50, yPercent:-50});
   });
+  ['blobA','blobB','blobC'].forEach(function(id){
+    gsap.set('#'+id, {xPercent:-50, yPercent:-50});
+  });
+  gsap.set('#blobA', {x:blobStates[0].a.x, y:blobStates[0].a.y, scale:blobStates[0].a.s});
+  gsap.set('#blobB', {x:blobStates[0].b.x, y:blobStates[0].b.y, scale:blobStates[0].b.s});
+  gsap.set('#blobC', {x:blobStates[0].c.x, y:blobStates[0].c.y, scale:blobStates[0].c.s});
 
   /* ---------- initial hidden states ---------- */
   gsap.set('.s1-divider', {scaleY:0});
-  gsap.set('.s1-left > *, .s1-pills, .s1-ghost, .s1-navhint', {opacity:0, y:16});
+  gsap.set('.s1-left > *', {opacity:0, y:16, filter:'blur(6px)'});
+  gsap.set('.s1-pills, .s1-navhint', {opacity:0, y:16});
   gsap.set('.s1-word .cut', {clipPath:'inset(0 100% 0 0)'});
-  gsap.set('#kicker1, .s2-headline, .s2-caption', {opacity:0, y:14});
+  gsap.set('#kicker1, .s2-caption', {opacity:0, y:14});
+  gsap.set('.s2-headline', {opacity:0, y:14, filter:'blur(6px)'});
   gsap.set('#kicker2', {opacity:0, y:14});
-  gsap.set('.s3-line2, .s3-line3, .s3-bridge', {opacity:0, y:18});
+  gsap.set('.s3-line2, .s3-line3, .s3-bridge', {opacity:0, y:18, filter:'blur(6px)'});
   gsap.set('.hl-bg', {scaleX:0});
   gsap.set('#ruler', {scaleY:0});
   gsap.set('.ruler-tick, .ruler-label, .ruler-end', {opacity:0});
@@ -434,17 +491,20 @@
 
   var runTitles = ['PORTADA','BÚSQUEDA','BÚSQUEDA','DESCUBRIMIENTO','DESCUBRIMIENTO','DESCUBRIMIENTO'];
   var filledSegs = [1,2,2,3,3,3];
+  var slideOfState = [0,1,1,2,2,2];
   var D = reduced ? .01 : .8;
 
   function fadeGroup(sel, show, opts){
     opts = opts || {};
-    gsap.to(sel, {
+    var vars = {
       opacity: show?1:0,
       y: show?0:(opts.hideY!==undefined?opts.hideY:14),
       duration: opts.duration || D,
       ease: opts.ease || 'power3.out',
       stagger: opts.stagger || 0
-    });
+    };
+    if (opts.blur) vars.filter = show ? 'blur(0px)' : 'blur(6px)';
+    gsap.to(sel, vars);
   }
 
   function applyState(i){
@@ -452,19 +512,24 @@
     segs.forEach(function(em,idx){ gsap.to(em, {scaleX: idx<filledSegs[i]?1:0, duration:.5, ease:'power2.out'}); });
     document.getElementById('chromeRun').innerHTML = '<b>'+runTitles[i]+'</b>';
 
+    /* atmosphere drifts to match whichever slide we're on */
+    var bs = blobStates[slideOfState[i]];
+    gsap.to('#blobA', {x:bs.a.x, y:bs.a.y, scale:bs.a.s, duration: reduced?.01:1.6, ease:'power2.inOut'});
+    gsap.to('#blobB', {x:bs.b.x, y:bs.b.y, scale:bs.b.s, duration: reduced?.01:1.8, ease:'power2.inOut'});
+    gsap.to('#blobC', {x:bs.c.x, y:bs.c.y, scale:bs.c.s, duration: reduced?.01:1.4, ease:'power2.inOut'});
+
     /* ===== SLIDE 1 (state 0) ===== */
     var onCover = (i===0);
     gsap.to('.s1-divider', {scaleY:onCover?1:0, duration:D, ease:'power2.inOut', delay:onCover?.15:0});
-    gsap.to('.s1-word .cut', {clipPath:onCover?'inset(0 0% 0 0)':'inset(0 100% 0 0)', duration: reduced?.01:1, ease:'power4.inOut', stagger:onCover?0.14:0});
-    fadeGroup('.s1-left > *', onCover, {stagger:onCover?.08:0});
+    gsap.to('.s1-word .cut', {clipPath:onCover?'inset(0 0% 0 0)':'inset(0 100% 0 0)', filter:onCover?'blur(0px)':'blur(10px)', duration: reduced?.01:1, ease:'power4.inOut', stagger:onCover?0.14:0});
+    fadeGroup('.s1-left > *', onCover, {stagger:onCover?.08:0, blur:true});
     fadeGroup('.s1-right .s1-pills', onCover, {});
-    gsap.to('.s1-ghost', {opacity:onCover?.045:0, y:onCover?0:16, duration:D});
-    gsap.to('.s1-navhint', {opacity:onCover?1:0, y:onCover?0:10, duration:D});
+    fadeGroup('.s1-navhint', onCover, {hideY:10});
 
     /* ===== SLIDE 2 kicker/headline/caption (states 1-2) ===== */
     var onSearchText = (i===1 || i===2);
     fadeGroup('#kicker1', onSearchText);
-    fadeGroup('.s2-headline', onSearchText, {duration:D*1.05});
+    fadeGroup('.s2-headline', onSearchText, {duration:D*1.05, blur:true});
     fadeGroup('.s2-caption', onSearchText, {});
 
     /* ===== chips: visible only mid-slide2 (state 2), drift away from state 3 ===== */
@@ -474,7 +539,7 @@
       var away = (i>=3);
       gsap.to('#'+id, {
         opacity: visible?1:0,
-        scale: visible?1:(away?.86:.86),
+        scale: visible?1:.86,
         y: away? c.y+70 : c.y,
         duration: D,
         ease:'power3.out',
@@ -502,9 +567,9 @@
 
     /* ===== SLIDE 3 (states 3-5) ===== */
     fadeGroup('#kicker2', i>=3);
-    fadeGroup('.s3-line2', i>=4);
-    fadeGroup('.s3-line3', i>=5);
-    fadeGroup('.s3-bridge', i>=5, {duration:D*1.1});
+    fadeGroup('.s3-line2', i>=4, {blur:true});
+    fadeGroup('.s3-line3', i>=5, {blur:true});
+    fadeGroup('.s3-bridge', i>=5, {duration:D*1.1, blur:true});
     gsap.to('.hl-bg', {scaleX:i>=5?1:0, duration: reduced?.01:.7, ease:'power3.inOut', delay:i>=5?.35:0});
 
     gsap.to('#ruler', {scaleY:i>=3?1:0, duration: reduced?.01:1, ease:'power2.inOut'});
