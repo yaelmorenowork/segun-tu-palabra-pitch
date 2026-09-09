@@ -33,20 +33,33 @@ movimiento, salvo los dos ecos deliberados: la apertura y el cierre
 (mismo "dissolve" suave, espejo), y el 67 % / 200.000 € (mismo conteo
 ascendente).
 
-## Pendiente — necesito estos dos assets para terminarlas
+## Estado de los assets
 
-- **Slide 4 — La Biblia de notas**: falta la foto o mockup real de la
-  Biblia con el margen de anotación visible. El texto y el layout ya están
-  construidos; la zona donde iría la imagen está marcada con un recuadro
-  punteado que lo indica explícitamente (no hay ningún placeholder
-  genérico haciendo pasar por definitivo).
-- **Slide 10 — Lo que pido**: falta el desglose real del panel financiero
-  interactivo (Chart.js) — evolución de ingresos, burn rate o runway a 36
-  meses. Mismo tratamiento: recuadro punteado marcando lo que falta, cifra
-  y texto ya construidos.
+- **Slide 4 — La Biblia de notas**: foto real (cerrada + abierta), con
+  fondo genuinamente transparente. El libro flota directamente sobre el
+  degradado de la slide — sin tarjeta ni caja detrás — con una sombra
+  suave y despegada debajo y un balanceo vertical mínimo y continuo,
+  tanto cerrado como abierto.
+- **Slides 9 y 10 — Dos escenarios / Lo que pido**: gráficas reales,
+  interactivas, construidas a partir de los 36 valores mensuales exactos
+  del panel financiero (sin cifras aproximadas ni inventadas). Un punto
+  recorre cada línea mes a mes en bucle continuo y lento, con la cifra
+  real de ese mes junto al punto, marcas en los meses 12/24/36 y un
+  tooltip al pasar el cursor. La slide 9 compara Conservador vs. Base
+  (dos líneas); la slide 10 muestra solo el escenario Conservador (una
+  línea con área rellena) — diseño visual distinto entre ambas, misma
+  lógica de interacción.
 
-Cuando me pases esos dos assets, sustituyo los recuadros por el contenido
-real sin tocar el resto del sistema.
+### Pendiente
+
+- **Slide 6 — QR de prueba**: el PNG del QR que se usa (`qr-code.png`)
+  tiene canal alfa pero está totalmente opaco (fondo blanco sólido, no
+  transparente). Por eso el QR sigue mostrando una tarjeta con sombra
+  suave alrededor en vez de integrarse directamente sobre el fondo — no
+  se ha añadido ningún fondo propio para compensarlo. El QR y el texto
+  ya están notablemente más grandes, legibles desde el fondo de una
+  sala. Si me pasas una versión con transparencia real, quito la tarjeta
+  y lo dejo flotando igual que la Biblia.
 
 ### Notas menores, no bloqueantes
 
