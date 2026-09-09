@@ -35,20 +35,30 @@ ascendente).
 
 ## Estado de los assets
 
-- **Slide 4 — La Biblia de notas**: foto real (cerrada + abierta), con
-  fondo genuinamente transparente. El libro flota directamente sobre el
-  degradado de la slide — sin tarjeta ni caja detrás — con una sombra
-  suave y despegada debajo y un balanceo vertical mínimo y continuo,
-  tanto cerrado como abierto.
-- **Slides 9 y 10 — Dos escenarios / Lo que pido**: gráficas reales,
-  interactivas, construidas a partir de los 36 valores mensuales exactos
-  del panel financiero (sin cifras aproximadas ni inventadas). Un punto
-  recorre cada línea mes a mes en bucle continuo y lento, con la cifra
-  real de ese mes junto al punto, marcas en los meses 12/24/36 y un
-  tooltip al pasar el cursor. La slide 9 compara Conservador vs. Base
-  (dos líneas); la slide 10 muestra solo el escenario Conservador (una
-  línea con área rellena) — diseño visual distinto entre ambas, misma
-  lógica de interacción.
+- **Slide 4 — La Biblia de notas**: una única foto real (la del margen
+  ancho con anotaciones a mano) con fondo genuinamente transparente —
+  ya no queda ningún rastro de la foto anterior. Flota directamente
+  sobre el degradado de la slide, sin tarjeta ni caja detrás, con una
+  sombra suave y despegada debajo y un balanceo vertical mínimo y
+  continuo. La secuencia se mantiene: llega y se sostiene un instante,
+  luego los márgenes se convierten en protagonistas (su propio glow) y
+  las palabras clave entran una a una.
+- **Slide 9 — Dos escenarios**: gráfica real de dos líneas con área
+  rellena (mismos colores de la leyenda, Conservador/Base — sin verde ni
+  rojo), dentro de una tarjeta coherente con el resto del mazo. Eje
+  horizontal siempre visible con marcas M1/M6/…/M36 además de Año 1/2/3.
+  Al pasar el cursor (o el dedo) aparece una marca vertical que sube
+  desde el eje hasta tocar ambas curvas en ese mes exacto, con la cifra
+  de cada escenario; en reposo, se queda fija en el mes 36 — nunca sin
+  ninguna cifra visible.
+- **Slide 10 — Lo que pido**: dos zonas claramente distintas — arriba/
+  izquierda, la cifra de la inversión (200.000€) y qué cubre; abajo/
+  derecha, una tarjeta aparte con el desglose real del gasto a 3 años
+  (~419.000€): Producto, Equipo, Marketing, Contenido, Operaciones, cada
+  una con su cifra, porcentaje y fuente (Fuente/Hipótesis). El contador
+  se completa primero; después entra la tarjeta del desglose como una
+  unidad, con su etiqueta apareciendo primero y las barras desplegándose
+  de izquierda a derecha.
 
 ### Pendiente
 
