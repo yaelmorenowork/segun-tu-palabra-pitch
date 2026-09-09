@@ -9,11 +9,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <style>
-  /* ===== DESIGN SYSTEM ===========================================
-     Fiel a las referencias: fondo blanco de base con "atmósfera" de
-     degradado azul-acero → crema cálido (nunca a pantalla completa),
-     glassmorphism en tags/botones, navy oscuro como tinta principal,
-     píldoras redondeadas, tipografía de sistema estilo Apple.
+  /* ===== DESIGN SYSTEM ============================================
+     Heredado tal cual de las 3 slides de muestra aprobadas — no se
+     redefine paleta, tipografía, degradados ni el mecanismo de
+     highlight sobre texto. Sólo se añaden clases de contenido nuevas
+     por slide, todas construidas sobre estos mismos tokens.
      ================================================================ */
   :root{
     --paper:      #FFFFFF;
@@ -53,199 +53,80 @@
     width:100vw;
   }
 
-  .wrap{
-    position:fixed; inset:0;
-    background:var(--paper);
-    display:block;
-  }
+  .wrap{position:fixed; inset:0; background:var(--paper); display:block;}
 
   /* ---- fixed 16:9 logical canvas, scaled to fit viewport ---- */
   .stage{
-    position:absolute;
-    top:50%; left:50%;
-    width:1600px; height:900px;
-    background:var(--paper);
-    transform:translate(-50%,-50%);
-    overflow:hidden;
-    box-shadow:0 0 0 1px var(--navy-08);
+    position:absolute; top:50%; left:50%; width:1600px; height:900px;
+    background:var(--paper); transform:translate(-50%,-50%);
+    overflow:hidden; box-shadow:0 0 0 1px var(--navy-08);
   }
 
   /* ================= ATMOSPHERE (soft gradient blobs, never full-bleed) ================= */
   #atmosphere{position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0;}
-  .blob{
-    position:absolute; top:0; left:0; border-radius:50%;
-    filter:blur(90px); will-change:transform;
-  }
+  .blob{position:absolute; top:0; left:0; border-radius:50%; filter:blur(90px); will-change:transform;}
   .blob-a{width:820px; height:820px; background:radial-gradient(circle at 32% 30%, rgba(126,151,188,.60), rgba(126,151,188,0) 68%);}
   .blob-b{width:760px; height:760px; background:radial-gradient(circle at 60% 45%, rgba(243,230,220,.95), rgba(243,230,220,0) 70%);}
   .blob-c{width:520px; height:520px; background:radial-gradient(circle at 50% 50%, rgba(216,226,238,.85), rgba(216,226,238,0) 70%);}
-
   @media (prefers-reduced-motion: no-preference){
     .blob{animation:drift 22s ease-in-out infinite alternate;}
     .blob-b{animation-duration:26s;}
     .blob-c{animation-duration:19s;}
   }
-  @keyframes drift{
-    from{ margin-left:0px; margin-top:0px; }
-    to{ margin-left:18px; margin-top:-14px; }
-  }
+  @keyframes drift{ from{ margin-left:0px; margin-top:0px; } to{ margin-left:18px; margin-top:-14px; } }
 
   /* ================= CHROME (persistent across slides) ================= */
-  .progressbar{
-    position:absolute; left:96px; top:44px; width:1408px; height:5px;
-    display:flex; gap:6px; z-index:2;
-  }
-  .progressbar i{
-    flex:1; height:100%; background:var(--chip-fill); border-radius:999px; overflow:hidden; position:relative;
-  }
-  .progressbar i em{
-    display:block; position:absolute; inset:0; background:var(--navy); border-radius:999px;
-    transform:scaleX(0); transform-origin:left;
-  }
+  .progressbar{position:absolute; left:96px; top:44px; width:1408px; height:5px; display:flex; gap:6px; z-index:5;}
+  .progressbar i{flex:1; height:100%; background:var(--chip-fill); border-radius:999px; overflow:hidden; position:relative;}
+  .progressbar i em{display:block; position:absolute; inset:0; background:var(--navy); border-radius:999px; transform:scaleX(0); transform-origin:left;}
 
-  .chrome-brand{
-    position:absolute; left:96px; top:72px; display:flex; align-items:center; gap:9px; color:var(--navy); z-index:2;
-  }
+  .chrome-brand{position:absolute; left:96px; top:72px; display:flex; align-items:center; gap:9px; color:var(--navy); z-index:5;}
   .chrome-brand svg{display:block;}
-  .chrome-brand span{
-    font-size:12.5px; letter-spacing:.05em; color:var(--navy-55); font-weight:600;
-  }
+  .chrome-brand span{font-size:12.5px; letter-spacing:.05em; color:var(--navy-55); font-weight:600;}
 
-  .chrome-run{
-    position:absolute; right:96px; top:72px; text-align:right; z-index:2;
-    font-size:12.5px; letter-spacing:.02em; color:var(--navy-38);
-  }
+  .chrome-run{position:absolute; right:96px; top:72px; text-align:right; z-index:5; font-size:12.5px; letter-spacing:.02em; color:var(--navy-38);}
   .chrome-run b{color:var(--navy-55); font-weight:600;}
 
-  .chrome-footer{
-    position:absolute; left:96px; bottom:44px; z-index:2;
-    font-size:12px; letter-spacing:.02em; color:var(--navy-38);
-  }
+  .chrome-footer{position:absolute; left:96px; bottom:44px; z-index:5; font-size:12px; letter-spacing:.02em; color:var(--navy-38);}
 
-  /* ================= SHARED: glass pill tag (kicker / small tags) ================= */
+  /* ================= SHARED COMPONENTS ================= */
   .pill-tag{
     display:inline-flex; align-items:center; padding:9px 18px; border-radius:999px;
     background:var(--navy); color:#fff; font-size:13px; font-weight:600; letter-spacing:.005em;
-    box-shadow:0 6px 18px rgba(27,39,64,.18);
+    box-shadow:0 6px 18px rgba(27,39,64,.18); white-space:nowrap;
   }
-
-  /* glass pill (over the atmosphere, translucent + blurred) */
   .pill-glass{
     display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:999px;
     background:var(--glass-fill); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
     border:1px solid var(--glass-line); box-shadow:var(--glass-shadow);
-    color:var(--navy-82); font-size:13.5px; font-weight:600;
-    transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+    color:var(--navy-82); font-size:14px; font-weight:600;
   }
   .pill-glass svg{flex:none; color:var(--navy-70);}
-  .pill-glass:hover{transform:translateY(-2px); box-shadow:0 14px 34px rgba(27,39,64,.16);}
-
-  /* ================= SLIDE 1 — COVER ================= */
-  #slide1{position:absolute; inset:0; z-index:1;}
-
-  .s1-divider{
-    position:absolute; left:520px; top:200px; width:1px; height:540px;
-    background:var(--navy-16); transform:scaleY(0); transform-origin:top;
-  }
-
-  .s1-left{position:absolute; left:96px; top:240px; width:364px;}
-  .s1-tagrow{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:34px;}
-  .s1-tagrow span{
-    font-size:12px; font-weight:600; color:var(--navy-70); background:var(--chip-fill);
-    border:1px solid var(--chip-line); border-radius:999px; padding:6px 13px;
-  }
-
-  .s1-para{
-    font-size:19px; line-height:1.55; color:var(--navy-70); max-width:340px; font-weight:400;
-  }
-
-  .s1-stats{display:flex; gap:40px; margin-top:60px;}
-  .s1-stat b{
-    display:block; font-size:32px; font-weight:800; color:var(--navy); letter-spacing:-.01em;
-  }
-  .s1-stat span{
-    display:block; margin-top:6px; font-size:11px; letter-spacing:.06em;
-    color:var(--navy-38); text-transform:uppercase; font-weight:600;
-  }
-
-  .s1-right{position:absolute; left:592px; top:238px; width:900px;}
-  .s1-word{
-    font-weight:800; font-size:110px; line-height:1; letter-spacing:-.02em;
-    margin:0; color:var(--navy);
-  }
-  .s1-word .cut{display:inline-block; overflow:hidden; clip-path:inset(0 100% 0 0);}
-  .s1-word .cut span{display:inline-block;}
-  .s1-word .accent{color:var(--steel-dark);}
-
-  .s1-pills{display:flex; gap:12px; margin-top:40px;}
-
-  .s1-navhint{
-    position:absolute; right:96px; bottom:44px;
-  }
-  .s1-navhint .pill-glass{padding:10px 20px 10px 22px;}
-  .s1-navhint .arrow{display:inline-block; transform:translateX(0); transition:transform .25s ease;}
-  .s1-navhint .pill-glass:hover .arrow{transform:translateX(4px);}
-
-  /* ================= SLIDE 2 — BÚSQUEDA ================= */
-  #slide2{position:absolute; inset:0; z-index:1;}
-  .s2-left{position:absolute; left:96px; top:210px; width:364px;}
-  .s2-headline{
-    font-weight:800; font-size:44px; line-height:1.16; color:var(--navy);
-    margin:22px 0 0 0; letter-spacing:-.01em;
-  }
-  .s2-caption{
-    margin-top:36px; font-size:17px; line-height:1.6; color:var(--navy-55); max-width:330px; font-weight:400;
-  }
-
-  /* ================= WORD FIELD (slide 2 → slide 3, shared layer) ============ */
-  #wordfield{position:absolute; inset:0; pointer-events:none; z-index:1;}
   .chip{
-    position:absolute; top:0; left:0; white-space:nowrap;
-    font-size:17px; font-weight:600; color:var(--navy-82);
-    border:1px solid var(--chip-line); border-radius:999px; padding:13px 22px;
-    background:var(--chip-fill); box-shadow:0 2px 8px rgba(27,39,64,.05);
-  }
-  .seed{
-    position:absolute; top:0; left:0; white-space:nowrap;
-    font-weight:800; color:var(--navy); letter-spacing:-.01em;
-  }
-  .seed.warm{color:var(--steel-dark);}
-
-  /* ================= SLIDE 3 — DESCUBRIMIENTO ================= */
-  #slide3{position:absolute; inset:0; z-index:1;}
-  .s3-left{position:absolute; left:96px; top:210px; width:364px;}
-
-  .s3-line2{
-    position:absolute; left:592px; top:452px; width:600px;
-    font-weight:600; font-size:40px; line-height:1.2; color:var(--navy-55);
-  }
-  .s3-line3{
-    position:absolute; left:592px; top:596px; width:600px;
-    font-weight:800; font-size:40px; line-height:1.24; color:var(--navy);
+    display:inline-flex; align-items:center; font-size:16px; font-weight:600; color:var(--navy-82);
+    border:1px solid var(--chip-line); border-radius:999px; padding:10px 18px;
+    background:var(--chip-fill); box-shadow:0 2px 8px rgba(27,39,64,.05); white-space:nowrap;
   }
   .hl{position:relative; display:inline-block; white-space:nowrap;}
-  .hl-bg{
-    position:absolute; left:-4px; top:6px; bottom:2px; width:calc(100% + 8px); background:var(--sky);
-    transform:scaleX(0); transform-origin:left; z-index:0; border-radius:6px;
-  }
+  .hl-bg{position:absolute; left:-4px; top:4px; bottom:0px; width:calc(100% + 8px); background:var(--sky); transform:scaleX(0); transform-origin:left; z-index:0; border-radius:6px;}
   .hl-text{position:relative; z-index:1;}
 
-  .s3-bridge{
-    position:absolute; left:592px; top:764px; width:600px;
-    font-size:19px; line-height:1.5; color:var(--navy-55); font-weight:500;
-  }
+  /* small dot+label tag, derived from the muestra's vertical-ruler ticks */
+  .dot-tag{display:inline-flex; align-items:center; gap:7px; font-size:15px; font-weight:600; color:var(--navy-70); white-space:nowrap;}
+  .dot-tag i{width:7px; height:7px; border-radius:50%; background:var(--steel-dark); display:block; flex:none;}
 
-  .ruler{position:absolute; left:1440px; top:420px; width:1px; height:308px; background:var(--navy-16); transform:scaleY(0); transform-origin:top;}
-  .ruler-tick{position:absolute; left:-4px; width:9px; height:9px; border-radius:50%; background:var(--steel-dark); transform:translate(-50%,-50%); margin-left:4.5px;}
-  .ruler-label{position:absolute; right:20px; width:130px; text-align:right; font-size:13px; font-weight:500; letter-spacing:0; color:var(--navy-55); transform:translateY(-50%);}
-  .ruler-end{position:absolute; left:-6px; width:13px; height:13px; border-radius:50%; background:var(--navy); transform:translate(-50%,-50%); margin-left:4.5px;}
-  .ruler-endlabel{position:absolute; left:1360px; top:740px; width:160px; text-align:center; font-size:14px; font-weight:700; letter-spacing:0; color:var(--navy);}
+  .asset-pending{
+    border:2px dashed var(--navy-16); border-radius:26px; background:var(--glass-fill);
+    backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px;
+    text-align:center; padding:40px;
+  }
+  .asset-pending svg{color:var(--navy-38);}
+  .asset-pending b{font-size:18px; color:var(--navy-55); font-weight:700;}
+  .asset-pending span{font-size:14px; color:var(--navy-38); max-width:360px; line-height:1.5;}
 
   /* ================= NAV CONTROLS (viewport-fixed, not scaled) ================= */
-  .navctl{
-    position:fixed; bottom:28px; left:50%; transform:translateX(-50%);
-    display:flex; align-items:center; gap:14px; z-index:50;
-  }
+  .navctl{position:fixed; bottom:28px; left:50%; transform:translateX(-50%); display:flex; align-items:center; gap:14px; z-index:50;}
   .navbtn{
     width:46px; height:46px; border-radius:50%; border:1px solid var(--glass-line);
     background:var(--glass-fill-2); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
@@ -259,21 +140,130 @@
   .navbtn:disabled:hover{background:var(--glass-fill-2); color:var(--navy); transform:none; box-shadow:var(--glass-shadow);}
   .navbtn:focus-visible{outline:2px solid var(--steel-dark); outline-offset:2px;}
   .navdots{display:flex; gap:7px;}
-  .navdots i{width:6px; height:6px; border-radius:50%; background:var(--navy-16); display:block; transition:background .2s;}
-  .navdots i.on{background:var(--navy);}
+  .navdots i{width:6px; height:6px; border-radius:50%; background:var(--navy-16); display:block; transition:background .2s, transform .2s;}
+  .navdots i.on{background:var(--navy); transform:scale(1.3);}
 
-  .toast{
-    position:fixed; left:50%; bottom:90px; transform:translate(-50%,8px);
-    font-size:12.5px; font-weight:600; letter-spacing:.01em; color:var(--navy-70);
-    background:var(--glass-fill-2); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-    border:1px solid var(--glass-line); padding:11px 20px; border-radius:999px; box-shadow:var(--glass-shadow);
-    opacity:0; pointer-events:none; transition:opacity .25s, transform .25s; z-index:50;
-  }
-  .toast.show{opacity:1; transform:translate(-50%,0);}
+  @media (prefers-reduced-motion: reduce){ *{transition-duration:.001ms !important; animation-duration:.001ms !important;} }
 
-  @media (prefers-reduced-motion: reduce){
-    *{transition-duration:.001ms !important; animation-duration:.001ms !important;}
+  /* ================= PER-SLIDE LAYOUT ================= */
+  .slide{position:absolute; inset:0; z-index:1;}
+
+  /* ---- Slide 1 · Apertura — centrado puro ---- */
+  #slide-0 .center-col{
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:1100px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:26px;
   }
+  #slide-0 .mark-big{color:var(--navy);}
+  #slide-0 .titular{font-size:82px; font-weight:800; letter-spacing:-.02em; color:var(--navy); margin:0; line-height:1.04;}
+  #slide-0 .subtitulo{font-size:26px; font-weight:500; color:var(--navy-55); margin:0; max-width:680px; line-height:1.5;}
+
+  /* ---- Slide 2 · El descubrimiento — asimétrico, texto en tercio inferior ---- */
+  .s2-word{position:absolute; top:0; left:0; font-weight:800; color:var(--navy); letter-spacing:-.01em; white-space:nowrap;}
+  #slide-1 .s2-block{position:absolute; left:96px; top:566px; width:1060px;}
+  #slide-1 .badge{margin-bottom:26px;}
+  #slide-1 .destacada{font-size:38px; font-weight:800; line-height:1.28; color:var(--navy); margin:0; max-width:980px;}
+  #slide-1 .cierre{font-size:22px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:26px 0 0 0; max-width:760px;}
+
+  /* ---- Slide 3 · El 67% — regla de tercios, cifra descentrada ---- */
+  #slide-2 .badge{position:absolute; left:96px; top:190px;}
+  #slide-2 .num-wrap{position:absolute; left:120px; top:270px; width:600px;}
+  #slide-2 .num{font-size:250px; font-weight:900; line-height:1; letter-spacing:-.03em; color:var(--navy); margin:0;}
+  #slide-2 .right-col{position:absolute; left:830px; top:326px; width:640px;}
+  #slide-2 .subtitulo{font-size:24px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:0;}
+  #slide-2 .cite{display:block; margin-top:8px; font-size:14px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--navy-38);}
+  #slide-2 .destacada{font-size:34px; font-weight:800; line-height:1.28; color:var(--navy); margin:38px 0 0 0;}
+  #slide-2 .cierre{font-size:22px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:22px 0 0 0;}
+
+  /* ---- Slide 4 · La Biblia de notas — mockup como protagonista ---- */
+  #slide-3 .badge{position:absolute; left:96px; top:190px;}
+  #slide-3 .left-col{position:absolute; left:96px; top:300px; width:600px;}
+  #slide-3 .s4-word{display:block; font-size:58px; font-weight:800; color:var(--navy); letter-spacing:-.01em; line-height:1.16; margin:0;}
+  #slide-3 .cierre{font-size:30px; font-weight:700; color:var(--steel-dark); margin:30px 0 0 0;}
+  #slide-3 .mockup-zone{position:absolute; left:820px; top:236px; width:560px; height:520px;}
+  #slide-3 .mockup-zone svg{width:100%; height:100%;}
+
+  /* ---- Slide 5 · Cinco modos — abanico de columnas ---- */
+  #slide-4 .badge{position:absolute; left:96px; top:168px;}
+  #slide-4 .fan{position:absolute; left:0; top:250px; width:1600px; height:270px;}
+  #slide-4 .fan-card{
+    position:absolute; top:0; left:0; width:250px; padding:30px 22px; border-radius:22px;
+    background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--glass-line); box-shadow:var(--glass-shadow);
+    text-align:center; font-size:24px; font-weight:800; color:var(--navy);
+  }
+  #slide-4 .bottom-col{position:absolute; left:50%; top:576px; width:1000px; transform:translateX(-50%); text-align:center;}
+  #slide-4 .subtitulo{font-size:26px; font-weight:600; color:var(--navy-55); margin:0;}
+  #slide-4 .destacada{font-size:34px; font-weight:800; color:var(--navy); margin:22px 0 0 0;}
+  #slide-4 .cierre{font-size:22px; font-weight:500; color:var(--navy-55); margin:22px 0 0 0;}
+
+  /* ---- Slide 6 · Primeras pruebas — tarjetas asimétricas ---- */
+  #slide-5 .top-col{position:absolute; left:96px; top:166px; width:640px;}
+  #slide-5 .badge{margin-bottom:22px;}
+  #slide-5 .titular{font-size:46px; font-weight:800; color:var(--navy); margin:0; letter-spacing:-.01em;}
+  #slide-5 .subtitulo{font-size:22px; font-weight:500; color:var(--navy-55); margin:16px 0 0 0;}
+  .s6-card{
+    position:absolute; width:480px; padding:34px 36px; border-radius:24px;
+    background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--glass-line); box-shadow:var(--glass-shadow);
+  }
+  .s6-card .q{font-size:44px; font-weight:800; color:var(--steel); line-height:.4; display:block; margin-bottom:14px;}
+  .s6-card b{display:block; font-size:20px; font-weight:700; color:var(--navy); margin-top:16px;}
+  .s6-card p{font-size:19px; font-weight:500; line-height:1.5; color:var(--navy-70); margin:0;}
+  #slide-5 #card-claudia{left:270px; top:420px;}
+  #slide-5 #card-pablo{left:880px; top:570px;}
+
+  /* ---- Slide 7 · El mercado — capas: mapa arriba, franja abajo ---- */
+  #slide-6 .badge{position:absolute; left:96px; top:166px;}
+  #slide-6 .map-zone{position:absolute; left:700px; top:190px; width:760px; height:320px;}
+  #slide-6 .num-block{position:absolute; left:96px; top:250px; width:460px;}
+  #slide-6 .num{font-size:112px; font-weight:900; color:var(--navy); margin:0; line-height:1;}
+  #slide-6 .num-label{font-size:22px; font-weight:600; color:var(--navy-55); margin:6px 0 0 0;}
+  #slide-6 .subtitulo{font-size:20px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:26px 0 0 0; max-width:440px;}
+  #slide-6 .destacada{position:absolute; left:96px; top:566px; width:1200px; font-size:32px; font-weight:800; color:var(--navy); margin:0;}
+  #slide-6 .channel-strip{position:absolute; left:96px; top:650px; width:1408px; display:flex; flex-wrap:wrap; gap:14px 26px;}
+  #slide-6 .sources{position:absolute; left:96px; top:722px; font-size:14px; font-weight:600; letter-spacing:.03em; color:var(--navy-38);}
+
+  /* ---- Slide 8 · Un modelo simple — dos columnas + conector ---- */
+  #slide-7 #s8-badge{position:absolute; left:96px; top:150px;}
+  #slide-7 .titular-wrap{position:absolute; left:50%; top:220px; transform:translateX(-50%); text-align:center;}
+  #slide-7 .titular{font-size:54px; font-weight:800; color:var(--navy); margin:0;}
+  #slide-7 .connector{position:absolute; left:310px; top:337px; width:660px; height:2px; background:var(--navy-16); overflow:hidden;}
+  #slide-7 .connector i{position:absolute; top:0; left:-30%; width:30%; height:100%; background:linear-gradient(90deg, transparent, var(--steel-dark), transparent);}
+  #slide-7 .col{position:absolute; top:320px; width:340px; text-align:center;}
+  #slide-7 .col svg{color:var(--navy);}
+  #slide-7 #col-left{left:250px;}
+  #slide-7 #col-right{left:1010px;}
+  #slide-7 .col p{font-size:22px; font-weight:600; line-height:1.5; color:var(--navy-70); margin:20px 0 0 0;}
+  #slide-7 .bottom{position:absolute; left:50%; top:602px; transform:translateX(-50%); width:820px; text-align:center;}
+  #slide-7 .destacada{font-size:36px; font-weight:800; color:var(--navy); margin:0;}
+  #slide-7 .cierre{font-size:22px; font-weight:500; color:var(--navy-55); margin:20px 0 0 0;}
+
+  /* ---- Slide 9 · Dos escenarios — split vertical ---- */
+  #slide-8 .badge{position:absolute; left:96px; top:150px;}
+  #slide-8 .divider{position:absolute; left:800px; top:210px; width:1px; height:520px; background:var(--navy-16); transform:scaleY(0); transform-origin:top;}
+  #slide-8 .col{position:absolute; top:210px; width:600px;}
+  #slide-8 #s9-left{left:110px;}
+  #slide-8 #s9-right{left:900px;}
+  #slide-8 .col .titular{font-size:40px; font-weight:800; color:var(--navy); margin:0;}
+  #slide-8 .col .subtitulo{font-size:21px; font-weight:500; color:var(--navy-55); margin:12px 0 0 0;}
+  #slide-8 .col .destacada{font-size:24px; font-weight:800; color:var(--steel-dark); margin:12px 0 0 0;}
+  #slide-8 .col svg{margin-top:26px;}
+  #slide-8 .cierre-wrap{position:absolute; left:50%; top:760px; transform:translateX(-50%); width:1100px; text-align:center;}
+  #slide-8 .cierre{font-size:22px; font-weight:600; color:var(--navy-55); margin:0;}
+
+  /* ---- Slide 10 · Lo que pido — dos zonas lado a lado ---- */
+  #slide-9 .badge{position:absolute; left:96px; top:190px;}
+  #slide-9 .left-col{position:absolute; left:96px; top:300px; width:620px;}
+  #slide-9 .num{font-size:150px; font-weight:900; color:var(--navy); margin:0; line-height:1; letter-spacing:-.02em;}
+  #slide-9 .subtitulo{font-size:22px; font-weight:600; line-height:1.8; color:var(--navy-55); margin:36px 0 0 0;}
+  #slide-9 .chart-zone{position:absolute; left:840px; top:236px; width:560px; height:520px;}
+
+  /* ---- Slide 11 · Cierre — centrado, espejo de la slide 1 ---- */
+  #slide-10 .center-col{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:1100px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:22px;}
+  #slide-10 .subtitulo{font-size:24px; font-weight:500; color:var(--navy-55); margin:0; max-width:700px; line-height:1.5;}
+  #slide-10 .titular{font-size:38px; font-weight:800; color:var(--navy); margin:0; max-width:900px; line-height:1.4;}
+  #slide-10 .destacada{font-size:30px; font-weight:600; font-style:italic; color:var(--steel-dark); margin:0; max-width:900px; line-height:1.4;}
+  #slide-10 .mark-big{color:var(--navy); margin-top:8px;}
 </style>
 </head>
 <body>
@@ -295,86 +285,176 @@
     <div class="chrome-run" id="chromeRun"><b>PORTADA</b></div>
     <div class="chrome-footer">PROPUESTA DE INVERSIÓN — 2026</div>
 
-    <!-- SLIDE 1 -->
-    <section id="slide1">
-      <div class="s1-divider"></div>
-      <div class="s1-left">
-        <div class="s1-tagrow">
-          <span>Estudio bíblico</span><span>Inteligencia artificial</span><span>Comunidad</span>
-        </div>
-        <p class="s1-para">Una nueva manera de leer, comprender y vivir la Biblia — pensada para cómo buscamos hoy.</p>
-        <div class="s1-stats">
-          <div class="s1-stat"><b>5</b><span>Modos de estudio</span></div>
-          <div class="s1-stat"><b>500M+</b><span>Hispanohablantes</span></div>
-        </div>
-      </div>
-      <div class="s1-right">
-        <p class="s1-word"><span class="cut"><span>Según</span></span></p>
-        <p class="s1-word"><span class="cut"><span>tu</span></span> <span class="cut"><span class="accent">Palabra.</span></span></p>
-        <div class="s1-pills">
-          <span class="pill-glass"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4.5c2-1 4-1 6 .5v10c-2-1.5-4-1.5-6-.5V4.5Z"/><path d="M18 4.5c-2-1-4-1-6 .5v10c2-1.5 4-1.5 6-.5V4.5Z"/></svg>Leer</span>
-          <span class="pill-glass"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5a4.5 4.5 0 0 0-2.5 8.24c.4.28.5.6.5 1.06v.7h4v-.7c0-.46.1-.78.5-1.06A4.5 4.5 0 0 0 10 2.5Z"/><path d="M8 16.3h4M8.5 18.3h3"/></svg>Comprender</span>
-          <span class="pill-glass"><svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 17s-6.2-3.8-6.2-8.4A3.6 3.6 0 0 1 10 6.2 3.6 3.6 0 0 1 16.2 8.6C16.2 13.2 10 17 10 17Z"/></svg>Vivir</span>
-        </div>
-      </div>
-      <div class="s1-navhint">
-        <span class="pill-glass"><span>Pulsa</span><span class="arrow">→</span><span>para empezar</span></span>
+    <!-- ============ SLIDE 1 · Apertura ============ -->
+    <section class="slide" id="slide-0">
+      <div class="center-col">
+        <svg class="mark-big" id="markOpen" width="40" height="40" viewBox="0 0 20 20"><circle cx="4" cy="16" r="3" fill="currentColor"/><circle cx="16" cy="4" r="3" fill="currentColor"/><circle cx="14" cy="14" r="2.2" fill="currentColor"/></svg>
+        <h1 class="titular">SEGÚN TU PALABRA</h1>
+        <p class="subtitulo">Una nueva forma de leer, estudiar y vivir la Palabra</p>
       </div>
     </section>
 
-    <!-- SLIDE 2 -->
-    <section id="slide2">
-      <div class="s2-left">
-        <div class="pill-tag" id="kicker1">01 — El punto de partida</div>
-        <h2 class="s2-headline">Cada persona busca a Dios de una forma distinta.</h2>
-        <p class="s2-caption">Seis razones reales por las que alguien, hoy, decide abrir la Biblia por primera vez.</p>
+    <!-- ============ SLIDE 2 · El descubrimiento ============ -->
+    <section class="slide" id="slide-1">
+      <div class="s2-word" id="w-dudas" style="font-size:70px;">Dudas.</div>
+      <div class="s2-word" id="w-busqueda" style="font-size:64px;">Búsqueda.</div>
+      <div class="s2-word" id="w-filologia" style="font-size:70px;">Filología.</div>
+      <div class="s2-block">
+        <div class="pill-tag badge" id="s1-badge">02 — El descubrimiento</div>
+        <p class="destacada">No dudaba de Dios. Dudaba de tener <span class="hl"><span class="hl-bg"></span><span class="hl-text">las herramientas</span></span> para conocerlo de verdad.</p>
+        <p class="cierre">¿Y si la respuesta no era buscar fuera, sino aprender a leer dentro?</p>
       </div>
     </section>
 
-    <!-- SLIDE 3 -->
-    <section id="slide3">
-      <div class="s3-left">
-        <div class="pill-tag" id="kicker2">02 — El descubrimiento</div>
+    <!-- ============ SLIDE 3 · El 67% ============ -->
+    <section class="slide" id="slide-2">
+      <div class="pill-tag badge">03 — El 67%</div>
+      <div class="num-wrap"><p class="num" id="num67">0%</p></div>
+      <div class="right-col">
+        <p class="subtitulo">de los católicos raramente o nunca lee la Biblia<span class="cite">Pew Research Center</span></p>
+        <p class="destacada">No es que no queramos conocer la Palabra.</p>
+        <p class="cierre">Es que nadie nos enseñó cómo acercarnos a ella.</p>
       </div>
-      <p class="s3-line2">Buscamos de mil formas distintas.</p>
-      <p class="s3-line3">Pero seguimos leyendo la Biblia <span class="hl"><span class="hl-bg"></span><span class="hl-text">de una sola.</span></span></p>
-      <p class="s3-bridge">¿Y si cada camino tuviera también su propia forma de leer?</p>
-
-      <div class="ruler" id="ruler">
-        <div class="ruler-tick" style="top:0px"></div><div class="ruler-label" style="top:0px">Dios</div>
-        <div class="ruler-tick" style="top:50px"></div><div class="ruler-label" style="top:50px">Oración</div>
-        <div class="ruler-tick" style="top:100px"></div><div class="ruler-label" style="top:100px">Fe</div>
-        <div class="ruler-tick" style="top:150px"></div><div class="ruler-label" style="top:150px">Dudas</div>
-        <div class="ruler-tick" style="top:200px"></div><div class="ruler-label" style="top:200px">Paz</div>
-        <div class="ruler-tick" style="top:250px"></div><div class="ruler-label" style="top:250px">Comunidad</div>
-        <div class="ruler-end" style="top:300px"></div>
-      </div>
-      <div class="ruler-endlabel">Un libro.</div>
     </section>
 
-    <!-- WORD FIELD (persists across slide 2 → 3) -->
-    <div id="wordfield">
-      <div class="chip" id="chip1">Conocer mejor a Dios</div>
-      <div class="chip" id="chip2">Tener un momento de oración</div>
-      <div class="chip" id="chip3">Profundizar en mi fe</div>
-      <div class="chip" id="chip4">Resolver dudas</div>
-      <div class="chip" id="chip5">Encontrar paz en momentos difíciles</div>
-      <div class="chip" id="chip6">Sentirme parte de una comunidad</div>
+    <!-- ============ SLIDE 4 · La Biblia de notas ============ -->
+    <section class="slide" id="slide-3">
+      <div class="pill-tag badge">04 — La Biblia de notas</div>
+      <div class="left-col">
+        <span class="s4-word" id="s4w1">Subrayar.</span>
+        <span class="s4-word" id="s4w2">Personalizar.</span>
+        <span class="s4-word" id="s4w3">Escribir.</span>
+        <p class="cierre">Nació Según tu Palabra.</p>
+      </div>
+      <div class="mockup-zone asset-pending" id="s4mockup">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5L9 17"/></svg>
+        <b>Mockup pendiente</b>
+        <span>Necesito una foto o mockup real de la Biblia de notas donde se vea el margen de anotación — no un render genérico.</span>
+      </div>
+    </section>
 
-      <div class="seed" id="seedDios">Dios<span style="color:var(--steel-dark)">.</span></div>
-      <div class="seed" id="seedPaz">Paz<span style="color:var(--steel-dark)">.</span></div>
-      <div class="seed" id="seedComunidad">Comunidad<span style="color:var(--steel-dark)">.</span></div>
-      <div class="seed warm" id="seedFe">Fe<span>.</span></div>
-    </div>
+    <!-- ============ SLIDE 5 · Cinco modos de estudio ============ -->
+    <section class="slide" id="slide-4">
+      <div class="pill-tag badge">05 — Cinco modos de estudio</div>
+      <div class="fan">
+        <div class="fan-card" id="fc1">Etimológico</div>
+        <div class="fan-card" id="fc2">Cristológico</div>
+        <div class="fan-card" id="fc3">Histórico</div>
+        <div class="fan-card" id="fc4">Pastoral</div>
+        <div class="fan-card" id="fc5">Lectio Divina</div>
+      </div>
+      <div class="bottom-col">
+        <p class="subtitulo">No hay una única forma de acercarse a Dios.</p>
+        <p class="destacada">Cada modo, un camino distinto hacia el mismo texto.</p>
+        <p class="cierre">La IA trabaja en silencio. La protagonista sigue siendo la Palabra.</p>
+      </div>
+    </section>
 
-    <!-- invisible ruler used once to measure real headline word-spacing (real font metrics,
-         not guessed pixels) — never painted, removed from flow via visibility:hidden -->
-    <div id="measureHeadline" style="position:absolute; left:592px; top:340px; display:flex; align-items:baseline; gap:30px; visibility:hidden; white-space:nowrap; pointer-events:none;">
-      <span style="font-family:var(--f-sans); font-weight:800; font-size:74px;">Dios.</span>
-      <span style="font-family:var(--f-sans); font-weight:800; font-size:74px;">Paz.</span>
-      <span style="font-family:var(--f-sans); font-weight:800; font-size:74px;">Comunidad.</span>
-      <span style="font-family:var(--f-sans); font-weight:800; font-size:74px;">Fe.</span>
-    </div>
+    <!-- ============ SLIDE 6 · Primeras pruebas ============ -->
+    <section class="slide" id="slide-5">
+      <div class="top-col">
+        <div class="pill-tag badge">06 — Primeras pruebas</div>
+        <h2 class="titular">Primeras pruebas</h2>
+        <p class="subtitulo">Lectores reales, sobre el Evangelio de Marcos</p>
+      </div>
+      <div class="s6-card" id="card-claudia"><span class="q">"</span><p>Al terminar, tenía preguntas y puntos concretos en los que seguir pensando.</p><b>Claudia, 21</b></div>
+      <div class="s6-card" id="card-pablo"><span class="q">"</span><p>No esperaba quedarme cuarenta minutos en un capítulo.</p><b>Pablo, 29</b></div>
+    </section>
+
+    <!-- ============ SLIDE 7 · Un idioma que nadie ha servido bien ============ -->
+    <section class="slide" id="slide-6">
+      <div class="pill-tag badge">07 — Un idioma que nadie ha servido bien</div>
+      <div class="map-zone" id="mapZone">
+        <svg viewBox="0 0 760 320" width="100%" height="100%">
+          <g id="mapDots" fill="none"></g>
+        </svg>
+      </div>
+      <div class="num-block">
+        <p class="num">~500M</p>
+        <p class="num-label">hablantes de español</p>
+        <p class="subtitulo">Catolicismo: fe mayoritaria en España e Hispanoamérica. 46%–90% de la población, según el país.</p>
+      </div>
+      <p class="destacada">~400.000 personas alcanzables a través de canales institucionales.</p>
+      <div class="channel-strip" id="channelStrip">
+        <span class="dot-tag"><i></i>Parroquias</span>
+        <span class="dot-tag"><i></i>Diócesis</span>
+        <span class="dot-tag"><i></i>Universidades católicas</span>
+        <span class="dot-tag"><i></i>Seminarios</span>
+        <span class="dot-tag"><i></i>Capellanías</span>
+        <span class="dot-tag"><i></i>Retiros</span>
+      </div>
+      <div class="sources">Instituto Cervantes · Pew Research Center</div>
+    </section>
+
+    <!-- ============ SLIDE 8 · Un modelo simple ============ -->
+    <section class="slide" id="slide-7">
+      <div class="pill-tag badge" id="s8-badge">08 — Un modelo simple</div>
+      <div class="titular-wrap"><h2 class="titular">Biblia. App.</h2></div>
+      <div class="connector"><i id="flowLine"></i></div>
+      <div class="col" id="col-left">
+        <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4.5c2-1 4-1 6 .5v10c-2-1.5-4-1.5-6-.5V4.5Z"/><path d="M18 4.5c-2-1-4-1-6 .5v10c2-1.5 4-1.5 6-.5V4.5Z"/></svg>
+        <p>La Biblia se compra una vez.</p>
+      </div>
+      <div class="col" id="col-right">
+        <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="2" width="10" height="16" rx="2"/><line x1="8" y1="15.5" x2="12" y2="15.5"/></svg>
+        <p>La app se paga mes a mes, y su precio crece con el contenido.</p>
+      </div>
+      <div class="bottom">
+        <p class="destacada">Dos ingresos, un mismo propósito.</p>
+        <p class="cierre">Acompañar la lectura de la Palabra, hoy y cada día después.</p>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 9 · Dos escenarios ============ -->
+    <section class="slide" id="slide-8">
+      <div class="pill-tag badge">09 — Dos escenarios</div>
+      <div class="divider"></div>
+      <div class="col" id="s9-left">
+        <h3 class="titular">Conservador</h3>
+        <p class="subtitulo">Empezamos en pérdidas.</p>
+        <p class="destacada">Rentable en el Año 3.</p>
+        <svg width="580" height="260" viewBox="0 0 580 260">
+          <line x1="0" y1="150" x2="580" y2="150" stroke="var(--navy-16)" stroke-width="1"/>
+          <path id="curveCons" pathLength="1" d="M0,190 C120,220 260,235 360,190 C450,150 500,90 580,40" fill="none" stroke="var(--steel-dark)" stroke-width="4" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="1"/>
+          <circle id="dotCons" cx="360" cy="190" r="6" fill="var(--navy)" opacity="0"/>
+        </svg>
+      </div>
+      <div class="col" id="s9-right">
+        <h3 class="titular">Realista</h3>
+        <p class="subtitulo">Equilibrio ya en el Año 2.</p>
+        <p class="destacada">~450.000€ de facturación en el Año 3.</p>
+        <svg width="580" height="260" viewBox="0 0 580 260">
+          <line x1="0" y1="150" x2="580" y2="150" stroke="var(--navy-16)" stroke-width="1"/>
+          <path id="curveReal" pathLength="1" d="M0,185 C90,200 160,190 220,150 C320,90 420,50 580,15" fill="none" stroke="var(--navy)" stroke-width="4" stroke-linecap="round" stroke-dasharray="1" stroke-dashoffset="1"/>
+          <circle id="dotReal" cx="220" cy="150" r="6" fill="var(--navy)" opacity="0"/>
+        </svg>
+      </div>
+      <div class="cierre-wrap"><p class="cierre">Mismo modelo, mismo margen. Cada año, menos gasto y más ingreso.</p></div>
+    </section>
+
+    <!-- ============ SLIDE 10 · Lo que pido ============ -->
+    <section class="slide" id="slide-9">
+      <div class="pill-tag badge">10 — Lo que pido</div>
+      <div class="left-col">
+        <p class="num" id="num200k">0€</p>
+        <p class="subtitulo">Desarrollo · Producción · Lanzamiento<br>Contenido teológico · Legal</p>
+      </div>
+      <div class="chart-zone asset-pending" id="s10chart">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="5" y1="19" x2="5" y2="11"/><line x1="12" y1="19" x2="12" y2="6"/><line x1="19" y1="19" x2="19" y2="14"/></svg>
+        <b>Gráfica pendiente</b>
+        <span>Necesito los datos reales del panel financiero interactivo (Chart.js) — evolución de ingresos, burn rate o runway a 36 meses.</span>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 11 · Cierre ============ -->
+    <section class="slide" id="slide-10">
+      <div class="center-col">
+        <p class="subtitulo">Para ser misioneros, primero hay que conocer lo que se anuncia.</p>
+        <p class="titular">"Sed misioneros de la Palabra."<br>— Papa León XIV</p>
+        <p class="destacada">"Hágase en mí, según tu palabra."<br>— Lucas 1:38</p>
+        <svg class="mark-big" id="markClose" width="34" height="34" viewBox="0 0 20 20"><circle cx="4" cy="16" r="3" fill="currentColor"/><circle cx="16" cy="4" r="3" fill="currentColor"/><circle cx="14" cy="14" r="2.2" fill="currentColor"/></svg>
+      </div>
+    </section>
 
   </div>
 
@@ -383,7 +463,6 @@
     <div class="navdots" id="navdots"></div>
     <button class="navbtn" id="btnNext" aria-label="Siguiente" title="Siguiente (→ / espacio)">›</button>
   </div>
-  <div class="toast" id="toast">Slides 4–11 · próximamente</div>
 </div>
 
 <script>
@@ -400,233 +479,371 @@
   fit();
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var D = reduced ? .01 : .85;
 
-  /* ---------- build progress bar (11 segments) ---------- */
+  /* =====================================================================
+     DECK MAP — 11 slides, each with 1-3 "beats". A global state index
+     walks through every beat of every slide in order; the top progress
+     bar reflects the SLIDE (one segment per slide, as in the muestra),
+     the bottom dots reflect the BEAT within the current slide.
+     ===================================================================== */
+  var slideNames  = ['PORTADA','DESCUBRIMIENTO','EL 67%','LA BIBLIA','CINCO MODOS','PRUEBAS','EL MERCADO','EL MODELO','ESCENARIOS','LA INVERSIÓN','CIERRE'];
+  var beatsPerSlide = [1, 3, 3, 2, 3, 2, 3, 3, 3, 2, 3];
+  var beatTable = []; // [slideIdx, localBeat] per global state
+  beatsPerSlide.forEach(function(n, s){ for (var b=0;b<n;b++) beatTable.push([s,b]); });
+  var TOTAL = beatTable.length;
+
+  /* ---------- progress bar: one segment per slide ---------- */
   var pb = document.getElementById('progressbar');
   var segs = [];
   for (var n=0;n<11;n++){
     var i = document.createElement('i');
     var em = document.createElement('em');
-    i.appendChild(em);
-    pb.appendChild(i);
-    segs.push(em);
+    i.appendChild(em); pb.appendChild(i); segs.push(em);
   }
 
-  /* ---------- atmosphere blobs: drift to a new resting spot per slide,
-     the one piece of "set dressing" that visibly carries across slides ---------- */
+  /* ---------- atmosphere blobs: a new resting spot per slide ---------- */
   var blobStates = [
-    {a:{x:1180,y:120,s:1},   b:{x:220, y:760,s:.9}, c:{x:1400,y:640,s:.8}},  // slide 1
-    {a:{x:120, y:80, s:.85}, b:{x:1420,y:200,s:1.05},c:{x:1100,y:780,s:.9}}, // slide 2
-    {a:{x:1500,y:760,s:.95}, b:{x:160, y:620,s:.95}, c:{x:120, y:120,s:.75}} // slide 3
+    {a:{x:800, y:260,s:1},   b:{x:1300,y:700,s:.85},c:{x:260, y:700,s:.8}},  // 0 apertura
+    {a:{x:120, y:80, s:.85}, b:{x:1420,y:200,s:1.05},c:{x:1100,y:780,s:.9}}, // 1 descubrimiento
+    {a:{x:1500,y:200,s:.9},  b:{x:220, y:700,s:1},   c:{x:900, y:150,s:.7}}, // 2 67%
+    {a:{x:1300,y:700,s:1},   b:{x:180, y:200,s:.85}, c:{x:800, y:820,s:.75}},// 3 biblia
+    {a:{x:800, y:120,s:.8},  b:{x:1450,y:780,s:.95}, c:{x:150, y:780,s:.85}},// 4 cinco modos
+    {a:{x:200, y:760,s:.9},  b:{x:1450,y:200,s:1},   c:{x:900, y:120,s:.7}}, // 5 pruebas
+    {a:{x:1450,y:150,s:1},   b:{x:200, y:800,s:.9},  c:{x:900, y:800,s:.75}},// 6 mercado
+    {a:{x:800, y:120,s:.85}, b:{x:150, y:780,s:.9},  c:{x:1450,y:780,s:.9}}, // 7 modelo
+    {a:{x:150, y:150,s:.85}, b:{x:1450,y:150,s:.85}, c:{x:800, y:800,s:.8}}, // 8 escenarios
+    {a:{x:1400,y:700,s:1},   b:{x:200, y:180,s:.85}, c:{x:800, y:120,s:.7}}, // 9 inversión
+    {a:{x:800, y:260,s:1},   b:{x:1300,y:700,s:.85}, c:{x:260, y:700,s:.8}}  // 10 cierre (mirror slide 0)
   ];
-
-  /* ---------- word-field coordinates ---------- */
-  var chipCoords = {
-    chip1:{x:640,  y:430, r:-3},
-    chip2:{x:1150, y:206, r:3},
-    chip3:{x:1300, y:452, r:-2},
-    chip4:{x:770,  y:748, r:4},
-    chip5:{x:1090, y:706, r:-3},
-    chip6:{x:626,  y:618, r:2}
-  };
-  var seedScatter = {
-    seedDios:      {x:706,  y:264, r:-6, size:58},
-    seedPaz:       {x:1246, y:344, r:8,  size:52},
-    seedComunidad: {x:986,  y:606, r:-4, size:44},
-    seedFe:        {x:1404, y:556, r:5,  size:64}
-  };
-  /* final headline positions are measured off real DOM layout (see #measureHeadline)
-     rather than guessed in px — word widths depend on the actual loaded font. */
-  var seedFinal = {
-    seedDios:      {x:648,  y:340, size:74},
-    seedPaz:       {x:826,  y:340, size:74},
-    seedComunidad: {x:1104, y:340, size:74},
-    seedFe:        {x:1338, y:340, size:74}
-  };
-  var seedFinalOrder = ['seedDios','seedPaz','seedComunidad','seedFe'];
-  function measureHeadline(){
-    var stageBox = stage.getBoundingClientRect();
-    var s = stageBox.width / 1600; // stage is CSS-scaled to fit the viewport; unscale back to logical px
-    var spans = document.querySelectorAll('#measureHeadline > span');
-    spans.forEach(function(span, idx){
-      var r = span.getBoundingClientRect();
-      var id = seedFinalOrder[idx];
-      seedFinal[id] = {
-        x: (r.left + r.width/2 - stageBox.left) / s,
-        y: (r.top + r.height/2 - stageBox.top) / s,
-        size: 74
-      };
-    });
-  }
-  measureHeadline();
-
-  Object.keys(chipCoords).forEach(function(id){
-    var c = chipCoords[id];
-    gsap.set('#'+id, {x:c.x, y:c.y, rotate:c.r, opacity:0, scale:.86, xPercent:-50, yPercent:-50});
-  });
-  Object.keys(seedScatter).forEach(function(id){
-    var c = seedScatter[id];
-    gsap.set('#'+id, {x:c.x, y:c.y, rotate:c.r, fontSize:c.size, opacity:0, scale:.8, xPercent:-50, yPercent:-50});
-  });
-  ['blobA','blobB','blobC'].forEach(function(id){
-    gsap.set('#'+id, {xPercent:-50, yPercent:-50});
-  });
+  ['blobA','blobB','blobC'].forEach(function(id){ gsap.set('#'+id, {xPercent:-50, yPercent:-50}); });
   gsap.set('#blobA', {x:blobStates[0].a.x, y:blobStates[0].a.y, scale:blobStates[0].a.s});
   gsap.set('#blobB', {x:blobStates[0].b.x, y:blobStates[0].b.y, scale:blobStates[0].b.s});
   gsap.set('#blobC', {x:blobStates[0].c.x, y:blobStates[0].c.y, scale:blobStates[0].c.s});
 
-  /* ---------- initial hidden states ---------- */
-  gsap.set('.s1-divider', {scaleY:0});
-  gsap.set('.s1-left > *', {opacity:0, y:16, filter:'blur(6px)'});
-  gsap.set('.s1-pills, .s1-navhint', {opacity:0, y:16});
-  gsap.set('.s1-word .cut', {clipPath:'inset(0 100% 0 0)'});
-  gsap.set('#kicker1, .s2-caption', {opacity:0, y:14});
-  gsap.set('.s2-headline', {opacity:0, y:14, filter:'blur(6px)'});
-  gsap.set('#kicker2', {opacity:0, y:14});
-  gsap.set('.s3-line2, .s3-line3, .s3-bridge', {opacity:0, y:18, filter:'blur(6px)'});
-  gsap.set('.hl-bg', {scaleX:0});
-  gsap.set('#ruler', {scaleY:0});
-  gsap.set('.ruler-tick, .ruler-label, .ruler-end', {opacity:0});
-  gsap.set('.ruler-endlabel', {opacity:0, y:10});
-
-  var runTitles = ['PORTADA','BÚSQUEDA','BÚSQUEDA','DESCUBRIMIENTO','DESCUBRIMIENTO','DESCUBRIMIENTO'];
-  var filledSegs = [1,2,2,3,3,3];
-  var slideOfState = [0,1,1,2,2,2];
-  var D = reduced ? .01 : .8;
-
+  /* ---------- helpers ---------- */
   function fadeGroup(sel, show, opts){
     opts = opts || {};
     var vars = {
       opacity: show?1:0,
-      y: show?0:(opts.hideY!==undefined?opts.hideY:14),
+      y: show?0:(opts.hideY!==undefined?opts.hideY:16),
       duration: opts.duration || D,
       ease: opts.ease || 'power3.out',
-      stagger: opts.stagger || 0
+      stagger: opts.stagger || 0,
+      delay: opts.delay || 0
     };
     if (opts.blur) vars.filter = show ? 'blur(0px)' : 'blur(6px)';
+    if (opts.scaleFrom !== undefined) vars.scale = show ? 1 : opts.scaleFrom;
     gsap.to(sel, vars);
   }
+  function countUp(el, to, suffix, decimals, formatThousands){
+    var obj = {v:0};
+    gsap.to(obj, {
+      v: to, duration: reduced?.01:1.3, ease:'power2.out',
+      onUpdate: function(){
+        var v = obj.v;
+        var s = decimals ? v.toFixed(decimals) : Math.round(v).toString();
+        if (formatThousands) s = Math.round(v).toLocaleString('es-ES');
+        el.textContent = s + suffix;
+      }
+    });
+  }
 
+  /* ---------- Slide 1 · word-field scatter coords for slide 2 ---------- */
+  var s2Scatter = {
+    'w-dudas':     {x:420, y:250, r:-5},
+    'w-busqueda':  {x:1130,y:210, r:4},
+    'w-filologia': {x:800, y:440, r:-3}
+  };
+  Object.keys(s2Scatter).forEach(function(id){
+    var c = s2Scatter[id];
+    gsap.set('#'+id, {x:c.x, y:c.y, rotate:c.r, opacity:0, scale:.9, xPercent:-50, yPercent:-50});
+  });
+
+  /* ---------- Slide 5 · fan card layout ---------- */
+  var fanCoords = [
+    {id:'fc1', x:250, y:80,  r:-11},
+    {id:'fc2', x:560, y:20,  r:-5.5},
+    {id:'fc3', x:800, y:0,   r:0},
+    {id:'fc4', x:1040,y:20,  r:5.5},
+    {id:'fc5', x:1350,y:80,  r:11}
+  ];
+  fanCoords.forEach(function(c, idx){
+    gsap.set('#'+c.id, {x:c.x, y:c.y, rotate:c.r, xPercent:-50, yPercent:0, opacity:0, scale:.85});
+  });
+
+  /* ---------- Slide 7 · abstract map dot-cluster (illustrative, not geographic) ---------- */
+  (function buildMap(){
+    var g = document.getElementById('mapDots');
+    var groups = [
+      {cx:180, cy:150, label:'España',        n:9,  r:70},
+      {cx:520, cy:170, label:'Hispanoamérica', n:16, r:120}
+    ];
+    var svgns = 'http://www.w3.org/2000/svg';
+    groups.forEach(function(grp, gi){
+      for (var k=0;k<grp.n;k++){
+        var ang = (k/grp.n) * Math.PI*2 + gi;
+        var rad = grp.r * (0.35 + 0.65*((k*53)%100)/100);
+        var cx = grp.cx + Math.cos(ang)*rad;
+        var cy = grp.cy + Math.sin(ang)*rad*0.7;
+        var c = document.createElementNS(svgns,'circle');
+        c.setAttribute('cx', cx); c.setAttribute('cy', cy);
+        c.setAttribute('r', 3.4 + (k%3));
+        c.setAttribute('fill', gi===0 ? 'var(--steel-dark)' : 'var(--navy)');
+        c.setAttribute('opacity', 0.75);
+        c.classList.add('map-dot');
+        g.appendChild(c);
+      }
+      var t = document.createElementNS(svgns,'text');
+      t.setAttribute('x', grp.cx); t.setAttribute('y', grp.cy+grp.r*0.75+34);
+      t.setAttribute('text-anchor','middle');
+      t.setAttribute('style','font-family:var(--f-sans); font-size:15px; font-weight:600; fill:var(--navy-55);');
+      t.textContent = grp.label;
+      g.appendChild(t);
+    });
+    gsap.set('.map-dot', {opacity:0, scale:0, transformOrigin:'center'});
+    gsap.set('#mapDots text', {opacity:0});
+  })();
+
+  /* ---------- initial hidden states ---------- */
+  gsap.set('#slide-0 .mark-big, #slide-0 .titular, #slide-0 .subtitulo', {opacity:0, y:18, filter:'blur(6px)'});
+
+  gsap.set('#slide-1 .badge, #slide-1 .destacada, #slide-1 .cierre', {opacity:0, y:16});
+  gsap.set('#slide-1 .destacada', {filter:'blur(6px)'});
+  gsap.set('.hl-bg', {scaleX:0});
+
+  gsap.set('#slide-2 .badge, #slide-2 .subtitulo, #slide-2 .destacada, #slide-2 .cierre', {opacity:0, y:16});
+  gsap.set('#slide-2 .num', {opacity:0, scale:.92, transformOrigin:'left center'});
+
+  gsap.set('#slide-3 .badge, #slide-3 .s4-word, #slide-3 .cierre', {opacity:0, y:18});
+  gsap.set('#s4mockup', {opacity:0, scale:.94});
+
+  gsap.set('#slide-4 .badge, #slide-4 .subtitulo, #slide-4 .destacada, #slide-4 .cierre', {opacity:0, y:16});
+
+  gsap.set('#slide-5 .badge, #slide-5 .titular, #slide-5 .subtitulo', {opacity:0, y:16});
+  gsap.set('#card-claudia, #card-pablo', {opacity:0, y:26});
+
+  gsap.set('#slide-6 .badge, #slide-6 .num, #slide-6 .num-label, #slide-6 .subtitulo, #slide-6 .destacada, .dot-tag, .sources', {opacity:0, y:14});
+
+  gsap.set('#s8-badge, #slide-7 .titular, #col-left, #col-right, #slide-7 .destacada, #slide-7 .cierre', {opacity:0, y:16});
+  gsap.set('#flowLine', {xPercent:0});
+
+  gsap.set('#slide-8 .badge, #slide-8 .divider', {opacity:0});
+  gsap.set('#slide-8 .divider', {scaleY:0});
+  gsap.set('#s9-left .titular, #s9-left .subtitulo, #s9-left .destacada, #s9-right .titular, #s9-right .subtitulo, #s9-right .destacada, #slide-8 .cierre', {opacity:0, y:14});
+
+  gsap.set('#slide-9 .badge, #slide-9 .subtitulo', {opacity:0, y:16});
+  gsap.set('#slide-9 .num', {opacity:0, scale:.92, transformOrigin:'left center'});
+  gsap.set('#s10chart', {opacity:0, scale:.94});
+
+  gsap.set('#slide-10 .subtitulo, #slide-10 .titular, #slide-10 .destacada, #slide-10 .mark-big', {opacity:0, y:16});
+
+  /* continuous idle motion (independent of beats) */
+  if (!reduced){
+    gsap.to('#num67', {scale:1.015, duration:4, ease:'sine.inOut', yoyo:true, repeat:-1, transformOrigin:'left center'});
+    gsap.to('#markOpen, #markClose', {rotate:8, duration:6, ease:'sine.inOut', yoyo:true, repeat:-1, transformOrigin:'center'});
+    gsap.to('#mapZone', {x:'+=10', y:'-=6', scale:1.02, duration:16, ease:'sine.inOut', yoyo:true, repeat:-1});
+  }
+
+  /* =====================================================================
+     PER-SLIDE RENDER FUNCTIONS — called with the local beat index (0-based)
+     ===================================================================== */
+  function renderSlide0(b){
+    var on = b>=0;
+    fadeGroup('#slide-0 .mark-big', on, {blur:true});
+    fadeGroup('#slide-0 .titular', on, {blur:true, delay:on?.1:0});
+    fadeGroup('#slide-0 .subtitulo', on, {blur:true, delay:on?.28:0, duration:D*1.1});
+  }
+
+  function renderSlide1(b){
+    // beat0: keywords float in; beat1: destacada (words settle/fade back); beat2: cierre
+    Object.keys(s2Scatter).forEach(function(id, idx){
+      var visible = b>=0;
+      var settle  = b>=1;
+      gsap.to('#'+id, {
+        opacity: visible ? (settle?.5:1) : 0,
+        scale: settle?.85:1,
+        duration: D,
+        ease:'power2.out',
+        delay: b===0 ? idx*0.12 : 0
+      });
+    });
+    fadeGroup('#slide-1 .badge', b>=0);
+    fadeGroup('#slide-1 .destacada', b>=1, {blur:true, delay:b===1?.1:0});
+    gsap.to('.hl-bg', {scaleX:b>=1?1:0, duration:reduced?.01:.7, ease:'power3.inOut', delay:b>=1?.5:0});
+    fadeGroup('#slide-1 .cierre', b>=2, {duration:D*1.05});
+  }
+
+  function renderSlide2(b){
+    fadeGroup('#slide-2 .badge', b>=0);
+    fadeGroup('#slide-2 .num', b>=0, {scaleFrom:.92});
+    if (b>=0) countUp(document.getElementById('num67'), 67, '%', 0, false);
+    fadeGroup('#slide-2 .subtitulo', b>=0, {delay:b===0?.25:0});
+    fadeGroup('#slide-2 .destacada', b>=1);
+    fadeGroup('#slide-2 .cierre', b>=2);
+  }
+
+  function renderSlide3(b){
+    fadeGroup('#slide-3 .badge', b>=0);
+    fadeGroup('#slide-3 .s4-word', b>=0, {stagger:.12});
+    gsap.to('#s4mockup', {opacity:b>=0?1:0, scale:b>=0?1:.94, duration:reduced?.01:1.4, ease:'power2.out'});
+    fadeGroup('#slide-3 .cierre', b>=1);
+  }
+
+  function renderSlide4(b){
+    fadeGroup('#slide-4 .badge', b>=0);
+    fanCoords.forEach(function(c, idx){
+      gsap.to('#'+c.id, {opacity:b>=0?1:0, scale:1, y:c.y, duration:D, ease:'power2.out', delay:b===0?idx*0.09:0});
+    });
+    fadeGroup('#slide-4 .subtitulo', b>=1);
+    fadeGroup('#slide-4 .destacada', b>=1, {delay:.12});
+    fadeGroup('#slide-4 .cierre', b>=2);
+  }
+
+  function renderSlide5(b){
+    fadeGroup('#slide-5 .badge', b>=0);
+    fadeGroup('#slide-5 .titular', b>=0, {delay:.06});
+    fadeGroup('#slide-5 .subtitulo', b>=0, {delay:.14});
+    fadeGroup('#card-claudia', b>=1);
+    fadeGroup('#card-pablo', b>=1, {delay:.18});
+  }
+
+  function renderSlide6(b){
+    fadeGroup('#slide-6 .badge', b>=0);
+    fadeGroup('#slide-6 .num', b>=0);
+    fadeGroup('#slide-6 .num-label', b>=0, {delay:.08});
+    gsap.to('.map-dot', {opacity:b>=0?.75:0, scale:b>=0?1:0, duration:D, stagger:0.012, delay:b>=0?.15:0});
+    gsap.to('#mapDots text', {opacity:b>=0?1:0, duration:D, delay:b>=0?.5:0});
+    fadeGroup('#slide-6 .subtitulo', b>=1);
+    fadeGroup('#slide-6 .destacada', b>=2);
+    fadeGroup('.dot-tag', b>=2, {stagger:.05, delay:.15});
+    fadeGroup('.sources', b>=2, {delay:.4});
+  }
+
+  function renderSlide7(b){
+    fadeGroup('#s8-badge', b>=0);
+    fadeGroup('#slide-7 .titular', b>=0, {delay:.06});
+    fadeGroup('#col-left', b>=1);
+    fadeGroup('#col-right', b>=1, {delay:.08});
+    fadeGroup('#slide-7 .destacada', b>=2);
+    fadeGroup('#slide-7 .cierre', b>=2, {delay:.15});
+  }
+
+  function renderSlide8(b){
+    gsap.to('#slide-8 .badge', {opacity:b>=0?1:0, duration:D});
+    gsap.to('#slide-8 .divider', {scaleY:b>=0?1:0, duration:reduced?.01:1, ease:'power2.inOut'});
+    fadeGroup('#s9-left .titular, #s9-right .titular', b>=0);
+    fadeGroup('#s9-left .subtitulo, #s9-right .subtitulo', b>=1);
+    fadeGroup('#s9-left .destacada, #s9-right .destacada', b>=1, {delay:.1});
+    gsap.to('#curveCons', {strokeDashoffset:b>=0?0:1, duration:reduced?.01:1.6, ease:'power2.inOut', delay:b===0?.15:0});
+    gsap.to('#curveReal', {strokeDashoffset:b>=0?0:1, duration:reduced?.01:1.3, ease:'power2.inOut', delay:b===0?.05:0});
+    gsap.to('#dotCons, #dotReal', {opacity:b>=0?1:0, duration:D, delay:b===0?1.5:0});
+    fadeGroup('#slide-8 .cierre', b>=2);
+  }
+
+  function renderSlide9(b){
+    fadeGroup('#slide-9 .badge', b>=0);
+    fadeGroup('#slide-9 .num', b>=0, {scaleFrom:.92});
+    if (b>=0) countUp(document.getElementById('num200k'), 200000, '€', 0, true);
+    fadeGroup('#slide-9 .subtitulo', b>=0, {delay:.3});
+    gsap.to('#s10chart', {opacity:b>=1?1:0, scale:b>=1?1:.94, duration:reduced?.01:1, ease:'power2.out'});
+  }
+
+  function renderSlide10(b){
+    fadeGroup('#slide-10 .subtitulo', b>=0, {blur:true});
+    fadeGroup('#slide-10 .titular', b>=1, {blur:true});
+    fadeGroup('#slide-10 .destacada', b>=2, {blur:true, delay:.35});
+    fadeGroup('#slide-10 .mark-big', b>=2, {delay:.9});
+  }
+
+  var renderers = [renderSlide0, renderSlide1, renderSlide2, renderSlide3, renderSlide4, renderSlide5, renderSlide6, renderSlide7, renderSlide8, renderSlide9, renderSlide10];
+
+  /* ---------- distinct per-slide entrance/exit motion for the slide's own root ---------- */
+  var motionPreset = ['dissolve','rise','zoomIn','zoomSlow','fanIn','riseCards','panDrift','mirrorIn','drawIn','zoomInR','dissolve'];
+  function motionVars(preset, entering){
+    switch(preset){
+      case 'rise':      return entering ? {y:0, opacity:1} : {y:-26, opacity:0};
+      case 'zoomIn':     return entering ? {scale:1, opacity:1} : {scale:1.06, opacity:0};
+      case 'zoomInR':    return entering ? {scale:1, opacity:1, x:0} : {scale:1.04, opacity:0, x:16};
+      case 'zoomSlow':   return entering ? {scale:1, opacity:1} : {scale:.97, opacity:0};
+      case 'fanIn':      return entering ? {y:0, opacity:1} : {y:14, opacity:0};
+      case 'riseCards':  return entering ? {y:0, opacity:1} : {y:22, opacity:0};
+      case 'panDrift':   return entering ? {x:0, opacity:1} : {x:-24, opacity:0};
+      case 'mirrorIn':   return entering ? {x:0, opacity:1} : {x:0, opacity:0};
+      case 'drawIn':     return entering ? {y:0, opacity:1} : {y:16, opacity:0};
+      default:           return entering ? {opacity:1} : {opacity:0};
+    }
+  }
+  var slideEls = [];
+  for (var si=0; si<11; si++) slideEls.push(document.getElementById('slide-'+si));
+  slideEls.forEach(function(el, idx){
+    gsap.set(el, Object.assign({opacity:0, pointerEvents:'none'}, motionVars(motionPreset[idx], false)));
+  });
+
+  var currentSlide = -1;
+  function goToSlideRoot(newSlide, oldSlide){
+    if (oldSlide>=0 && oldSlide!==newSlide){
+      gsap.to(slideEls[oldSlide], Object.assign({duration:reduced?.01:.6, ease:'power2.in', pointerEvents:'none'}, motionVars(motionPreset[oldSlide], false)));
+    }
+    gsap.set(slideEls[newSlide], {pointerEvents:'auto'});
+    gsap.to(slideEls[newSlide], Object.assign({duration:reduced?.01:.9, ease:'power2.out'}, motionVars(motionPreset[newSlide], true)));
+  }
+
+  /* ---------- master apply ---------- */
   function applyState(i){
-    /* chrome */
-    segs.forEach(function(em,idx){ gsap.to(em, {scaleX: idx<filledSegs[i]?1:0, duration:.5, ease:'power2.out'}); });
-    document.getElementById('chromeRun').innerHTML = '<b>'+runTitles[i]+'</b>';
+    var slideIdx = beatTable[i][0], beat = beatTable[i][1];
 
-    /* atmosphere drifts to match whichever slide we're on */
-    var bs = blobStates[slideOfState[i]];
+    if (slideIdx !== currentSlide){
+      goToSlideRoot(slideIdx, currentSlide);
+      currentSlide = slideIdx;
+    }
+
+    segs.forEach(function(em, idx){ gsap.to(em, {scaleX: idx<=slideIdx?1:0, duration:.5, ease:'power2.out'}); });
+    document.getElementById('chromeRun').innerHTML = '<b>'+slideNames[slideIdx]+'</b>';
+
+    var bs = blobStates[slideIdx];
     gsap.to('#blobA', {x:bs.a.x, y:bs.a.y, scale:bs.a.s, duration: reduced?.01:1.6, ease:'power2.inOut'});
     gsap.to('#blobB', {x:bs.b.x, y:bs.b.y, scale:bs.b.s, duration: reduced?.01:1.8, ease:'power2.inOut'});
     gsap.to('#blobC', {x:bs.c.x, y:bs.c.y, scale:bs.c.s, duration: reduced?.01:1.4, ease:'power2.inOut'});
 
-    /* ===== SLIDE 1 (state 0) ===== */
-    var onCover = (i===0);
-    gsap.to('.s1-divider', {scaleY:onCover?1:0, duration:D, ease:'power2.inOut', delay:onCover?.15:0});
-    gsap.to('.s1-word .cut', {clipPath:onCover?'inset(0 0% 0 0)':'inset(0 100% 0 0)', filter:onCover?'blur(0px)':'blur(10px)', duration: reduced?.01:1, ease:'power4.inOut', stagger:onCover?0.14:0});
-    fadeGroup('.s1-left > *', onCover, {stagger:onCover?.08:0, blur:true});
-    fadeGroup('.s1-right .s1-pills', onCover, {});
-    fadeGroup('.s1-navhint', onCover, {hideY:10});
+    renderers[slideIdx](beat);
+    buildDots(slideIdx, beat);
+  }
 
-    /* ===== SLIDE 2 kicker/headline/caption (states 1-2) ===== */
-    var onSearchText = (i===1 || i===2);
-    fadeGroup('#kicker1', onSearchText);
-    fadeGroup('.s2-headline', onSearchText, {duration:D*1.05, blur:true});
-    fadeGroup('.s2-caption', onSearchText, {});
-
-    /* ===== chips: visible only mid-slide2 (state 2), drift away from state 3 ===== */
-    Object.keys(chipCoords).forEach(function(id, idx){
-      var c = chipCoords[id];
-      var visible = (i===2);
-      var away = (i>=3);
-      gsap.to('#'+id, {
-        opacity: visible?1:0,
-        scale: visible?1:.86,
-        y: away? c.y+70 : c.y,
-        duration: D,
-        ease:'power3.out',
-        delay: visible ? idx*0.05 : 0
-      });
-    });
-
-    /* ===== seed words: enter at state2 (scattered), migrate to headline at state>=3 ===== */
-    Object.keys(seedScatter).forEach(function(id, idx){
-      var sc = seedScatter[id], fin = seedFinal[id];
-      var visible = (i>=2);
-      var migrated = (i>=3);
-      gsap.to('#'+id, {
-        opacity: visible?1:0,
-        x: migrated?fin.x:sc.x,
-        y: migrated?fin.y:sc.y,
-        rotate: migrated?0:sc.r,
-        fontSize: migrated?fin.size:sc.size,
-        scale: 1,
-        duration: migrated? D*1.15 : D,
-        ease: migrated?'power4.inOut':'back.out(1.4)',
-        delay: i===2 ? idx*0.07 : (migrated? idx*0.05 : 0)
-      });
-    });
-
-    /* ===== SLIDE 3 (states 3-5) ===== */
-    fadeGroup('#kicker2', i>=3);
-    fadeGroup('.s3-line2', i>=4, {blur:true});
-    fadeGroup('.s3-line3', i>=5, {blur:true});
-    fadeGroup('.s3-bridge', i>=5, {duration:D*1.1, blur:true});
-    gsap.to('.hl-bg', {scaleX:i>=5?1:0, duration: reduced?.01:.7, ease:'power3.inOut', delay:i>=5?.35:0});
-
-    gsap.to('#ruler', {scaleY:i>=3?1:0, duration: reduced?.01:1, ease:'power2.inOut'});
-    gsap.to('.ruler-tick, .ruler-label', {opacity:i>=4?1:0, duration:D, stagger:i>=4?0.06:0});
-    gsap.to('.ruler-end', {opacity:i>=4?1:0, duration:D, delay:i>=4?0.36:0});
-    gsap.to('.ruler-endlabel', {opacity:i>=4?1:0, y:i>=4?0:10, duration:D, delay:i>=4?0.42:0});
+  /* ---------- bottom carousel dots: beats within current slide ---------- */
+  var dotsWrap = document.getElementById('navdots');
+  var lastDotSlide = -1;
+  function buildDots(slideIdx, beat){
+    if (slideIdx !== lastDotSlide){
+      dotsWrap.innerHTML = '';
+      for (var k=0;k<beatsPerSlide[slideIdx];k++) dotsWrap.appendChild(document.createElement('i'));
+      lastDotSlide = slideIdx;
+    }
+    Array.prototype.forEach.call(dotsWrap.children, function(d,k){ d.classList.toggle('on', k===beat); });
   }
 
   /* ---------- controller ---------- */
   var idx = -1;
-  var TOTAL = 6;
   var btnPrev = document.getElementById('btnPrev');
   var btnNext = document.getElementById('btnNext');
-  var dotsWrap = document.getElementById('navdots');
-  var toast = document.getElementById('toast');
-  var toastTimer;
-
-  for (var k=0;k<TOTAL;k++){
-    var dot = document.createElement('i');
-    dotsWrap.appendChild(dot);
-  }
   function refreshUI(){
     btnPrev.disabled = (idx<=0);
     btnNext.disabled = (idx>=TOTAL-1);
-    Array.prototype.forEach.call(dotsWrap.children, function(d,k){ d.classList.toggle('on', k===idx); });
   }
   function go(n){
-    if (n<0 || n>TOTAL-1){
-      toast.classList.add('show');
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 1600);
-      return;
-    }
+    if (n<0 || n>TOTAL-1) return;
     idx = n;
     applyState(idx);
     refreshUI();
   }
   go(0);
 
-  /* headline word-widths depend on the webfont; re-measure once it's actually
-     loaded and, if the viewer is already past the transformation beat, snap
-     the seed words to the corrected spacing. */
-  if (document.fonts && document.fonts.ready){
-    document.fonts.ready.then(function(){
-      measureHeadline();
-      if (idx>=3) applyState(idx);
-    });
-  }
-
   btnNext.addEventListener('click', function(){ go(idx+1); });
   btnPrev.addEventListener('click', function(){ go(idx-1); });
-
   document.addEventListener('keydown', function(e){
     if (e.key==='ArrowRight' || e.key===' '){ e.preventDefault(); go(idx+1); }
     else if (e.key==='ArrowLeft'){ e.preventDefault(); go(idx-1); }
   });
-
   document.querySelector('.wrap').addEventListener('click', function(e){
     if (e.target.closest('.navctl')) return;
     var half = e.clientX > window.innerWidth/2;
