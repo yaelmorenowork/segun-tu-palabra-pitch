@@ -269,11 +269,21 @@
   #slide-7 #col-left{left:250px;}
   #slide-7 #col-right{left:1010px;}
   #slide-7 .col p{font-size:22px; font-weight:600; line-height:1.4; color:var(--navy-70); margin:18px 0 0 0;}
-  #slide-7 .detail-list{margin-top:16px;}
-  #slide-7 .detail-list p{font-size:15px; font-weight:500; line-height:1.45; color:var(--navy-55); margin:6px 0 0 0;}
-  #slide-7 .detail-list p:first-child{margin-top:0;}
-  #slide-7 .detail-list .detail-tag{font-weight:800; color:var(--steel-dark); text-transform:uppercase; letter-spacing:.05em; font-size:12.5px; margin-bottom:1px;}
-  #slide-7 .bottom{position:absolute; left:50%; top:602px; transform:translateX(-50%); width:820px; text-align:center;}
+  /* each detail line is its own small card — a color dot up front, a muted
+     caption, and the real figure in heavy weight so it reads at a glance */
+  #slide-7 .detail-list{margin-top:18px; display:flex; flex-direction:column; gap:9px;}
+  #slide-7 .detail-item{
+    display:flex; align-items:flex-start; gap:11px; text-align:left;
+    padding:11px 15px; border-radius:14px;
+    background:var(--glass-fill-2); border:1px solid var(--glass-line);
+  }
+  #slide-7 .detail-icon{width:9px; height:9px; margin-top:7px; border-radius:50%; background:var(--steel-dark); flex:none;}
+  #slide-7 .detail-text{display:flex; flex-direction:column; gap:2px;}
+  #slide-7 .detail-label{font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--navy-38);}
+  #slide-7 .detail-value{font-size:18px; font-weight:800; color:var(--navy); line-height:1.3;}
+  #slide-7 .detail-item--tag{align-items:center;}
+  #slide-7 .detail-item--tag .detail-value{color:var(--steel-dark); text-transform:uppercase; letter-spacing:.04em;}
+  #slide-7 .bottom{position:absolute; left:50%; top:748px; transform:translateX(-50%); width:820px; text-align:center;}
   #slide-7 .destacada{font-size:36px; font-weight:800; color:var(--navy); margin:0;}
 
   /* ---- Slide 9 · Dos escenarios — split vertical ---- */
@@ -486,19 +496,40 @@
         <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4.5c2-1 4-1 6 .5v10c-2-1.5-4-1.5-6-.5V4.5Z"/><path d="M18 4.5c-2-1-4-1-6 .5v10c2-1.5 4-1.5 6-.5V4.5Z"/></svg>
         <p>La Biblia se compra una vez.</p>
         <div class="detail-list">
-          <p>Precio: 39,90€ (PVP)</p>
-          <p>Traducción: a cargo de la Conferencia Episcopal</p>
-          <p>Canales de distribución: B2B (retiros, parroquias, comunidades) e influencers católicos</p>
+          <div class="detail-item">
+            <i class="detail-icon"></i>
+            <span class="detail-text"><span class="detail-label">Precio</span><span class="detail-value">39,90€ (PVP)</span></span>
+          </div>
+          <div class="detail-item">
+            <i class="detail-icon"></i>
+            <span class="detail-text"><span class="detail-label">Traducción</span><span class="detail-value">Conferencia Episcopal</span></span>
+          </div>
+          <div class="detail-item">
+            <i class="detail-icon"></i>
+            <span class="detail-text"><span class="detail-label">Canales de distribución</span><span class="detail-value">B2B (retiros, parroquias, comunidades) e influencers católicos</span></span>
+          </div>
         </div>
       </div>
       <div class="col" id="col-right">
         <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="2" width="10" height="16" rx="2"/><line x1="8" y1="15.5" x2="12" y2="15.5"/></svg>
         <p>La app se paga mes a mes, y su precio crece con el contenido.</p>
         <div class="detail-list">
-          <p class="detail-tag">Freemium</p>
-          <p>Suscripción mensual: 6,99€/mes</p>
-          <p>Suscripción anual: 59,99€/año</p>
-          <p>Contenido revisado por revisores teológicos</p>
+          <div class="detail-item detail-item--tag">
+            <i class="detail-icon"></i>
+            <span class="detail-text"><span class="detail-value">Freemium</span></span>
+          </div>
+          <div class="detail-item">
+            <i class="detail-icon"></i>
+            <span class="detail-text"><span class="detail-label">Suscripción mensual</span><span class="detail-value">6,99€/mes</span></span>
+          </div>
+          <div class="detail-item">
+            <i class="detail-icon"></i>
+            <span class="detail-text"><span class="detail-label">Suscripción anual</span><span class="detail-value">59,99€/año</span></span>
+          </div>
+          <div class="detail-item">
+            <i class="detail-icon"></i>
+            <span class="detail-text"><span class="detail-label">Contenido</span><span class="detail-value">Revisado por revisores teológicos</span></span>
+          </div>
         </div>
       </div>
       <div class="bottom">
