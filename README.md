@@ -61,6 +61,16 @@ ascendente).
   bloques Biblia/App; cada bloque incluye ahora su desglose (precio,
   traducción y canales de la Biblia; modelo freemium y suscripciones de
   la app).
+- **Slide 5 — Cinco modos de estudio**: layout a dos columnas. A la
+  derecha, un mockup de móvil grande (marco oscuro, esquinas
+  redondeadas, dynamic island) con el vídeo real de la app en bucle
+  (silenciado, autoplay, llena la pantalla del mockup sin bandas
+  negras). El vídeo original (12MB) se recomprimió a H.264/CRF 20 sin
+  tocar su contenido (mismos 580×1300, ~56s, sin audio) para mantener el
+  peso de la página razonable — visualmente no se distingue del
+  original. A la izquierda, las 5 tarjetas de "modos" en pila con
+  solapamiento parcial (mismo efecto de tarjeta blanca/rotación/sombra
+  de antes) y el bloque de texto alineado a la izquierda debajo.
 
 ### Pendiente
 
