@@ -43,22 +43,24 @@ ascendente).
   continuo. La secuencia se mantiene: llega y se sostiene un instante,
   luego los márgenes se convierten en protagonistas (su propio glow) y
   las palabras clave entran una a una.
-- **Slide 9 — Dos escenarios**: gráfica real de dos líneas con área
-  rellena (mismos colores de la leyenda, Conservador/Base — sin verde ni
-  rojo), dentro de una tarjeta coherente con el resto del mazo. Eje
-  horizontal siempre visible con marcas M1/M6/…/M36 además de Año 1/2/3.
-  Al pasar el cursor (o el dedo) aparece una marca vertical que sube
-  desde el eje hasta tocar ambas curvas en ese mes exacto, con la cifra
-  de cada escenario; en reposo, se queda fija en el mes 36 — nunca sin
-  ninguna cifra visible.
+- **Slide 9 — Dos escenarios**: bajo cada título (Conservador/Base), su
+  propia gráfica de barras agrupadas Ingresos vs. Gastos por año (Año
+  1/2/3) — datos reales del motor del panel, mismos colores del sistema
+  (navy sólido para Ingresos, acero/lavanda para Gastos, nunca semáforo
+  rojo/verde), un único eje compartido entre ambas gráficas para que la
+  comparación entre escenarios sea honesta. Las barras crecen desde 0 al
+  cargar la slide, con tooltip al pasar el cursor sobre cada una.
 - **Slide 10 — Lo que pido**: dos zonas claramente distintas — arriba/
   izquierda, la cifra de la inversión (200.000€) y qué cubre; abajo/
   derecha, una tarjeta aparte con el desglose real del gasto a 3 años
   (~419.000€): Producto, Equipo, Marketing, Contenido, Operaciones, cada
-  una con su cifra, porcentaje y fuente (Fuente/Hipótesis). El contador
-  se completa primero; después entra la tarjeta del desglose como una
-  unidad, con su etiqueta apareciendo primero y las barras desplegándose
-  de izquierda a derecha.
+  una con su cifra y porcentaje. El contador se completa primero;
+  después entra la tarjeta del desglose como una unidad, con su etiqueta
+  apareciendo primero y las barras desplegándose de izquierda a derecha.
+- **Slide 8 — Un modelo simple**: sin la línea divisoria entre los
+  bloques Biblia/App; cada bloque incluye ahora su desglose (precio,
+  traducción y canales de la Biblia; modelo freemium y suscripciones de
+  la app).
 
 ### Pendiente
 

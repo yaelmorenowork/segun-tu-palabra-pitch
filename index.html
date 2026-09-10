@@ -260,17 +260,19 @@
   #slide-6 .channel-strip{position:absolute; left:96px; top:650px; width:1408px; display:flex; flex-wrap:wrap; gap:14px 26px;}
   #slide-6 .sources{position:absolute; left:96px; top:722px; font-size:14px; font-weight:600; letter-spacing:.03em; color:var(--navy-38);}
 
-  /* ---- Slide 8 · Un modelo simple — dos columnas + conector ---- */
+  /* ---- Slide 8 · Un modelo simple — dos columnas ---- */
   #slide-7 #s8-badge{position:absolute; left:96px; top:150px;}
   #slide-7 .titular-wrap{position:absolute; left:50%; top:220px; transform:translateX(-50%); text-align:center;}
   #slide-7 .titular{font-size:54px; font-weight:800; color:var(--navy); margin:0;}
-  #slide-7 .connector{position:absolute; left:310px; top:337px; width:660px; height:2px; background:var(--navy-16); overflow:hidden;}
-  #slide-7 .connector i{position:absolute; top:0; left:-30%; width:30%; height:100%; background:linear-gradient(90deg, transparent, var(--steel-dark), transparent);}
   #slide-7 .col{position:absolute; top:320px; width:340px; text-align:center;}
   #slide-7 .col svg{color:var(--navy);}
   #slide-7 #col-left{left:250px;}
   #slide-7 #col-right{left:1010px;}
-  #slide-7 .col p{font-size:22px; font-weight:600; line-height:1.5; color:var(--navy-70); margin:20px 0 0 0;}
+  #slide-7 .col p{font-size:22px; font-weight:600; line-height:1.4; color:var(--navy-70); margin:18px 0 0 0;}
+  #slide-7 .detail-list{margin-top:16px;}
+  #slide-7 .detail-list p{font-size:15px; font-weight:500; line-height:1.45; color:var(--navy-55); margin:6px 0 0 0;}
+  #slide-7 .detail-list p:first-child{margin-top:0;}
+  #slide-7 .detail-list .detail-tag{font-weight:800; color:var(--steel-dark); text-transform:uppercase; letter-spacing:.05em; font-size:12.5px; margin-bottom:1px;}
   #slide-7 .bottom{position:absolute; left:50%; top:602px; transform:translateX(-50%); width:820px; text-align:center;}
   #slide-7 .destacada{font-size:36px; font-weight:800; color:var(--navy); margin:0;}
 
@@ -286,32 +288,32 @@
   #slide-8 .cierre-wrap{position:absolute; left:50%; top:772px; transform:translateX(-50%); width:1100px; text-align:center;}
   #slide-8 .cierre{font-size:22px; font-weight:600; color:var(--navy-55); margin:0;}
 
-  /* ---- shared: the real interactive chart (slide 9) — a card, consistent
-     with the deck's other cards (e.g. the testimonial cards), never a
-     full-bleed transparent panel. Scrub with the cursor/finger — a vertical
-     marker rises from the always-visible timeline to both curves at that
-     month; resting state (no pointer) defaults to month 36, never blank. ---- */
-  .chart-card{
-    position:relative; box-sizing:border-box; padding:26px 30px 20px;
-    background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-    border:1px solid var(--glass-line); border-radius:24px; box-shadow:var(--glass-shadow);
-  }
+  /* ---- shared: chart legend + hover tooltip, used by the Ingresos/Gastos
+     bar charts below — same glass-card language as the deck's other cards
+     (e.g. the testimonial cards), never a full-bleed transparent panel. ---- */
   .chart-legend{display:flex; gap:22px; margin-bottom:12px;}
-  .chart-plot{position:relative;}
-  .chart-plot svg{display:block;}
   .chart-tooltip{
     position:absolute; top:0; left:0; pointer-events:none; z-index:20;
     background:var(--navy); color:#fff; font-size:13px; font-weight:600; line-height:1.6;
-    padding:10px 14px; border-radius:10px; box-shadow:var(--glass-shadow);
-    opacity:0; transform:translate(-50%,-108%); white-space:nowrap;
+    padding:8px 12px; border-radius:10px; box-shadow:var(--glass-shadow);
+    opacity:0; transform:translate(-50%,-112%); white-space:nowrap;
   }
-  .chart-tooltip .tt-month{display:block; font-weight:800; color:var(--sky); margin-bottom:4px;}
-  .chart-tooltip .tt-row{display:flex; align-items:center; gap:7px;}
-  .chart-tooltip .tt-row + .tt-row{margin-top:2px;}
-  .chart-tooltip .tt-row i{width:8px; height:8px; border-radius:50%; flex:none;}
-  .chart-hover-rect{fill:transparent; cursor:crosshair;}
 
-  #slide-8 .chart-card{position:absolute; left:96px; top:410px; width:1408px;}
+  /* ---- Slide 9 · Ingresos vs Gastos, one grouped bar chart per column ---- */
+  #slide-8 .col .bars-card{
+    position:relative; margin-top:24px; box-sizing:border-box; padding:20px 22px 16px;
+    background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    border:1px solid var(--glass-line); border-radius:20px; box-shadow:var(--glass-shadow);
+  }
+  #slide-8 .bars-plot{display:flex; align-items:flex-end; justify-content:space-around; height:150px; border-bottom:1px solid var(--navy-16); padding:0 4px;}
+  #slide-8 .bar-group{display:flex; flex-direction:column; align-items:center;}
+  #slide-8 .bar-pair{display:flex; align-items:flex-end; gap:7px; height:150px;}
+  #slide-8 .bar{width:26px; border-radius:5px 5px 0 0; height:0%;}
+  #slide-8 .bar-ing{background:var(--navy);}
+  #slide-8 .bar-gas{background:var(--steel);}
+  #slide-8 .bar-year{margin-top:9px; font-size:12.5px; font-weight:600; color:var(--navy-55);}
+  #slide-8 .chart-legend.small{margin:14px 0 0; gap:18px; justify-content:center;}
+  #slide-8 .chart-legend.small .dot-tag{font-size:13px;}
 
   /* ---- Slide 10 · Lo que pido — dos zonas lado a lado ---- */
   #slide-9 .badge{position:absolute; left:96px; top:170px;}
@@ -329,13 +331,12 @@
   #slide-9 .bd-label{margin:0 0 18px; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--navy-55);}
   #slide-9 .bd-label b{color:var(--navy); font-weight:800;}
   #slide-9 .bd-bars{display:flex; flex-direction:column; gap:13px;}
-  #slide-9 .bd-row{display:grid; grid-template-columns:98px 1fr 88px 38px 76px; align-items:center; column-gap:12px;}
+  #slide-9 .bd-row{display:grid; grid-template-columns:98px 1fr 88px 40px; align-items:center; column-gap:12px;}
   #slide-9 .bd-name{font-size:15px; font-weight:700; color:var(--navy);}
   #slide-9 .bd-track{height:10px; border-radius:6px; background:var(--navy-08); overflow:hidden;}
   #slide-9 .bd-fill{display:block; height:100%; width:0%; border-radius:6px; background:var(--steel-dark);}
   #slide-9 .bd-val{font-size:14px; font-weight:700; color:var(--navy); text-align:right;}
-  #slide-9 .bd-pct{font-size:13px; font-weight:600; color:var(--navy-55);}
-  #slide-9 .bd-src{font-size:12px; font-weight:600; letter-spacing:.02em; color:var(--navy-38);}
+  #slide-9 .bd-pct{font-size:13px; font-weight:600; color:var(--navy-55); text-align:right;}
   #slide-9 .bd-close{margin:22px 0 0; font-size:15px; font-weight:600; line-height:1.55; color:var(--navy-55);}
 
   /* ---- Slide 11 · Cierre — centrado, espejo de la slide 1 ---- */
@@ -481,14 +482,24 @@
     <section class="slide" id="slide-7">
       <div class="pill-tag badge" id="s8-badge">08 — Un modelo simple</div>
       <div class="titular-wrap"><h2 class="titular">Biblia. App.</h2></div>
-      <div class="connector"><i id="flowLine"></i></div>
       <div class="col" id="col-left">
         <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4.5c2-1 4-1 6 .5v10c-2-1.5-4-1.5-6-.5V4.5Z"/><path d="M18 4.5c-2-1-4-1-6 .5v10c2-1.5 4-1.5 6-.5V4.5Z"/></svg>
         <p>La Biblia se compra una vez.</p>
+        <div class="detail-list">
+          <p>Precio: 39,90€ (PVP)</p>
+          <p>Traducción: a cargo de la Conferencia Episcopal</p>
+          <p>Canales de distribución: B2B (retiros, parroquias, comunidades) e influencers católicos</p>
+        </div>
       </div>
       <div class="col" id="col-right">
         <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="2" width="10" height="16" rx="2"/><line x1="8" y1="15.5" x2="12" y2="15.5"/></svg>
         <p>La app se paga mes a mes, y su precio crece con el contenido.</p>
+        <div class="detail-list">
+          <p class="detail-tag">Freemium</p>
+          <p>Suscripción mensual: 6,99€/mes</p>
+          <p>Suscripción anual: 59,99€/año</p>
+          <p>Contenido revisado por revisores teológicos</p>
+        </div>
       </div>
       <div class="bottom">
         <p class="destacada">Dos ingresos, un mismo propósito.</p>
@@ -503,20 +514,26 @@
         <h3 class="titular">Conservador</h3>
         <p class="subtitulo">Empezamos en pérdidas.</p>
         <p class="destacada">Rentable en el Año 2 — vuelve a pérdidas en el Año 3.</p>
+        <div class="bars-card" id="s9barsCons">
+          <div class="bars-plot"></div>
+          <div class="chart-tooltip"></div>
+          <div class="chart-legend small">
+            <span class="dot-tag"><i style="background:var(--navy)"></i>Ingresos</span>
+            <span class="dot-tag"><i style="background:var(--steel)"></i>Gastos</span>
+          </div>
+        </div>
       </div>
       <div class="col" id="s9-right">
         <h3 class="titular">Base</h3>
         <p class="subtitulo">Rentable desde el primer año.</p>
         <p class="destacada">93.058€ de resultado en el Año 3, sobre 258.022€ de ingresos.</p>
-      </div>
-      <div class="chart-card" id="s9chartCard">
-        <div class="chart-legend">
-          <span class="dot-tag"><i style="background:var(--steel-dark)"></i>Conservador</span>
-          <span class="dot-tag"><i style="background:var(--navy)"></i>Base</span>
-        </div>
-        <div class="chart-plot">
-          <svg id="s9svg" width="1348" height="230" viewBox="0 0 1348 230"></svg>
-          <div class="chart-tooltip" id="s9tooltip"></div>
+        <div class="bars-card" id="s9barsBase">
+          <div class="bars-plot"></div>
+          <div class="chart-tooltip"></div>
+          <div class="chart-legend small">
+            <span class="dot-tag"><i style="background:var(--navy)"></i>Ingresos</span>
+            <span class="dot-tag"><i style="background:var(--steel)"></i>Gastos</span>
+          </div>
         </div>
       </div>
       <div class="cierre-wrap"><p class="cierre">Mismo modelo, mismo margen. Cada año, menos gasto y más ingreso.</p></div>
@@ -537,35 +554,30 @@
             <span class="bd-track"><span class="bd-fill" data-pct="44"></span></span>
             <span class="bd-val">184.440€</span>
             <span class="bd-pct">44%</span>
-            <span class="bd-src">Fuente</span>
           </div>
           <div class="bd-row">
             <span class="bd-name">Equipo</span>
             <span class="bd-track"><span class="bd-fill" data-pct="19"></span></span>
             <span class="bd-val">79.200€</span>
             <span class="bd-pct">19%</span>
-            <span class="bd-src">Hipótesis</span>
           </div>
           <div class="bd-row">
             <span class="bd-name">Marketing</span>
             <span class="bd-track"><span class="bd-fill" data-pct="9"></span></span>
             <span class="bd-val">36.000€</span>
             <span class="bd-pct">9%</span>
-            <span class="bd-src">Hipótesis</span>
           </div>
           <div class="bd-row">
             <span class="bd-name">Contenido</span>
             <span class="bd-track"><span class="bd-fill" data-pct="4"></span></span>
             <span class="bd-val">16.193€</span>
             <span class="bd-pct">4%</span>
-            <span class="bd-src">Hipótesis</span>
           </div>
           <div class="bd-row">
             <span class="bd-name">Operaciones</span>
             <span class="bd-track"><span class="bd-fill" data-pct="25"></span></span>
             <span class="bd-val">103.387€</span>
             <span class="bd-pct">25%</span>
-            <span class="bd-src">Fuente</span>
           </div>
         </div>
         <p class="bd-close">La diferencia la cubren los propios ingresos: el escenario Base ya es rentable desde el primer año.</p>
@@ -686,81 +698,64 @@
   }
 
   /* =====================================================================
-     FINANCIALS — real monthly output of the uploaded panel's own runModel()
-     engine (financiación 200.000€), verified against confirmed annual
-     totals before use. Not illustrative: every point below is real.
+     FINANCIALS — real annual output of the uploaded panel's own runModel()
+     engine (financiación 200.000€). Not illustrative: every figure below
+     is real, given exactly, never recomputed or rounded further.
      ===================================================================== */
-  var FIN = {
-    cons: [-9118,-8776,-4595,-5329,-5059,-4811,-581,-369,-173,8,175,330,155,377,589,791,984,1168,1343,1511,1670,1823,1969,2108,-854,-725,-602,-484,-372,-266,-163,-66,27,116,201,282],
-    base: [-8975,-8411,-847,-2057,-1591,-1153,3258,3645,4007,4349,4669,4971,2857,3256,3641,4012,4370,4715,5047,5368,5678,5978,6267,6546,6457,6721,6976,7222,7459,7689,7910,8124,8331,8532,8725,8913],
-    cajaCons: [190882,182106,177511,172182,167123,162312,161731,161361,161188,161196,161371,161701,161856,162234,162823,163615,164599,165766,167110,168620,170290,172113,174082,176191,175337,174612,174011,173526,173154,172888,172725,172659,172686,172802,173003,173285]
+  var S9BARS = {
+    cons: [
+      {year:'Año 1', ing:63573,  gas:101872},
+      {year:'Año 2', ing:107935, gas:93446},
+      {year:'Año 3', ing:135163, gas:138068}
+    ],
+    base: [
+      {year:'Año 1', ing:114012, gas:112147},
+      {year:'Año 2', ing:199844, gas:142109},
+      {year:'Año 3', ing:258022, gas:164964}
+    ]
   };
   function fmtEur(v){
     var n = Math.round(v);
     var s = Math.abs(n).toLocaleString('es-ES') + '€';
     return n < 0 ? '−' + s : s;
   }
-
-  /* ---------- shared chart geometry/build helpers ---------- */
-  var svgns = 'http://www.w3.org/2000/svg';
-  function svgEl(tag, attrs){
-    var el = document.createElementNS(svgns, tag);
-    for (var k in attrs) el.setAttribute(k, attrs[k]);
-    return el;
-  }
-  // builds x(month)/y(value) mappers plus the shared chrome (zero line, year
-  // markers) for a plot area of the given pixel box; returns the mappers so
-  // callers can place their own paths/dots into the same space.
-  function chartScales(svg, opts){
-    var W = opts.w, H = opts.h, padL = opts.padL||6, padR = opts.padR||6, padT = opts.padT||14, padB = opts.padB||30;
-    var plotW = W - padL - padR, plotB = H - padB, plotT = padT;
-    var allVals = [].concat.apply([], opts.series);
-    var vMin = Math.min.apply(null, allVals), vMax = Math.max.apply(null, allVals);
-    var pad = (vMax - vMin) * 0.14 || 1000;
-    vMin -= pad; vMax += pad;
-    function x(m){ return padL + (m-1)/35 * plotW; }
-    function y(v){ return plotB - (v - vMin)/(vMax - vMin) * (plotB - plotT); }
-    // zero baseline + year markers — tagged 'chart-chrome' so the reveal
-    // animation can target exactly these, never the value labels
-    if (vMin < 0 && vMax > 0){
-      svg.appendChild(svgEl('line', {x1:padL, x2:W-padR, y1:y(0), y2:y(0), stroke:'var(--navy-16)', 'stroke-width':1, 'class':'chart-chrome'}));
-    }
-    [12,24,36].forEach(function(m, idx){
-      var xm = x(m);
-      svg.appendChild(svgEl('line', {x1:xm, x2:xm, y1:plotT, y2:plotB, stroke:'var(--navy-16)', 'stroke-width':1, 'stroke-dasharray':'3,4', 'class':'chart-chrome'}));
-      // the last marker sits right at the plot's edge — anchor it inward
-      // instead of centering, so "Año 3" never clips against the svg edge
-      var anchor = (m===36) ? 'end' : 'middle';
-      var tx = (m===36) ? xm+2 : xm;
-      var t = svgEl('text', {x:tx, y:H-8, 'text-anchor':anchor, style:'font-family:var(--f-sans); font-size:12px; font-weight:600; fill:var(--navy-38);', 'class':'chart-chrome'});
-      t.textContent = 'Año ' + (idx+1);
-      svg.appendChild(t);
+  // one shared scale across both charts (Conservador + Base) so the two
+  // scenarios stay honestly comparable — never independently rescaled
+  var s9barsMax = Math.max.apply(null, [].concat(
+    S9BARS.cons.map(function(d){ return Math.max(d.ing, d.gas); }),
+    S9BARS.base.map(function(d){ return Math.max(d.ing, d.gas); })
+  )) * 1.08;
+  // builds one grouped Ingresos/Gastos bar chart (3 year-groups × 2 bars)
+  // into #containerId .bars-plot; bars start at height 0 (grown in later)
+  // and each gets its own hover tooltip with the exact real figure
+  function buildBarChart(containerId, data){
+    var card = document.getElementById(containerId);
+    var plot = card.querySelector('.bars-plot');
+    var tooltip = card.querySelector('.chart-tooltip');
+    var bars = [];
+    data.forEach(function(d){
+      var group = document.createElement('div'); group.className = 'bar-group';
+      var pair = document.createElement('div'); pair.className = 'bar-pair';
+      [['bar-ing','Ingresos',d.ing], ['bar-gas','Gastos',d.gas]].forEach(function(spec){
+        var el = document.createElement('div');
+        el.className = 'bar ' + spec[0];
+        el.setAttribute('data-pct', (spec[2] / s9barsMax * 100).toFixed(2));
+        el.addEventListener('mouseenter', function(){
+          var r = el.getBoundingClientRect(), cr = card.getBoundingClientRect();
+          tooltip.style.left = (r.left - cr.left + r.width/2) + 'px';
+          tooltip.style.top = (r.top - cr.top) + 'px';
+          tooltip.textContent = d.year + ' · ' + spec[1] + ': ' + fmtEur(spec[2]);
+          tooltip.style.opacity = 1;
+        });
+        el.addEventListener('mouseleave', function(){ tooltip.style.opacity = 0; });
+        pair.appendChild(el);
+        bars.push(el);
+      });
+      var yr = document.createElement('span'); yr.className = 'bar-year'; yr.textContent = d.year;
+      group.appendChild(pair); group.appendChild(yr);
+      plot.appendChild(group);
     });
-    return {x:x, y:y, plotT:plotT, plotB:plotB, padL:padL, padR:padR, W:W};
-  }
-  function pathFromSeries(scales, data){
-    var d = '';
-    for (var m=1; m<=36; m++){
-      d += (m===1?'M':'L') + scales.x(m).toFixed(1) + ',' + scales.y(data[m-1]).toFixed(1) + ' ';
-    }
-    return d;
-  }
-  // cursor/touch scrubbing along the month axis: given scales + an overlay
-  // element, calls onMove(month) as the pointer moves and onLeave() when it
-  // lifts/leaves — the caller decides what "resting" looks like (never blank).
-  function wireScrub(overlayEl, scales, onMove, onLeave){
-    function monthAt(clientX){
-      var rect = overlayEl.getBoundingClientRect();
-      var relX = (clientX - rect.left) / rect.width * scales.W;
-      var m = Math.round(1 + (relX - scales.padL) / (scales.W - scales.padL - scales.padR) * 35);
-      return Math.max(1, Math.min(36, m));
-    }
-    overlayEl.addEventListener('mousemove', function(e){ onMove(monthAt(e.clientX)); });
-    overlayEl.addEventListener('mouseleave', onLeave);
-    overlayEl.addEventListener('touchstart', function(e){ if (e.touches[0]) onMove(monthAt(e.touches[0].clientX)); }, {passive:true});
-    overlayEl.addEventListener('touchmove', function(e){ if (e.touches[0]) onMove(monthAt(e.touches[0].clientX)); }, {passive:true});
-    overlayEl.addEventListener('touchend', onLeave);
-    overlayEl.addEventListener('touchcancel', onLeave);
+    return bars;
   }
 
   /* ---------- Slide 1 · word-field scatter coords for slide 2 ---------- */
@@ -819,72 +814,10 @@
     gsap.set('#mapDots text', {opacity:0});
   })();
 
-  /* ---------- Slide 9 (index8) · Conservador vs Base — real dual-line/area
-     chart, cursor/touch-driven (no automatic point animation): a vertical
-     marker rises from the always-visible month axis to both curves at the
-     hovered month; resting state defaults to month 36 (Año 3), so a figure
-     is always on screen even with nobody interacting. ---------- */
-  var s9 = (function build(){
-    var svg = document.getElementById('s9svg');
-    var W = 1348, H = 230;
-    var scales = chartScales(svg, {w:W, h:H, padT:14, padB:40, series:[FIN.cons, FIN.base]});
-
-    // low-opacity fills under each line — the same two series colors already
-    // in the legend, no new hues introduced
-    function areaD(data){
-      return pathFromSeries(scales, data) + 'L' + scales.x(36).toFixed(1) + ',' + scales.plotB + ' L' + scales.x(1).toFixed(1) + ',' + scales.plotB + ' Z';
-    }
-    var areaCons = svgEl('path', {d:areaD(FIN.cons), fill:'var(--steel-dark)', stroke:'none', opacity:0});
-    var areaBase = svgEl('path', {d:areaD(FIN.base), fill:'var(--navy)', stroke:'none', opacity:0});
-    svg.appendChild(areaCons); svg.appendChild(areaBase);
-
-    // fine month ticks (M1, M6 … M36) — lighter/smaller than the Año marks,
-    // tagged as chart-chrome so they reveal together with the axis
-    [1,6,11,16,21,26,31,36].forEach(function(m){
-      var xm = scales.x(m);
-      var anchor = m===1 ? 'start' : m===36 ? 'end' : 'middle';
-      var tx = m===1 ? xm-1 : m===36 ? xm+1 : xm;
-      var t = svgEl('text', {x:tx, y:scales.plotB+15, 'text-anchor':anchor, style:'font-family:var(--f-sans); font-size:10.5px; font-weight:600; fill:var(--navy-38);', 'class':'chart-chrome'});
-      t.textContent = 'M' + m;
-      svg.appendChild(t);
-    });
-
-    var pCons = svgEl('path', {d:pathFromSeries(scales, FIN.cons), fill:'none', stroke:'var(--steel-dark)', 'stroke-width':3.5, 'stroke-linecap':'round', 'stroke-linejoin':'round', 'pathLength':'1', 'stroke-dasharray':'1', 'stroke-dashoffset':'1'});
-    var pBase = svgEl('path', {d:pathFromSeries(scales, FIN.base), fill:'none', stroke:'var(--navy)', 'stroke-width':3.5, 'stroke-linecap':'round', 'stroke-linejoin':'round', 'pathLength':'1', 'stroke-dasharray':'1', 'stroke-dashoffset':'1'});
-    svg.appendChild(pCons); svg.appendChild(pBase);
-
-    // the vertical marker: rises from the timeline up to both curves
-    var crosshair = svgEl('line', {x1:0, x2:0, y1:scales.plotB, y2:scales.plotB, stroke:'var(--navy-38)', 'stroke-width':1.5, opacity:0});
-    var dotCons = svgEl('circle', {r:6, fill:'var(--steel-dark)', stroke:'#fff', 'stroke-width':2, opacity:0});
-    var dotBase = svgEl('circle', {r:6, fill:'var(--navy)', stroke:'#fff', 'stroke-width':2, opacity:0});
-    svg.appendChild(crosshair); svg.appendChild(dotCons); svg.appendChild(dotBase);
-
-    // transparent hover/touch-capture rect, topmost so it always receives the pointer
-    var hover = svgEl('rect', {x:0, y:0, width:W, height:H, 'class':'chart-hover-rect'});
-    hover.style.pointerEvents = 'auto';
-    svg.appendChild(hover);
-
-    var tooltip = document.getElementById('s9tooltip');
-    function placeAt(m){
-      var cx = scales.x(m), cyC = scales.y(FIN.cons[m-1]), cyB = scales.y(FIN.base[m-1]);
-      dotCons.setAttribute('cx', cx); dotCons.setAttribute('cy', cyC);
-      dotBase.setAttribute('cx', cx); dotBase.setAttribute('cy', cyB);
-      var top = Math.min(cyC, cyB);
-      crosshair.setAttribute('x1', cx); crosshair.setAttribute('x2', cx);
-      crosshair.setAttribute('y1', scales.plotB); crosshair.setAttribute('y2', top);
-      tooltip.style.left = cx + 'px';
-      tooltip.style.top = (top - 12) + 'px';
-      tooltip.innerHTML =
-        '<span class="tt-month">Mes ' + m + '</span>' +
-        '<span class="tt-row"><i style="background:var(--steel-dark)"></i>Conservador: ' + fmtEur(FIN.cons[m-1]) + '</span>' +
-        '<span class="tt-row"><i style="background:var(--navy)"></i>Base: ' + fmtEur(FIN.base[m-1]) + '</span>';
-    }
-    placeAt(36); // default/rest position — a figure is always visible
-
-    wireScrub(hover, scales, placeAt, function(){ placeAt(36); });
-
-    return {areaCons:areaCons, areaBase:areaBase, pCons:pCons, pBase:pBase, crosshair:crosshair, dotCons:dotCons, dotBase:dotBase};
-  })();
+  /* ---------- Slide 9 (index8) · Conservador / Base — grouped Ingresos vs
+     Gastos bar charts, one under each column, sharing one scale ---------- */
+  var s9barsCons = buildBarChart('s9barsCons', S9BARS.cons);
+  var s9barsBase = buildBarChart('s9barsBase', S9BARS.base);
 
   /* ---------- initial hidden states ---------- */
   gsap.set('#slide-0 .mark-big, #slide-0 .titular, #slide-0 .subtitulo', {opacity:0, y:18, filter:'blur(6px)'});
@@ -911,13 +844,11 @@
   gsap.set('#slide-6 .badge, #slide-6 .num, #slide-6 .num-label, #slide-6 .subtitulo, #slide-6 .destacada, .dot-tag, .sources', {opacity:0, y:14});
 
   gsap.set('#s8-badge, #slide-7 .titular, #col-left, #col-right, #slide-7 .destacada', {opacity:0, y:16});
-  gsap.set('#flowLine', {xPercent:0});
 
   gsap.set('#slide-8 .badge, #slide-8 .divider', {opacity:0});
   gsap.set('#slide-8 .divider', {scaleY:0});
   gsap.set('#s9-left .titular, #s9-left .subtitulo, #s9-left .destacada, #s9-right .titular, #s9-right .subtitulo, #s9-right .destacada, #slide-8 .cierre', {opacity:0, y:14});
-  gsap.set('#s9svg .chart-chrome', {opacity:0});
-  gsap.set('#s9chartCard .chart-legend', {opacity:0, y:12});
+  gsap.set('#s9barsCons .chart-legend, #s9barsBase .chart-legend', {opacity:0, y:10});
 
   gsap.set('#slide-9 .badge, #slide-9 .subtitulo', {opacity:0, y:16});
   gsap.set('#slide-9 .num', {opacity:0, scale:.92, transformOrigin:'left center'});
@@ -1046,22 +977,20 @@
   }
 
   function renderSlide8(b){
-    // beat0: badge + divider + both titulares; chart card draws in (chrome,
-    //        area fills, both real lines, then the default marker at Año 3
-    //        — from here on the cursor/finger drives it, no auto-animation)
+    // beat0: badge + divider + both titulares; the six real bars in each
+    //        chart grow from 0 to their value, lightly staggered
     // beat1: subtítulo + frase destacada per column
     // beat2: cierre
     gsap.to('#slide-8 .badge', {opacity:b>=0?1:0, duration:D});
     gsap.to('#slide-8 .divider', {scaleY:b>=0?1:0, duration:reduced?.01:1, ease:'power2.inOut'});
     fadeGroup('#s9-left .titular, #s9-right .titular', b>=0);
-    fadeGroup('#s9chartCard .chart-legend', b>=0, {delay:.2});
-    gsap.to('#s9svg .chart-chrome', {opacity:b>=0?1:0, duration:D, stagger:.02, delay:b===0?.3:0});
-    gsap.to(s9.areaCons, {opacity:b>=0?.13:0, duration:reduced?.01:1, delay:b===0?.4:0});
-    gsap.to(s9.areaBase, {opacity:b>=0?.1:0, duration:reduced?.01:1, delay:b===0?.4:0});
-    gsap.to(s9.pCons, {strokeDashoffset:b>=0?0:1, duration:reduced?.01:1.6, ease:'power2.inOut', delay:b===0?.35:0});
-    gsap.to(s9.pBase, {strokeDashoffset:b>=0?0:1, duration:reduced?.01:1.6, ease:'power2.inOut', delay:b===0?.45:0});
-    gsap.to([s9.crosshair, s9.dotCons, s9.dotBase], {opacity:b>=0?1:0, duration:D, delay:b===0?2:0});
-    gsap.to('#s9tooltip', {opacity:b>=0?1:0, duration:D, delay:b===0?2:0});
+    fadeGroup('#s9barsCons .chart-legend, #s9barsBase .chart-legend', b>=0, {delay:.15});
+    [s9barsCons, s9barsBase].forEach(function(bars){
+      bars.forEach(function(el, i){
+        var pct = el.getAttribute('data-pct');
+        gsap.to(el, {height:(b>=0?pct+'%':'0%'), duration:reduced?.01:(b>=0?.7:.35), ease:'power2.out', delay:b>=0?.25+i*.07:0});
+      });
+    });
     fadeGroup('#s9-left .subtitulo, #s9-right .subtitulo', b>=1);
     fadeGroup('#s9-left .destacada, #s9-right .destacada', b>=1, {delay:.1});
     fadeGroup('#slide-8 .cierre', b>=2);
