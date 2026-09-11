@@ -148,105 +148,92 @@
   /* ================= PER-SLIDE LAYOUT ================= */
   .slide{position:absolute; inset:0; z-index:1;}
 
-  /* ---- Slide 1 · Apertura — centrado puro ---- */
-  #slide-0 .center-col{
-    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-    width:1100px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:26px;
-  }
-  #slide-0 .mark-big{color:var(--navy);}
-  #slide-0 .titular{font-size:82px; font-weight:800; letter-spacing:-.02em; color:var(--navy); margin:0; line-height:1.04;}
-  #slide-0 .subtitulo{font-size:26px; font-weight:500; color:var(--navy-55); margin:0; max-width:680px; line-height:1.5;}
+  /* ---- Slide 0 & 12 · Portada — centrado puro, frase con efecto
+     typewriter en bucle. La slide 12 es una copia exacta: mismo
+     marcado, mismo código, mismo bucle de palabras. ---- */
+  .portada-col{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:1200px; text-align:center;}
+  .portada-col .titular{font-size:62px; font-weight:800; letter-spacing:-.02em; color:var(--navy); margin:0; line-height:1.3;}
+  .type-word{color:var(--steel-dark);}
+  .type-cursor{display:inline-block; width:3px; height:.85em; background:var(--steel-dark); margin-left:3px; vertical-align:-.08em; animation:caretBlink 1s step-end infinite;}
+  @keyframes caretBlink{ 50%{ opacity:0; } }
 
-  /* ---- Slide 2 · El descubrimiento — asimétrico, texto en tercio inferior ---- */
-  .s2-word{position:absolute; top:0; left:0; font-weight:800; color:var(--navy); letter-spacing:-.01em; white-space:nowrap;}
-  #slide-1 .s2-block{position:absolute; left:96px; top:566px; width:1060px;}
-  #slide-1 .badge{margin-bottom:26px;}
-  #slide-1 .destacada{font-size:38px; font-weight:800; line-height:1.28; color:var(--navy); margin:0; max-width:980px;}
-  #slide-1 .cierre{font-size:22px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:26px 0 0 0; max-width:760px;}
+  /* ---- Slide 1 · El plano — asimétrico: texto a la izquierda, línea de
+     tiempo vertical decorativa a la derecha ---- */
+  #slide-1 .badge{position:absolute; left:96px; top:190px;}
+  #slide-1 .text-col{position:absolute; left:96px; top:290px; width:780px;}
+  #slide-1 .subtitulo{font-size:26px; font-weight:600; color:var(--navy-55); margin:0;}
+  #slide-1 .destacada{font-size:36px; font-weight:800; line-height:1.32; color:var(--navy); margin:26px 0 0 0;}
+  #slide-1 .cierre{font-size:22px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:26px 0 0 0; max-width:660px;}
+  #slide-1 .timeline-vert{position:absolute; left:1180px; top:230px; width:340px; height:460px;}
 
-  /* ---- Slide 3 · El 67% — regla de tercios, cifra descentrada ---- */
-  #slide-2 .badge{position:absolute; left:96px; top:190px;}
-  #slide-2 .num-wrap{position:absolute; left:120px; top:270px; width:600px;}
-  #slide-2 .num{font-size:250px; font-weight:900; line-height:1; letter-spacing:-.03em; color:var(--navy); margin:0;}
-  #slide-2 .right-col{position:absolute; left:830px; top:326px; width:640px;}
-  #slide-2 .subtitulo{font-size:24px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:0;}
-  #slide-2 .cite{display:block; margin-top:8px; font-size:14px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--navy-38);}
-  #slide-2 .destacada{font-size:34px; font-weight:800; line-height:1.28; color:var(--navy); margin:38px 0 0 0;}
-  #slide-2 .cierre{font-size:22px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:22px 0 0 0;}
+  /* ---- Slide 2 · El problema — centrado, foco único: anillo circular
+     (mismo lenguaje visual que la barra segmentada superior, en redondo) ---- */
+  /* centering wrappers stay static/un-animated on purpose — GSAP overwrites
+     the whole inline transform on any x/y/rotate/scale tween, which would
+     silently clobber a CSS translateX(-50%) centering trick if applied to
+     the same element being animated */
+  #slide-2 .badge-wrap{position:absolute; left:50%; top:150px; transform:translateX(-50%);}
+  #slide-2 .ring-wrap{position:absolute; left:50%; top:222px; transform:translateX(-50%); width:300px; height:300px;}
+  #slide-2 .ring-inner{position:relative; width:100%; height:100%;}
+  #slide-2 .ring-svg{width:100%; height:100%; display:block;}
+  #slide-2 .ring-track{fill:none; stroke:var(--chip-fill); stroke-width:16;}
+  #slide-2 .ring-fill{fill:none; stroke:var(--navy); stroke-width:16; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; transform:rotate(-90deg); transform-origin:100px 100px;}
+  #slide-2 .num-wrap{position:absolute; left:0; top:50%; width:100%; transform:translateY(-50%); text-align:center;}
+  #slide-2 .num{font-size:72px; font-weight:900; color:var(--navy); margin:0; letter-spacing:-.02em;}
+  #slide-2 .text-col{position:absolute; left:50%; top:558px; transform:translateX(-50%); width:760px; text-align:center;}
+  #slide-2 .subtitulo{font-size:22px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:0;}
+  #slide-2 .cierre{font-size:26px; font-weight:700; color:var(--steel-dark); margin:22px 0 0 0;}
 
-  /* ---- Slide 4 · La Biblia de notas — mockup como protagonista ---- */
-  #slide-3 .badge{position:absolute; left:96px; top:190px;}
-  #slide-3 .left-col{position:absolute; left:96px; top:280px; width:600px;}
-  #slide-3 .s4-word{display:block; font-size:56px; font-weight:800; color:var(--navy); letter-spacing:-.01em; line-height:1.16; margin:0;}
-  #slide-3 .cierre{font-size:28px; font-weight:700; color:var(--steel-dark); margin:26px 0 0 0;}
-  #slide-3 .s4-extra{margin:0; line-height:1.5;}
-  #slide-3 .s4-extra.t1{font-size:20px; font-weight:600; color:var(--navy-70); margin-top:16px;}
-  #slide-3 .s4-extra.t2{font-size:16px; font-weight:600; letter-spacing:.03em; color:var(--navy-38); margin-top:8px; text-transform:uppercase;}
+  /* ---- Slide 3 · La solución — mockup del móvil (reutilizado tal cual)
+     a la derecha; título + chips a la izquierda ---- */
+  #slide-3 .badge{position:absolute; left:96px; top:168px;}
+  #slide-3 .text-col{position:absolute; left:96px; top:290px; width:760px;}
+  #slide-3 .titular{font-size:58px; font-weight:800; color:var(--navy); margin:0; letter-spacing:-.01em;}
+  #slide-3 .chip-label{font-size:13px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--navy-38); margin:34px 0 0 0;}
+  #slide-3 .chip-row{display:flex; flex-wrap:wrap; gap:12px; margin-top:16px;}
+  #slide-3 .chip-row.small .chip{font-size:14px; padding:8px 16px; color:var(--navy-55); background:var(--paper); border-color:var(--chip-line);}
 
-  /* ---- book stage: the real photo, with a genuinely transparent background
-     — no card/box behind it. It floats directly on the slide's own
-     gradient: a soft detached shadow beneath (never touching), a minimal
-     continuous idle bob. Only the real open-spread photo is used — no
-     separate closed-cover crop/photo, nothing else composited behind or
-     underneath it. ---- */
-  #slide-3 .book-stage{position:absolute; left:864px; top:186px; width:500px; height:530px; perspective:1500px;}
-  #slide-3 .book-crop{position:relative;}
-  #slide-3 .book-crop-open{width:466px; height:321px;}
-  #slide-3 .book-crop-open img{display:block; width:100%; height:100%; object-fit:contain;}
-
-  #slide-3 .book-open{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);}
-  /* detached floating shadow — separate element, never touching the book,
-     soft/diffuse only; no hard shadow or ground line anywhere else here */
-  #slide-3 .book-shadow{
-    position:absolute; left:50%; bottom:-8px; width:300px; height:46px; margin-left:-150px;
-    border-radius:50%; background:radial-gradient(ellipse closest-side, rgba(27,39,64,.34), rgba(27,39,64,0) 74%);
-    filter:blur(9px); opacity:0; pointer-events:none;
-  }
-  #slide-3 .margin-glow{
-    position:absolute; top:5%; bottom:5%; width:66px; border-radius:34px;
-    background:radial-gradient(closest-side, rgba(79,106,147,.6), rgba(79,106,147,0) 74%);
-    mix-blend-mode:multiply; filter:blur(1px); opacity:0;
-  }
-  #slide-3 .margin-glow.ml{left:6px;}
-  #slide-3 .margin-glow.mr{right:6px;}
-  @media (prefers-reduced-motion: no-preference){
-    #slide-3 .margin-glow{animation:marginPulse 3.4s ease-in-out infinite;}
-  }
-  /* only the scale pulses here — opacity stays under GSAP's control (reveal/hide),
-     never fought over by this infinite animation */
-  @keyframes marginPulse{ 0%,100%{ transform:scaleY(1); } 50%{ transform:scaleY(1.05); } }
-
-  /* ---- Slide 5 · Cinco modos — dos columnas: pila de tarjetas + texto a la
-     izquierda, mockup de móvil grande a la derecha (el móvil manda en
-     tamaño; el texto se ajusta al hueco que le queda). ---- */
-  #slide-4 .badge{position:absolute; left:96px; top:168px;}
-  #slide-4 .fan{position:absolute; left:0; top:0; width:800px; height:900px;}
-  #slide-4 .fan-card{
-    position:absolute; top:0; left:0; width:250px; padding:30px 22px; border-radius:22px;
-    background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-    border:1px solid var(--glass-line); box-shadow:var(--glass-shadow);
-    text-align:center; font-size:24px; font-weight:800; color:var(--navy);
-  }
-  #slide-4 .bottom-col{position:absolute; left:96px; top:584px; width:660px; text-align:left;}
-  #slide-4 .subtitulo{font-size:26px; font-weight:600; color:var(--navy-55); margin:0;}
-  #slide-4 .destacada{font-size:34px; font-weight:800; color:var(--navy); margin:22px 0 0 0;}
-  #slide-4 .cierre{font-size:22px; font-weight:500; color:var(--navy-55); margin:22px 0 0 0;}
-
-  /* real iPhone-style mockup — dark bezel + rounded corners + floating
-     dynamic island, the video filling the screen edge-to-edge (object-fit:
-     cover, no letterboxing) */
-  #slide-4 .phone-mock{
+  #slide-3 .phone-mock{
     position:absolute; left:1040px; top:120px; width:319px; height:684px; box-sizing:border-box;
     padding:12px; border-radius:56px; background:#10151f;
     box-shadow:0 30px 60px rgba(27,39,64,.28), 0 10px 22px rgba(27,39,64,.16);
   }
-  #slide-4 .phone-screen{position:relative; width:100%; height:100%; border-radius:44px; overflow:hidden; background:#000;}
-  #slide-4 .phone-screen video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;}
-  #slide-4 .phone-island{position:absolute; top:14px; left:50%; transform:translateX(-50%); width:90px; height:26px; border-radius:16px; background:#000; z-index:2;}
+  #slide-3 .phone-screen{position:relative; width:100%; height:100%; border-radius:44px; overflow:hidden; background:#000;}
+  #slide-3 .phone-screen video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;}
+  #slide-3 .phone-island{position:absolute; top:14px; left:50%; transform:translateX(-50%); width:90px; height:26px; border-radius:16px; background:#000; z-index:2;}
 
-  /* ---- Slide 6 · Primeras pruebas — tarjetas asimétricas ---- */
+  /* ---- Slide 4 · La Biblia física — mockup fotográfico (reutilizado tal
+     cual: misma foto, mismo flotado, misma sombra despegada) protagonista,
+     con poco texto al lado ---- */
+  #slide-4 .badge{position:absolute; left:96px; top:190px;}
+  #slide-4 .left-col{position:absolute; left:96px; top:400px; width:620px;}
+  #slide-4 .cierre{font-size:28px; font-weight:700; line-height:1.45; color:var(--navy); margin:0;}
+
+  #slide-4 .book-stage{position:absolute; left:864px; top:186px; width:500px; height:530px; perspective:1500px;}
+  #slide-4 .book-crop{position:relative;}
+  #slide-4 .book-crop-open{width:466px; height:321px;}
+  #slide-4 .book-crop-open img{display:block; width:100%; height:100%; object-fit:contain;}
+  #slide-4 .book-open{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);}
+  #slide-4 .book-shadow{
+    position:absolute; left:50%; bottom:-8px; width:300px; height:46px; margin-left:-150px;
+    border-radius:50%; background:radial-gradient(ellipse closest-side, rgba(27,39,64,.34), rgba(27,39,64,0) 74%);
+    filter:blur(9px); opacity:0; pointer-events:none;
+  }
+  #slide-4 .margin-glow{
+    position:absolute; top:5%; bottom:5%; width:66px; border-radius:34px;
+    background:radial-gradient(closest-side, rgba(79,106,147,.6), rgba(79,106,147,0) 74%);
+    mix-blend-mode:multiply; filter:blur(1px); opacity:0;
+  }
+  #slide-4 .margin-glow.ml{left:6px;}
+  #slide-4 .margin-glow.mr{right:6px;}
+  @media (prefers-reduced-motion: no-preference){
+    #slide-4 .margin-glow{animation:marginPulse 3.4s ease-in-out infinite;}
+  }
+  @keyframes marginPulse{ 0%,100%{ transform:scaleY(1); } 50%{ transform:scaleY(1.05); } }
+
+  /* ---- Slide 5 · Primeras pruebas — sin cambios de diseño ni contenido,
+     sólo se retira el badge (queda dentro del grupo "03") ---- */
   #slide-5 .top-col{position:absolute; left:96px; top:166px; width:640px;}
-  #slide-5 .badge{margin-bottom:22px;}
   #slide-5 .titular{font-size:46px; font-weight:800; color:var(--navy); margin:0; letter-spacing:-.01em;}
   #slide-5 .subtitulo{font-size:22px; font-weight:500; color:var(--navy-55); margin:16px 0 0 0;}
   .s6-card{
@@ -263,112 +250,70 @@
   #slide-5 .qr-block img{width:210px; height:210px; display:block; margin:0 auto 18px; border-radius:25px; box-shadow:var(--glass-shadow);}
   #slide-5 .qr-block p{margin:0; font-size:21px; font-weight:700; color:var(--navy-70); line-height:1.35;}
 
-  /* ---- Slide 7 · El mercado — capas: mapa arriba, franja abajo ---- */
-  #slide-6 .badge{position:absolute; left:96px; top:166px;}
-  #slide-6 .map-zone{position:absolute; left:700px; top:190px; width:760px; height:320px;}
-  #slide-6 .num-block{position:absolute; left:96px; top:250px; width:460px;}
-  #slide-6 .num{font-size:112px; font-weight:900; color:var(--navy); margin:0; line-height:1;}
-  #slide-6 .num-label{font-size:22px; font-weight:600; color:var(--navy-55); margin:6px 0 0 0;}
-  #slide-6 .subtitulo{font-size:20px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:26px 0 0 0; max-width:440px;}
-  #slide-6 .destacada{position:absolute; left:96px; top:566px; width:1200px; font-size:32px; font-weight:800; color:var(--navy); margin:0;}
-  #slide-6 .channel-strip{position:absolute; left:96px; top:650px; width:1408px; display:flex; flex-wrap:wrap; gap:14px 26px;}
-  #slide-6 .sources{position:absolute; left:96px; top:722px; font-size:14px; font-weight:600; letter-spacing:.03em; color:var(--navy-38);}
+  /* ---- Slide 6 · El mercado — grid de tres bloques de cifra, uno
+     resaltado en el acento azul/lavanda ---- */
+  #slide-6 .badge{position:absolute; left:96px; top:150px;}
+  #slide-6 .stat-grid{position:absolute; left:96px; top:280px; width:1408px; display:flex; gap:32px;}
+  #slide-6 .stat-block{flex:1; padding:42px 34px; border-radius:26px; background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-line); box-shadow:var(--glass-shadow);}
+  #slide-6 .stat-block .num{font-size:62px; font-weight:900; color:var(--navy); margin:0; line-height:1; letter-spacing:-.02em;}
+  #slide-6 .stat-block .stat-label{font-size:18px; font-weight:600; color:var(--navy-55); margin:18px 0 0 0; line-height:1.4;}
+  #slide-6 .stat-block.accent{background:linear-gradient(155deg, var(--steel-dark), var(--navy)); border-color:transparent;}
+  #slide-6 .stat-block.accent .num{color:#fff;}
+  #slide-6 .stat-block.accent .stat-label{color:rgba(255,255,255,.82);}
+  #slide-6 .cierre-wrap{position:absolute; left:96px; top:600px; width:1408px; text-align:center;}
+  #slide-6 .destacada{font-size:32px; font-weight:800; color:var(--navy); margin:0;}
 
-  /* ---- Slide 8 · Un modelo simple — dos columnas ---- */
-  #slide-7 #s8-badge{position:absolute; left:96px; top:150px;}
-  #slide-7 .titular-wrap{position:absolute; left:50%; top:220px; transform:translateX(-50%); text-align:center;}
-  #slide-7 .titular{font-size:54px; font-weight:800; color:var(--navy); margin:0;}
-  #slide-7 .col{position:absolute; top:320px; width:340px; text-align:center;}
-  #slide-7 .col svg{color:var(--navy);}
-  #slide-7 #col-left{left:250px;}
-  #slide-7 #col-right{left:1010px;}
-  #slide-7 .col p{font-size:22px; font-weight:600; line-height:1.4; color:var(--navy-70); margin:18px 0 0 0;}
-  /* each detail line is its own small card — a color dot up front, a muted
-     caption, and the real figure in heavy weight so it reads at a glance */
-  #slide-7 .detail-list{margin-top:18px; display:flex; flex-direction:column; gap:9px;}
-  #slide-7 .detail-item{
-    display:flex; align-items:flex-start; gap:11px; text-align:left;
-    padding:11px 15px; border-radius:14px;
-    background:var(--glass-fill-2); border:1px solid var(--glass-line);
-  }
-  #slide-7 .detail-icon{width:9px; height:9px; margin-top:7px; border-radius:50%; background:var(--steel-dark); flex:none;}
-  #slide-7 .detail-text{display:flex; flex-direction:column; gap:2px;}
-  #slide-7 .detail-label{font-size:12px; font-weight:700; letter-spacing:.05em; text-transform:uppercase; color:var(--navy-38);}
-  #slide-7 .detail-value{font-size:18px; font-weight:800; color:var(--navy); line-height:1.3;}
-  #slide-7 .detail-item--tag{align-items:center;}
-  #slide-7 .detail-item--tag .detail-value{color:var(--steel-dark); text-transform:uppercase; letter-spacing:.04em;}
-  #slide-7 .bottom{position:absolute; left:50%; top:748px; transform:translateX(-50%); width:820px; text-align:center;}
-  #slide-7 .destacada{font-size:36px; font-weight:800; color:var(--navy); margin:0;}
+  /* ---- Slide 7 · Cómo llegamos — tres tarjetas iguales en horizontal,
+     un icono simple por tarjeta ---- */
+  #slide-7 .badge{position:absolute; left:96px; top:150px;}
+  #slide-7 .reach-grid{position:absolute; left:96px; top:290px; width:1408px; display:flex; gap:32px;}
+  #slide-7 .reach-card{flex:1; padding:38px 32px; border-radius:26px; background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-line); box-shadow:var(--glass-shadow);}
+  #slide-7 .reach-card svg{color:var(--navy);}
+  #slide-7 .reach-card p{font-size:20px; font-weight:600; line-height:1.5; color:var(--navy-70); margin:24px 0 0 0;}
 
-  /* ---- Slide 9 · Dos escenarios — split vertical ---- */
+  /* ---- Slide 8 · El modelo — flujo horizontal con flechas: secuencia,
+     no simultaneidad ---- */
   #slide-8 .badge{position:absolute; left:96px; top:150px;}
-  #slide-8 .divider{position:absolute; left:800px; top:210px; width:1px; height:190px; background:var(--navy-16); transform:scaleY(0); transform-origin:top;}
-  #slide-8 .col{position:absolute; top:210px; width:600px;}
-  #slide-8 #s9-left{left:110px;}
-  #slide-8 #s9-right{left:900px;}
-  #slide-8 .col .titular{font-size:40px; font-weight:800; color:var(--navy); margin:0;}
-  #slide-8 .col .subtitulo{font-size:21px; font-weight:500; color:var(--navy-55); margin:12px 0 0 0;}
-  #slide-8 .col .destacada{font-size:22px; font-weight:800; color:var(--steel-dark); line-height:1.3; margin:12px 0 0 0;}
-  #slide-8 .cierre-wrap{position:absolute; left:50%; top:772px; transform:translateX(-50%); width:1100px; text-align:center;}
-  #slide-8 .cierre{font-size:22px; font-weight:600; color:var(--navy-55); margin:0;}
+  #slide-8 .flow-row{position:absolute; left:96px; top:340px; width:1408px; display:flex; align-items:center;}
+  #slide-8 .flow-block{flex:1; padding:32px 28px; border-radius:24px; background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-line); box-shadow:var(--glass-shadow); text-align:center;}
+  #slide-8 .flow-block p{font-size:21px; font-weight:700; color:var(--navy); margin:0; line-height:1.35;}
+  #slide-8 .flow-arrow{flex:none; width:56px; display:flex; align-items:center; justify-content:center; color:var(--steel-dark);}
+  #slide-8 .note{position:absolute; left:96px; top:520px; width:1408px; text-align:center; font-size:17px; font-weight:600; line-height:1.5; color:var(--navy-55);}
 
-  /* ---- shared: chart legend + hover tooltip, used by the Ingresos/Gastos
-     bar charts below — same glass-card language as the deck's other cards
-     (e.g. the testimonial cards), never a full-bleed transparent panel. ---- */
-  .chart-legend{display:flex; gap:22px; margin-bottom:12px;}
-  .chart-tooltip{
-    position:absolute; top:0; left:0; pointer-events:none; z-index:20;
-    background:var(--navy); color:#fff; font-size:13px; font-weight:600; line-height:1.6;
-    padding:8px 12px; border-radius:10px; box-shadow:var(--glass-shadow);
-    opacity:0; transform:translate(-50%,-112%); white-space:nowrap;
-  }
+  /* ---- Slide 9 · La inversión — cifra dominante arriba; la barra
+     segmentada del header, reutilizada como protagonista, muestra el
+     reparto (categorías dadas sin proporción -> segmentos iguales,
+     nunca una cifra inventada por segmento) ---- */
+  #slide-9 .badge-wrap{position:absolute; left:50%; top:150px; transform:translateX(-50%);}
+  #slide-9 .num{position:absolute; left:50%; top:224px; transform:translateX(-50%); font-size:126px; font-weight:900; color:var(--navy); margin:0; letter-spacing:-.02em;}
+  #slide-9 .spend-bar{position:absolute; left:96px; top:452px; width:1408px; height:34px; display:flex; gap:5px;}
+  #slide-9 .spend-seg{flex:1; height:100%; border-radius:10px; background:var(--chip-fill); overflow:hidden; position:relative;}
+  #slide-9 .spend-seg em{display:block; position:absolute; inset:0; background:var(--navy); transform:scaleX(0); transform-origin:left; border-radius:10px;}
+  #slide-9 .spend-labels{position:absolute; left:96px; top:500px; width:1408px; display:flex; gap:5px;}
+  #slide-9 .spend-labels span{flex:1; text-align:center; font-size:13px; font-weight:600; line-height:1.35; color:var(--navy-55); padding:0 4px; opacity:0;}
+  #slide-9 .support-wrap{position:absolute; left:50%; top:620px; transform:translateX(-50%); width:900px; text-align:center;}
+  #slide-9 .support{font-size:19px; font-weight:600; line-height:1.55; color:var(--navy-55); margin:0;}
 
-  /* ---- Slide 9 · Ingresos vs Gastos, one grouped bar chart per column ---- */
-  #slide-8 .col .bars-card{
-    position:relative; margin-top:24px; box-sizing:border-box; padding:20px 22px 16px;
-    background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-    border:1px solid var(--glass-line); border-radius:20px; box-shadow:var(--glass-shadow);
-  }
-  #slide-8 .bars-plot{display:flex; align-items:flex-end; justify-content:space-around; height:150px; border-bottom:1px solid var(--navy-16); padding:0 4px;}
-  #slide-8 .bar-group{display:flex; flex-direction:column; align-items:center;}
-  #slide-8 .bar-pair{display:flex; align-items:flex-end; gap:7px; height:150px;}
-  #slide-8 .bar{width:26px; border-radius:5px 5px 0 0; height:0%;}
-  #slide-8 .bar-ing{background:var(--navy);}
-  #slide-8 .bar-gas{background:var(--steel);}
-  #slide-8 .bar-year{margin-top:9px; font-size:12.5px; font-weight:600; color:var(--navy-55);}
-  #slide-8 .chart-legend.small{margin:14px 0 0; gap:18px; justify-content:center;}
-  #slide-8 .chart-legend.small .dot-tag{font-size:13px;}
+  /* ---- Slide 10 · El recorrido — línea de tiempo vertical protagonista
+     (mismo componente que la Slide 1), frase de apoyo al lado ---- */
+  #slide-10 .badge{position:absolute; left:96px; top:150px;}
+  #slide-10 .timeline-vert{position:absolute; left:230px; top:210px; width:420px; height:560px;}
+  #slide-10 .support{position:absolute; left:800px; top:440px; width:700px; font-size:26px; font-weight:700; font-style:italic; color:var(--steel-dark); margin:0; line-height:1.4;}
 
-  /* ---- Slide 10 · Lo que pido — dos zonas lado a lado ---- */
-  #slide-9 .badge{position:absolute; left:96px; top:170px;}
-  #slide-9 .left-col{position:absolute; left:96px; top:250px; width:560px;}
-  #slide-9 .num{font-size:150px; font-weight:900; color:var(--navy); margin:0; line-height:1; letter-spacing:-.02em;}
-  #slide-9 .subtitulo{font-size:22px; font-weight:600; line-height:1.6; color:var(--navy-55); margin:32px 0 0 0;}
+  /* ---- shared: línea de tiempo vertical — mismo componente reutilizado
+     en la Slide 1 (decorativa) y la Slide 10 (protagonista); sólo cambia
+     la posición/tamaño de su contenedor por slide ---- */
+  .timeline-vert{position:relative;}
+  .timeline-vert .tl-line{position:absolute; left:6px; top:0; bottom:0; width:2px; background:var(--navy-16); transform:scaleY(0); transform-origin:top;}
+  .timeline-vert .tl-point{position:absolute; left:0; display:flex; align-items:center; gap:18px; opacity:0;}
+  .timeline-vert .tl-dot{width:14px; height:14px; border-radius:50%; background:var(--steel-dark); border:3px solid var(--paper); box-shadow:0 2px 8px rgba(27,39,64,.18); flex:none;}
+  .timeline-vert .tl-label{font-size:19px; font-weight:700; color:var(--navy); line-height:1.3; white-space:nowrap;}
 
-  /* the ask (top/left) and the 3-year spend breakdown (bottom/right, its own
-     card) are two deliberately distinct figures/zones — never one panel */
-  #slide-9 .breakdown-card{
-    position:absolute; left:760px; top:390px; width:744px; box-sizing:border-box;
-    padding:28px 34px; background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-    border:1px solid var(--glass-line); border-radius:24px; box-shadow:var(--glass-shadow);
-  }
-  #slide-9 .bd-label{margin:0 0 18px; font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--navy-55);}
-  #slide-9 .bd-label b{color:var(--navy); font-weight:800;}
-  #slide-9 .bd-bars{display:flex; flex-direction:column; gap:13px;}
-  #slide-9 .bd-row{display:grid; grid-template-columns:98px 1fr 88px 40px; align-items:center; column-gap:12px;}
-  #slide-9 .bd-name{font-size:15px; font-weight:700; color:var(--navy);}
-  #slide-9 .bd-track{height:10px; border-radius:6px; background:var(--navy-08); overflow:hidden;}
-  #slide-9 .bd-fill{display:block; height:100%; width:0%; border-radius:6px; background:var(--steel-dark);}
-  #slide-9 .bd-val{font-size:14px; font-weight:700; color:var(--navy); text-align:right;}
-  #slide-9 .bd-pct{font-size:13px; font-weight:600; color:var(--navy-55); text-align:right;}
-  #slide-9 .bd-close{margin:22px 0 0; font-size:15px; font-weight:600; line-height:1.55; color:var(--navy-55);}
-
-  /* ---- Slide 11 · Cierre — centrado, espejo de la slide 1 ---- */
-  #slide-10 .center-col{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:1100px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:22px;}
-  #slide-10 .subtitulo{font-size:24px; font-weight:500; color:var(--navy-55); margin:0; max-width:700px; line-height:1.5;}
-  #slide-10 .titular{font-size:38px; font-weight:800; color:var(--navy); margin:0; max-width:900px; line-height:1.4;}
-  #slide-10 .destacada{font-size:30px; font-weight:600; font-style:italic; color:var(--steel-dark); margin:0; max-width:900px; line-height:1.4;}
-  #slide-10 .mark-big{color:var(--navy); margin-top:8px;}
+  /* ---- Slide 11 · Cierre contemplativo — centrado, mucho espacio en
+     blanco, sin badge (el footer también se oculta en esta slide) ---- */
+  #slide-11 .center-col{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:1000px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:32px;}
+  #slide-11 .titular{font-size:42px; font-weight:700; color:var(--navy); margin:0; max-width:860px; line-height:1.5;}
+  #slide-11 .destacada{font-size:28px; font-weight:600; font-style:italic; color:var(--steel-dark); margin:0; max-width:860px; line-height:1.5;}
 </style>
 </head>
 <body>
@@ -388,50 +333,79 @@
       <span>SEGÚN TU PALABRA</span>
     </div>
     <div class="chrome-run" id="chromeRun"><b>PORTADA</b></div>
-    <div class="chrome-footer">PITCH HWAW — 2026</div>
+    <div class="chrome-footer" id="chromeFooter">PITCH HWAW — 2026</div>
 
-    <!-- ============ SLIDE 1 · Apertura ============ -->
+    <!-- ============ SLIDE 1 · Portada ============ -->
     <section class="slide" id="slide-0">
-      <div class="center-col">
-        <svg class="mark-big" id="markOpen" width="40" height="40" viewBox="0 0 20 20"><circle cx="4" cy="16" r="3" fill="currentColor"/><circle cx="16" cy="4" r="3" fill="currentColor"/><circle cx="14" cy="14" r="2.2" fill="currentColor"/></svg>
-        <h1 class="titular">SEGÚN TU PALABRA</h1>
-        <p class="subtitulo">Una nueva forma de leer, estudiar y vivir la Palabra</p>
+      <div class="portada-col">
+        <h1 class="titular">La Palabra es <span class="type-word" id="typeWord0"></span><span class="type-cursor"></span></h1>
       </div>
     </section>
 
-    <!-- ============ SLIDE 2 · El descubrimiento ============ -->
+    <!-- ============ SLIDE 2 · El plano ============ -->
     <section class="slide" id="slide-1">
-      <div class="s2-word" id="w-dudas" style="font-size:70px;">Dudas.</div>
-      <div class="s2-word" id="w-busqueda" style="font-size:64px;">Búsqueda.</div>
-      <div class="s2-word" id="w-filologia" style="font-size:70px;">Filología.</div>
-      <div class="s2-block">
-        <div class="pill-tag badge" id="s1-badge">02 — El descubrimiento</div>
-        <p class="destacada">No dudaba de Dios. Dudaba de tener <span class="hl"><span class="hl-bg"></span><span class="hl-text">las herramientas</span></span> para conocerlo de verdad.</p>
-        <p class="cierre">¿Y si la respuesta no era buscar fuera, sino aprender a leer dentro?</p>
+      <div class="pill-tag badge">01 — El plano</div>
+      <div class="text-col">
+        <p class="subtitulo">La Biblia es el libro más vendido de la historia.</p>
+        <p class="destacada">Más de 3.900 millones de copias. Y aun así, es de los menos leídos.</p>
+        <p class="cierre">No es un problema de fe. Es un problema de plano.</p>
       </div>
+      <div class="timeline-vert" id="timeline1"></div>
     </section>
 
-    <!-- ============ SLIDE 3 · El 67% ============ -->
+    <!-- ============ SLIDE 3 · El problema ============ -->
     <section class="slide" id="slide-2">
-      <div class="pill-tag badge">03 — El 67%</div>
-      <div class="num-wrap"><p class="num" id="num67">0%</p></div>
-      <div class="right-col">
-        <p class="subtitulo">de los católicos raramente o nunca lee la Biblia<span class="cite">Pew Research Center</span></p>
-        <p class="destacada">No es que no queramos conocer la Palabra.</p>
-        <p class="cierre">Es que nadie nos enseñó cómo acercarnos a ella.</p>
+      <div class="badge-wrap"><div class="pill-tag badge">02 — El problema</div></div>
+      <div class="ring-wrap">
+        <div class="ring-inner">
+          <svg class="ring-svg" viewBox="0 0 200 200">
+            <circle class="ring-track" cx="100" cy="100" r="84"/>
+            <circle class="ring-fill" cx="100" cy="100" r="84" pathLength="1"/>
+          </svg>
+          <div class="num-wrap"><p class="num" id="num67">0%</p></div>
+        </div>
+      </div>
+      <div class="text-col">
+        <p class="subtitulo">de los católicos rara vez o nunca lee la Biblia (Pew Research)</p>
+        <p class="cierre">Rezar y entender son cosas distintas.</p>
       </div>
     </section>
 
-    <!-- ============ SLIDE 4 · La Biblia de notas ============ -->
+    <!-- ============ SLIDE 4 · La solución (mockup del móvil reutilizado) ============ -->
     <section class="slide" id="slide-3">
-      <div class="pill-tag badge">04 — La Biblia de notas</div>
+      <div class="pill-tag badge">03 — La solución</div>
+      <div class="text-col">
+        <h2 class="titular">Según tu Palabra</h2>
+        <div class="chip-group" id="chipGroup1">
+          <p class="chip-label">Modos de estudio</p>
+          <div class="chip-row">
+            <span class="chip">Histórico</span>
+            <span class="chip">Teológico</span>
+            <span class="chip">Etimológico</span>
+          </div>
+        </div>
+        <div class="chip-group" id="chipGroup2">
+          <p class="chip-label">Público ampliado</p>
+          <div class="chip-row small">
+            <span class="chip">Catequistas</span>
+            <span class="chip">Seminaristas</span>
+            <span class="chip">Agentes pastorales</span>
+          </div>
+        </div>
+      </div>
+      <div class="phone-mock" id="phoneMock">
+        <div class="phone-screen">
+          <video id="appDemoVideo" autoplay loop muted playsinline></video>
+          <div class="phone-island"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 5 · La Biblia física (mockup fotográfico reutilizado) ============ -->
+    <section class="slide" id="slide-4">
+      <div class="pill-tag badge">03 — La solución</div>
       <div class="left-col">
-        <span class="s4-word" id="s4w1">Subrayar.</span>
-        <span class="s4-word" id="s4w2">Personalizar.</span>
-        <span class="s4-word" id="s4w3">Escribir.</span>
-        <p class="cierre">Nació Según tu Palabra.</p>
-        <p class="s4-extra t1">Una Biblia y una app de estudio que te acompaña.</p>
-        <p class="s4-extra t2">Traducción de la CEE.</p>
+        <p class="cierre">Junto a la app, una Biblia física de estudio, cuidada, pensada como objeto — porque hay gente a la que el papel todavía le dice algo que la pantalla no dice.</p>
       </div>
       <div class="book-stage" id="bookStage">
         <div class="book-shadow" id="bookShadow"></div>
@@ -445,33 +419,9 @@
       </div>
     </section>
 
-    <!-- ============ SLIDE 5 · Cinco modos de estudio ============ -->
-    <section class="slide" id="slide-4">
-      <div class="pill-tag badge">05 — Cinco modos de estudio</div>
-      <div class="fan">
-        <div class="fan-card" id="fc1">Etimológico</div>
-        <div class="fan-card" id="fc2">Cristológico</div>
-        <div class="fan-card" id="fc3">Histórico</div>
-        <div class="fan-card" id="fc4">Pastoral</div>
-        <div class="fan-card" id="fc5">Lectio Divina</div>
-      </div>
-      <div class="bottom-col">
-        <p class="subtitulo">No hay una única forma de acercarse a Dios.</p>
-        <p class="destacada">Cada modo, un camino distinto hacia el mismo texto.</p>
-        <p class="cierre">La IA trabaja en silencio. La protagonista sigue siendo la Palabra.</p>
-      </div>
-      <div class="phone-mock" id="phoneMock">
-        <div class="phone-screen">
-          <video id="appDemoVideo" autoplay loop muted playsinline></video>
-          <div class="phone-island"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SLIDE 6 · Primeras pruebas ============ -->
+    <!-- ============ SLIDE 6 · Primeras pruebas (reutilizada tal cual, sin badge) ============ -->
     <section class="slide" id="slide-5">
       <div class="top-col">
-        <div class="pill-tag badge">06 — Primeras pruebas</div>
         <h2 class="titular">Primeras pruebas</h2>
         <p class="subtitulo">Lectores reales, sobre el Evangelio de Marcos</p>
       </div>
@@ -483,165 +433,86 @@
       </div>
     </section>
 
-    <!-- ============ SLIDE 7 · Un idioma que nadie ha servido bien ============ -->
+    <!-- ============ SLIDE 7 · El mercado ============ -->
     <section class="slide" id="slide-6">
-      <div class="pill-tag badge">07 — Un idioma que nadie ha servido bien</div>
-      <div class="map-zone" id="mapZone">
-        <svg viewBox="0 0 760 320" width="100%" height="100%">
-          <g id="mapDots" fill="none"></g>
-        </svg>
+      <div class="pill-tag badge">04 — El mercado</div>
+      <div class="stat-grid">
+        <div class="stat-block" id="stat1">
+          <p class="num">2,74M</p>
+          <p class="stat-label">usuarios de Hallow en Latinoamérica</p>
+        </div>
+        <div class="stat-block" id="stat2">
+          <p class="num">1M</p>
+          <p class="stat-label">solo en Colombia</p>
+        </div>
+        <div class="stat-block accent" id="stat3">
+          <p class="num">México</p>
+          <p class="stat-label">el mercado católico hispanohablante más grande del mundo, infrarrepresentado</p>
+        </div>
       </div>
-      <div class="num-block">
-        <p class="num">~500M</p>
-        <p class="num-label">hablantes de español</p>
-        <p class="subtitulo">Catolicismo: fe mayoritaria en España e Hispanoamérica. 46%–90% de la población, según el país.</p>
-      </div>
-      <p class="destacada">~400.000 personas alcanzables a través de canales institucionales.</p>
-      <div class="channel-strip" id="channelStrip">
-        <span class="dot-tag"><i></i>Parroquias</span>
-        <span class="dot-tag"><i></i>Diócesis</span>
-        <span class="dot-tag"><i></i>Universidades católicas</span>
-        <span class="dot-tag"><i></i>Seminarios</span>
-        <span class="dot-tag"><i></i>Capellanías</span>
-        <span class="dot-tag"><i></i>Retiros</span>
-      </div>
-      <div class="sources">Instituto Cervantes · Pew Research Center</div>
+      <div class="cierre-wrap"><p class="destacada">Hallow ha resuelto el hábito. No ha resuelto el entenderla.</p></div>
     </section>
 
-    <!-- ============ SLIDE 8 · Un modelo simple ============ -->
+    <!-- ============ SLIDE 8 · Cómo llegamos ============ -->
     <section class="slide" id="slide-7">
-      <div class="pill-tag badge" id="s8-badge">08 — Un modelo simple</div>
-      <div class="titular-wrap"><h2 class="titular">Biblia. App.</h2></div>
-      <div class="col" id="col-left">
-        <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4.5c2-1 4-1 6 .5v10c-2-1.5-4-1.5-6-.5V4.5Z"/><path d="M18 4.5c-2-1-4-1-6 .5v10c2-1.5 4-1.5 6-.5V4.5Z"/></svg>
-        <p>La Biblia se compra una vez.</p>
-        <div class="detail-list">
-          <div class="detail-item">
-            <i class="detail-icon"></i>
-            <span class="detail-text"><span class="detail-label">Precio</span><span class="detail-value">39,90€ (PVP)</span></span>
-          </div>
-          <div class="detail-item">
-            <i class="detail-icon"></i>
-            <span class="detail-text"><span class="detail-label">Traducción</span><span class="detail-value">Conferencia Episcopal</span></span>
-          </div>
-          <div class="detail-item">
-            <i class="detail-icon"></i>
-            <span class="detail-text"><span class="detail-label">Canales de distribución</span><span class="detail-value">B2B (retiros, parroquias, comunidades) e influencers católicos</span></span>
-          </div>
+      <div class="pill-tag badge">05 — Cómo llegamos</div>
+      <div class="reach-grid">
+        <div class="reach-card" id="reach1">
+          <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V9l6-4.5L16 9v9M2 18h16M8 18v-5h4v5"/></svg>
+          <p>Más del 80% de las (arqui)diócesis de EE.UU. ya tienen personal dedicado al ministerio hispano.</p>
         </div>
-      </div>
-      <div class="col" id="col-right">
-        <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="2" width="10" height="16" rx="2"/><line x1="8" y1="15.5" x2="12" y2="15.5"/></svg>
-        <p>La app se paga mes a mes, y su precio crece con el contenido.</p>
-        <div class="detail-list">
-          <div class="detail-item detail-item--tag">
-            <i class="detail-icon"></i>
-            <span class="detail-text"><span class="detail-value">Freemium</span></span>
-          </div>
-          <div class="detail-item">
-            <i class="detail-icon"></i>
-            <span class="detail-text"><span class="detail-label">Suscripción mensual</span><span class="detail-value">6,99€/mes</span></span>
-          </div>
-          <div class="detail-item">
-            <i class="detail-icon"></i>
-            <span class="detail-text"><span class="detail-label">Suscripción anual</span><span class="detail-value">59,99€/año</span></span>
-          </div>
-          <div class="detail-item">
-            <i class="detail-icon"></i>
-            <span class="detail-text"><span class="detail-label">Contenido</span><span class="detail-value">Revisado por revisores teológicos</span></span>
-          </div>
+        <div class="reach-card" id="reach2">
+          <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="16" height="11" rx="2"/><path d="M7 6l1.5-2h3L13 6"/><circle cx="10" cy="11.5" r="3.2"/></svg>
+          <p>Creadoras y creadores de contenido católico en español — un ecosistema activo.</p>
         </div>
-      </div>
-      <div class="bottom">
-        <p class="destacada">Dos ingresos, un mismo propósito.</p>
+        <div class="reach-card" id="reach3">
+          <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="14" height="9" rx="1.3"/><path d="M3 8h14M10 8v9"/><path d="M10 8c-.5-3-4-4.5-5.3-3S5.5 8 10 8Zm0 0c.5-3 4-4.5 5.3-3S14.5 8 10 8Z"/></svg>
+          <p>La Biblia física entra por las ocasiones de regalo: comunión, confirmación, bautizo.</p>
+        </div>
       </div>
     </section>
 
-    <!-- ============ SLIDE 9 · Dos escenarios ============ -->
+    <!-- ============ SLIDE 9 · El modelo ============ -->
     <section class="slide" id="slide-8">
-      <div class="pill-tag badge">09 — Dos escenarios</div>
-      <div class="divider"></div>
-      <div class="col" id="s9-left">
-        <h3 class="titular">Conservador</h3>
-        <p class="subtitulo">Empezamos en pérdidas.</p>
-        <p class="destacada">Rentable en el Año 2 — vuelve a pérdidas en el Año 3.</p>
-        <div class="bars-card" id="s9barsCons">
-          <div class="bars-plot"></div>
-          <div class="chart-tooltip"></div>
-          <div class="chart-legend small">
-            <span class="dot-tag"><i style="background:var(--navy)"></i>Ingresos</span>
-            <span class="dot-tag"><i style="background:var(--steel)"></i>Gastos</span>
-          </div>
-        </div>
+      <div class="pill-tag badge">06 — El modelo</div>
+      <div class="flow-row">
+        <div class="flow-block" id="flow1"><p>Suscripción — el hábito diario</p></div>
+        <div class="flow-arrow" id="arrow1"><svg width="28" height="16" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></div>
+        <div class="flow-block" id="flow2"><p>Biblia física — la puerta de entrada</p></div>
+        <div class="flow-arrow" id="arrow2"><svg width="28" height="16" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></div>
+        <div class="flow-block" id="flow3"><p>Licencias B2B — desde el año 2</p></div>
       </div>
-      <div class="col" id="s9-right">
-        <h3 class="titular">Base</h3>
-        <p class="subtitulo">Rentable desde el primer año.</p>
-        <p class="destacada">93.058€ de resultado en el Año 3, sobre 258.022€ de ingresos.</p>
-        <div class="bars-card" id="s9barsBase">
-          <div class="bars-plot"></div>
-          <div class="chart-tooltip"></div>
-          <div class="chart-legend small">
-            <span class="dot-tag"><i style="background:var(--navy)"></i>Ingresos</span>
-            <span class="dot-tag"><i style="background:var(--steel)"></i>Gastos</span>
-          </div>
-        </div>
-      </div>
-      <div class="cierre-wrap"><p class="cierre">Mismo modelo, mismo margen. Cada año, menos gasto y más ingreso.</p></div>
+      <p class="note" id="modelNote">50-65% del PVP se lo queda el intermediario en librería tradicional — la venta directa es el canal prioritario.</p>
     </section>
 
-    <!-- ============ SLIDE 10 · Lo que pido ============ -->
+    <!-- ============ SLIDE 10 · La inversión ============ -->
     <section class="slide" id="slide-9">
-      <div class="pill-tag badge">10 — Lo que pido</div>
-      <div class="left-col">
-        <p class="num" id="num200k">0€</p>
-        <p class="subtitulo">La inversión que pido. Cubre el arranque: desarrollo,<br>lanzamiento y los primeros meses de equipo y contenido.</p>
-      </div>
-      <div class="breakdown-card" id="s10breakdown">
-        <p class="bd-label">Gasto total a 3 años: <b>~419.000€</b></p>
-        <div class="bd-bars">
-          <div class="bd-row">
-            <span class="bd-name">Producto</span>
-            <span class="bd-track"><span class="bd-fill" data-pct="44"></span></span>
-            <span class="bd-val">184.440€</span>
-            <span class="bd-pct">44%</span>
-          </div>
-          <div class="bd-row">
-            <span class="bd-name">Equipo</span>
-            <span class="bd-track"><span class="bd-fill" data-pct="19"></span></span>
-            <span class="bd-val">79.200€</span>
-            <span class="bd-pct">19%</span>
-          </div>
-          <div class="bd-row">
-            <span class="bd-name">Marketing</span>
-            <span class="bd-track"><span class="bd-fill" data-pct="9"></span></span>
-            <span class="bd-val">36.000€</span>
-            <span class="bd-pct">9%</span>
-          </div>
-          <div class="bd-row">
-            <span class="bd-name">Contenido</span>
-            <span class="bd-track"><span class="bd-fill" data-pct="4"></span></span>
-            <span class="bd-val">16.193€</span>
-            <span class="bd-pct">4%</span>
-          </div>
-          <div class="bd-row">
-            <span class="bd-name">Operaciones</span>
-            <span class="bd-track"><span class="bd-fill" data-pct="25"></span></span>
-            <span class="bd-val">103.387€</span>
-            <span class="bd-pct">25%</span>
-          </div>
-        </div>
-        <p class="bd-close">La diferencia la cubren los propios ingresos: el escenario Base ya es rentable desde el primer año.</p>
+      <div class="badge-wrap"><div class="pill-tag badge">07 — La inversión</div></div>
+      <p class="num" id="numInversion">0€</p>
+      <div class="spend-bar" id="spendBar"></div>
+      <div class="spend-labels" id="spendLabels"></div>
+      <div class="support-wrap"><p class="support">Para construir la app, sacar la primera tirada de 1.000 Biblias, constituir la empresa y sostener la operación durante los primeros 9 meses.</p></div>
+    </section>
+
+    <!-- ============ SLIDE 11 · El recorrido ============ -->
+    <section class="slide" id="slide-10">
+      <div class="pill-tag badge">08 — El recorrido</div>
+      <div class="timeline-vert" id="timeline10"></div>
+      <p class="support">Tardé años en encontrar el camino.</p>
+    </section>
+
+    <!-- ============ SLIDE 12 · Cierre contemplativo ============ -->
+    <section class="slide" id="slide-11">
+      <div class="center-col">
+        <p class="titular">"Sed misioneros de la Palabra."<br>— León XIV</p>
+        <p class="destacada">"Hágase en mí según tu palabra."<br>— Lucas 1:38</p>
       </div>
     </section>
 
-    <!-- ============ SLIDE 11 · Cierre ============ -->
-    <section class="slide" id="slide-10">
-      <div class="center-col">
-        <p class="subtitulo">Para ser misioneros, primero hay que conocer lo que se anuncia.</p>
-        <p class="titular">"Sed misioneros de la Palabra."<br>— Papa León XIV</p>
-        <p class="destacada">"Hágase en mí, según tu palabra."<br>— Lucas 1:38</p>
-        <svg class="mark-big" id="markClose" width="34" height="34" viewBox="0 0 20 20"><circle cx="4" cy="16" r="3" fill="currentColor"/><circle cx="16" cy="4" r="3" fill="currentColor"/><circle cx="14" cy="14" r="2.2" fill="currentColor"/></svg>
+    <!-- ============ SLIDE 13 · Portada (copia exacta de la Slide 1) ============ -->
+    <section class="slide" id="slide-12">
+      <div class="portada-col">
+        <h1 class="titular">La Palabra es <span class="type-word" id="typeWord12"></span><span class="type-cursor"></span></h1>
       </div>
     </section>
 
@@ -653,7 +524,6 @@
     <button class="navbtn" id="btnNext" aria-label="Siguiente" title="Siguiente (→ / espacio)">›</button>
   </div>
 </div>
-
 <script>
 (function(){
   "use strict";
@@ -689,21 +559,22 @@
   var D = reduced ? .01 : .85;
 
   /* =====================================================================
-     DECK MAP — 11 slides, each with 1-3 "beats". A global state index
+     DECK MAP — 13 slides, each with 1-4 "beats". A global state index
      walks through every beat of every slide in order; the top progress
-     bar reflects the SLIDE (one segment per slide, as in the muestra),
-     the bottom dots reflect the BEAT within the current slide.
+     bar reflects the SLIDE (one segment per slide), the bottom dots
+     reflect the BEAT within the current slide.
      ===================================================================== */
-  var slideNames  = ['PORTADA','DESCUBRIMIENTO','EL 67%','LA BIBLIA','CINCO MODOS','PRUEBAS','EL MERCADO','EL MODELO','ESCENARIOS','LA INVERSIÓN','CIERRE'];
-  var beatsPerSlide = [1, 3, 3, 3, 7, 2, 3, 3, 3, 2, 3];
+  var slideNames = ['PORTADA','EL PLANO','EL PROBLEMA','LA SOLUCIÓN','LA BIBLIA','PRUEBAS','EL MERCADO','CÓMO LLEGAMOS','EL MODELO','LA INVERSIÓN','EL RECORRIDO','CIERRE','PORTADA'];
+  var beatsPerSlide = [1, 3, 2, 3, 2, 2, 3, 4, 4, 3, 2, 2, 1];
   var beatTable = []; // [slideIdx, localBeat] per global state
   beatsPerSlide.forEach(function(n, s){ for (var b=0;b<n;b++) beatTable.push([s,b]); });
   var TOTAL = beatTable.length;
+  var SLIDE_COUNT = beatsPerSlide.length;
 
   /* ---------- progress bar: one segment per slide ---------- */
   var pb = document.getElementById('progressbar');
   var segs = [];
-  for (var n=0;n<11;n++){
+  for (var n=0;n<SLIDE_COUNT;n++){
     var i = document.createElement('i');
     var em = document.createElement('em');
     i.appendChild(em); pb.appendChild(i); segs.push(em);
@@ -711,17 +582,19 @@
 
   /* ---------- atmosphere blobs: a new resting spot per slide ---------- */
   var blobStates = [
-    {a:{x:800, y:260,s:1},   b:{x:1300,y:700,s:.85},c:{x:260, y:700,s:.8}},  // 0 apertura
-    {a:{x:120, y:80, s:.85}, b:{x:1420,y:200,s:1.05},c:{x:1100,y:780,s:.9}}, // 1 descubrimiento
-    {a:{x:1500,y:200,s:.9},  b:{x:220, y:700,s:1},   c:{x:900, y:150,s:.7}}, // 2 67%
-    {a:{x:1300,y:700,s:1},   b:{x:180, y:200,s:.85}, c:{x:800, y:820,s:.75}},// 3 biblia
-    {a:{x:800, y:120,s:.8},  b:{x:1450,y:780,s:.95}, c:{x:150, y:780,s:.85}},// 4 cinco modos
+    {a:{x:800, y:260,s:1},   b:{x:1300,y:700,s:.85},c:{x:260, y:700,s:.8}},  // 0 portada
+    {a:{x:150, y:200,s:.85}, b:{x:1450,y:680,s:1},  c:{x:1300,y:150,s:.7}}, // 1 el plano
+    {a:{x:800, y:150,s:.9},  b:{x:200, y:750,s:1},  c:{x:1400,y:750,s:.75}},// 2 el problema
+    {a:{x:1300,y:700,s:1},   b:{x:180, y:200,s:.85}, c:{x:800, y:820,s:.75}},// 3 la solución
+    {a:{x:1300,y:700,s:1},   b:{x:180, y:200,s:.85}, c:{x:800, y:820,s:.75}},// 4 la biblia física
     {a:{x:200, y:760,s:.9},  b:{x:1450,y:200,s:1},   c:{x:900, y:120,s:.7}}, // 5 pruebas
-    {a:{x:1450,y:150,s:1},   b:{x:200, y:800,s:.9},  c:{x:900, y:800,s:.75}},// 6 mercado
-    {a:{x:800, y:120,s:.85}, b:{x:150, y:780,s:.9},  c:{x:1450,y:780,s:.9}}, // 7 modelo
-    {a:{x:150, y:150,s:.85}, b:{x:1450,y:150,s:.85}, c:{x:800, y:800,s:.8}}, // 8 escenarios
-    {a:{x:1400,y:700,s:1},   b:{x:200, y:180,s:.85}, c:{x:800, y:120,s:.7}}, // 9 inversión
-    {a:{x:800, y:260,s:1},   b:{x:1300,y:700,s:.85}, c:{x:260, y:700,s:.8}}  // 10 cierre (mirror slide 0)
+    {a:{x:1450,y:150,s:1},   b:{x:200, y:800,s:.9},  c:{x:900, y:800,s:.75}},// 6 el mercado
+    {a:{x:150, y:150,s:.85}, b:{x:1450,y:150,s:.85}, c:{x:800, y:800,s:.8}}, // 7 cómo llegamos
+    {a:{x:800, y:120,s:.85}, b:{x:150, y:780,s:.9},  c:{x:1450,y:780,s:.9}}, // 8 el modelo
+    {a:{x:1400,y:700,s:1},   b:{x:200, y:180,s:.85}, c:{x:800, y:120,s:.7}}, // 9 la inversión
+    {a:{x:150, y:200,s:.85}, b:{x:1450,y:680,s:1},   c:{x:1300,y:150,s:.7}}, // 10 el recorrido
+    {a:{x:800, y:260,s:1},   b:{x:1300,y:700,s:.85}, c:{x:260, y:700,s:.8}}, // 11 cierre
+    {a:{x:800, y:260,s:1},   b:{x:1300,y:700,s:.85}, c:{x:260, y:700,s:.8}}  // 12 portada (= 0)
   ];
   ['blobA','blobB','blobC'].forEach(function(id){ gsap.set('#'+id, {xPercent:-50, yPercent:-50}); });
   gsap.set('#blobA', {x:blobStates[0].a.x, y:blobStates[0].a.y, scale:blobStates[0].a.s});
@@ -756,178 +629,123 @@
     });
   }
 
-  /* =====================================================================
-     FINANCIALS — real annual output of the uploaded panel's own runModel()
-     engine (financiación 200.000€). Not illustrative: every figure below
-     is real, given exactly, never recomputed or rounded further.
-     ===================================================================== */
-  var S9BARS = {
-    cons: [
-      {year:'Año 1', ing:63573,  gas:101872},
-      {year:'Año 2', ing:107935, gas:93446},
-      {year:'Año 3', ing:135163, gas:138068}
-    ],
-    base: [
-      {year:'Año 1', ing:114012, gas:112147},
-      {year:'Año 2', ing:199844, gas:142109},
-      {year:'Año 3', ing:258022, gas:164964}
-    ]
-  };
-  function fmtEur(v){
-    var n = Math.round(v);
-    var s = Math.abs(n).toLocaleString('es-ES') + '€';
-    return n < 0 ? '−' + s : s;
-  }
-  // one shared scale across both charts (Conservador + Base) so the two
-  // scenarios stay honestly comparable — never independently rescaled
-  var s9barsMax = Math.max.apply(null, [].concat(
-    S9BARS.cons.map(function(d){ return Math.max(d.ing, d.gas); }),
-    S9BARS.base.map(function(d){ return Math.max(d.ing, d.gas); })
-  )) * 1.08;
-  // builds one grouped Ingresos/Gastos bar chart (3 year-groups × 2 bars)
-  // into #containerId .bars-plot; bars start at height 0 (grown in later)
-  // and each gets its own hover tooltip with the exact real figure
-  function buildBarChart(containerId, data){
-    var card = document.getElementById(containerId);
-    var plot = card.querySelector('.bars-plot');
-    var tooltip = card.querySelector('.chart-tooltip');
-    var bars = [];
-    data.forEach(function(d){
-      var group = document.createElement('div'); group.className = 'bar-group';
-      var pair = document.createElement('div'); pair.className = 'bar-pair';
-      [['bar-ing','Ingresos',d.ing], ['bar-gas','Gastos',d.gas]].forEach(function(spec){
-        var el = document.createElement('div');
-        el.className = 'bar ' + spec[0];
-        el.setAttribute('data-pct', (spec[2] / s9barsMax * 100).toFixed(2));
-        el.addEventListener('mouseenter', function(){
-          var r = el.getBoundingClientRect(), cr = card.getBoundingClientRect();
-          tooltip.style.left = (r.left - cr.left + r.width/2) + 'px';
-          tooltip.style.top = (r.top - cr.top) + 'px';
-          tooltip.textContent = d.year + ' · ' + spec[1] + ': ' + fmtEur(spec[2]);
-          tooltip.style.opacity = 1;
-        });
-        el.addEventListener('mouseleave', function(){ tooltip.style.opacity = 0; });
-        pair.appendChild(el);
-        bars.push(el);
-      });
-      var yr = document.createElement('span'); yr.className = 'bar-year'; yr.textContent = d.year;
-      group.appendChild(pair); group.appendChild(yr);
-      plot.appendChild(group);
+  /* ---------- shared: vertical timeline builder (Slide 1 & Slide 10 reuse
+     this exact component — only the milestone text and container
+     position/size differ) ---------- */
+  function buildTimeline(containerId, milestones){
+    var el = document.getElementById(containerId);
+    var line = document.createElement('div'); line.className = 'tl-line';
+    el.appendChild(line);
+    var points = [];
+    var n = milestones.length;
+    milestones.forEach(function(label, i){
+      var pct = n>1 ? (i/(n-1))*100 : 0;
+      var pt = document.createElement('div');
+      pt.className = 'tl-point';
+      pt.style.top = pct + '%';
+      pt.style.transform = 'translateY(-50%)';
+      var dot = document.createElement('span'); dot.className = 'tl-dot';
+      var lbl = document.createElement('span'); lbl.className = 'tl-label'; lbl.textContent = label;
+      pt.appendChild(dot); pt.appendChild(lbl);
+      el.appendChild(pt);
+      points.push(pt);
     });
-    return bars;
+    return {line:line, points:points};
   }
+  var tl1 = buildTimeline('timeline1', ['Redacción de los textos bíblicos', 'Primera traducción', 'Hoy']);
+  var tl10 = buildTimeline('timeline10', ['15 años — primer estudio bíblico', 'Literatura clásica y cristiana', 'Lenguas originales', 'Hoy']);
 
-  /* ---------- Slide 1 · word-field scatter coords for slide 2 ---------- */
-  var s2Scatter = {
-    'w-dudas':     {x:420, y:250, r:-5},
-    'w-busqueda':  {x:1130,y:210, r:4},
-    'w-filologia': {x:800, y:440, r:-3}
-  };
-  Object.keys(s2Scatter).forEach(function(id){
-    var c = s2Scatter[id];
-    gsap.set('#'+id, {x:c.x, y:c.y, rotate:c.r, opacity:0, scale:.9, xPercent:-50, yPercent:-50});
-  });
+  /* ---------- shared: spend bar builder (Slide 9 · La inversión) — reuses
+     the header's own segmented-bar mechanism (scaleX sweep from the left)
+     at a larger scale. The six categories were given without individual
+     amounts, so the segments are deliberately equal-width — a label list,
+     never a fabricated proportion. ---------- */
+  var SPEND_CATS = ['Desarrollo de la app', 'Primera tirada (1.000 Biblias)', 'Constitución + legal', 'Operación (9 meses)', 'Marketing de lanzamiento', 'Colchón de contingencia'];
+  function buildSpendBar(barId, labelsId, cats){
+    var bar = document.getElementById(barId), labelsWrap = document.getElementById(labelsId);
+    var segEls = [];
+    cats.forEach(function(label){
+      var seg = document.createElement('div'); seg.className = 'spend-seg';
+      var em2 = document.createElement('em');
+      seg.appendChild(em2);
+      bar.appendChild(seg);
+      segEls.push(em2);
+      var lbl = document.createElement('span'); lbl.textContent = label;
+      labelsWrap.appendChild(lbl);
+    });
+    return segEls;
+  }
+  var spendSegs = buildSpendBar('spendBar', 'spendLabels', SPEND_CATS);
 
-  /* ---------- Slide 5 · card stack layout (left column) — same scattered
-     card look as before (rounded, tilted, soft shadow), just cascading
-     down the left column instead of fanned out horizontally ---------- */
-  var fanCoords = [
-    {id:'fc1', x:225, y:255, r:-11},
-    {id:'fc2', x:260, y:307, r:5.5},
-    {id:'fc3', x:210, y:359, r:-5.5},
-    {id:'fc4', x:265, y:411, r:11},
-    {id:'fc5', x:220, y:463, r:0}
-  ];
-  fanCoords.forEach(function(c, idx){
-    gsap.set('#'+c.id, {x:c.x, y:c.y, rotate:c.r, xPercent:-50, yPercent:0, opacity:0, scale:.85});
-  });
-
-  /* ---------- Slide 7 · abstract map dot-cluster (illustrative, not geographic) ---------- */
-  (function buildMap(){
-    var g = document.getElementById('mapDots');
-    var groups = [
-      {cx:180, cy:150, label:'España',        n:9,  r:70},
-      {cx:520, cy:170, label:'Hispanoamérica', n:16, r:120}
-    ];
-    var svgns = 'http://www.w3.org/2000/svg';
-    groups.forEach(function(grp, gi){
-      for (var k=0;k<grp.n;k++){
-        var ang = (k/grp.n) * Math.PI*2 + gi;
-        var rad = grp.r * (0.35 + 0.65*((k*53)%100)/100);
-        var cx = grp.cx + Math.cos(ang)*rad;
-        var cy = grp.cy + Math.sin(ang)*rad*0.7;
-        var c = document.createElementNS(svgns,'circle');
-        c.setAttribute('cx', cx); c.setAttribute('cy', cy);
-        c.setAttribute('r', 3.4 + (k%3));
-        c.setAttribute('fill', gi===0 ? 'var(--steel-dark)' : 'var(--navy)');
-        c.setAttribute('opacity', 0.75);
-        c.classList.add('map-dot');
-        g.appendChild(c);
+  /* ---------- shared: typewriter (Slide 1 & Slide 13, i.e. index 0 & 12)
+     — "La Palabra es " + a continuous type/delete loop through the exact
+     word list, in order. Two independent instances of the same function,
+     one per portada element, so the closing slide is a true duplicate. ---------- */
+  var TYPE_WORDS = ['vida','camino','verdad','alimento','promesa','dirección','Cristo'];
+  function startTypewriter(elId){
+    if (reduced){ document.getElementById(elId).textContent = TYPE_WORDS[0]; return; }
+    var el = document.getElementById(elId);
+    var wi = 0, ci = 0, deleting = false;
+    function tick(){
+      var word = TYPE_WORDS[wi];
+      if (!deleting){
+        ci++;
+        el.textContent = word.slice(0, ci);
+        if (ci === word.length){ deleting = true; setTimeout(tick, 1300); return; }
+        setTimeout(tick, 85);
+      } else {
+        ci--;
+        el.textContent = word.slice(0, ci);
+        if (ci === 0){ deleting = false; wi = (wi+1) % TYPE_WORDS.length; setTimeout(tick, 300); return; }
+        setTimeout(tick, 45);
       }
-      var t = document.createElementNS(svgns,'text');
-      t.setAttribute('x', grp.cx); t.setAttribute('y', grp.cy+grp.r*0.75+34);
-      t.setAttribute('text-anchor','middle');
-      t.setAttribute('style','font-family:var(--f-sans); font-size:15px; font-weight:600; fill:var(--navy-55);');
-      t.textContent = grp.label;
-      g.appendChild(t);
-    });
-    gsap.set('.map-dot', {opacity:0, scale:0, transformOrigin:'center'});
-    gsap.set('#mapDots text', {opacity:0});
-  })();
-
-  /* ---------- Slide 9 (index8) · Conservador / Base — grouped Ingresos vs
-     Gastos bar charts, one under each column, sharing one scale ---------- */
-  var s9barsCons = buildBarChart('s9barsCons', S9BARS.cons);
-  var s9barsBase = buildBarChart('s9barsBase', S9BARS.base);
+    }
+    tick();
+  }
+  startTypewriter('typeWord0');
+  startTypewriter('typeWord12');
 
   /* ---------- initial hidden states ---------- */
-  gsap.set('#slide-0 .mark-big, #slide-0 .titular, #slide-0 .subtitulo', {opacity:0, y:18, filter:'blur(6px)'});
+  gsap.set('#slide-0 .titular, #slide-12 .titular', {opacity:0, y:18, filter:'blur(6px)'});
 
-  gsap.set('#slide-1 .badge, #slide-1 .destacada, #slide-1 .cierre', {opacity:0, y:16});
+  gsap.set('#slide-1 .badge, #slide-1 .subtitulo, #slide-1 .destacada, #slide-1 .cierre', {opacity:0, y:16});
   gsap.set('#slide-1 .destacada', {filter:'blur(6px)'});
-  gsap.set('.hl-bg', {scaleX:0});
 
-  gsap.set('#slide-2 .badge, #slide-2 .subtitulo, #slide-2 .destacada, #slide-2 .cierre', {opacity:0, y:16});
-  gsap.set('#slide-2 .num', {opacity:0, scale:.92, transformOrigin:'left center'});
+  gsap.set('#slide-2 .badge, #slide-2 .subtitulo, #slide-2 .cierre', {opacity:0, y:16});
+  gsap.set('#slide-2 .num', {opacity:0, scale:.92, transformOrigin:'center'});
 
-  gsap.set('#slide-3 .badge, #slide-3 .s4-word, #slide-3 .cierre, #slide-3 .s4-extra', {opacity:0, y:18});
+  gsap.set('#slide-3 .badge, #slide-3 .titular, #chipGroup1, #chipGroup2', {opacity:0, y:16});
+  gsap.set('#phoneMock', {opacity:0, scale:.94});
+
+  gsap.set('#slide-4 .badge, #slide-4 .cierre', {opacity:0, y:18});
   gsap.set('#bookOpen', {opacity:0, scale:.93});
   gsap.set('#bookShadow', {opacity:0});
   gsap.set('#marginL, #marginR', {opacity:0});
-  gsap.set('#s4mockup', {opacity:0, scale:.94});
 
-  gsap.set('#slide-4 .badge, #slide-4 .subtitulo, #slide-4 .destacada, #slide-4 .cierre', {opacity:0, y:16});
-  gsap.set('#phoneMock', {opacity:0, scale:.94});
-
-  gsap.set('#slide-5 .badge, #slide-5 .titular, #slide-5 .subtitulo', {opacity:0, y:16});
+  gsap.set('#slide-5 .titular, #slide-5 .subtitulo', {opacity:0, y:16});
   gsap.set('#card-claudia, #card-pablo', {opacity:0, y:26});
   gsap.set('#qrBlock', {opacity:0, y:16});
 
-  gsap.set('#slide-6 .badge, #slide-6 .num, #slide-6 .num-label, #slide-6 .subtitulo, #slide-6 .destacada, .dot-tag, .sources', {opacity:0, y:14});
+  gsap.set('#stat1, #stat2, #stat3, #slide-6 .badge, #slide-6 .destacada', {opacity:0, y:16});
 
-  gsap.set('#s8-badge, #slide-7 .titular, #col-left, #col-right, #slide-7 .destacada', {opacity:0, y:16});
+  gsap.set('#reach1, #reach2, #reach3, #slide-7 .badge', {opacity:0, y:16});
 
-  gsap.set('#slide-8 .badge, #slide-8 .divider', {opacity:0});
-  gsap.set('#slide-8 .divider', {scaleY:0});
-  gsap.set('#s9-left .titular, #s9-left .subtitulo, #s9-left .destacada, #s9-right .titular, #s9-right .subtitulo, #s9-right .destacada, #slide-8 .cierre', {opacity:0, y:14});
-  gsap.set('#s9barsCons .chart-legend, #s9barsBase .chart-legend', {opacity:0, y:10});
+  gsap.set('#flow1, #flow2, #flow3, #arrow1, #arrow2, #slide-8 .badge, #modelNote', {opacity:0, y:16});
 
-  gsap.set('#slide-9 .badge, #slide-9 .subtitulo', {opacity:0, y:16});
-  gsap.set('#slide-9 .num', {opacity:0, scale:.92, transformOrigin:'left center'});
-  gsap.set('#s10breakdown', {opacity:0, y:18});
-  gsap.set('#s10breakdown .bd-label, #s10breakdown .bd-close', {opacity:0, y:8});
+  gsap.set('#slide-9 .badge, #slide-9 .support', {opacity:0, y:16});
+  gsap.set('#spendLabels span', {opacity:0});
 
-  gsap.set('#slide-10 .subtitulo, #slide-10 .titular, #slide-10 .destacada, #slide-10 .mark-big', {opacity:0, y:16});
+  gsap.set('#slide-10 .badge, #slide-10 .support', {opacity:0, y:16});
+
+  gsap.set('#slide-11 .titular, #slide-11 .destacada', {opacity:0, y:16});
 
   /* continuous idle motion (independent of beats) */
   if (!reduced){
-    gsap.to('#num67', {scale:1.015, duration:4, ease:'sine.inOut', yoyo:true, repeat:-1, transformOrigin:'left center'});
-    gsap.to('#markOpen, #markClose', {rotate:8, duration:6, ease:'sine.inOut', yoyo:true, repeat:-1, transformOrigin:'center'});
-    gsap.to('#mapZone', {x:'+=10', y:'-=6', scale:1.02, duration:16, ease:'sine.inOut', yoyo:true, repeat:-1});
-    // the whole book floats — a minimal continuous bob, closed or open, as if
-    // it had its own light rather than resting on anything. The detached
-    // shadow breathes in sync (only scale, never opacity — opacity stays
-    // under the beat-driven reveal below, so the two never fight)
+    gsap.to('#slide-2 .ring-inner', {scale:1.015, duration:4, ease:'sine.inOut', yoyo:true, repeat:-1, transformOrigin:'center'});
+    // the whole book floats — a minimal continuous bob, as if it had its
+    // own light rather than resting on anything. The detached shadow
+    // breathes in sync (only scale, never opacity — opacity stays under
+    // the beat-driven reveal below, so the two never fight)
     gsap.to('#bookStage', {y:'+=7', duration:5, ease:'sine.inOut', yoyo:true, repeat:-1});
     gsap.to('#bookShadow', {scale:1.08, duration:5, ease:'sine.inOut', yoyo:true, repeat:-1, transformOrigin:'center'});
   }
@@ -935,84 +753,59 @@
   /* =====================================================================
      PER-SLIDE RENDER FUNCTIONS — called with the local beat index (0-based)
      ===================================================================== */
-  function renderSlide0(b){
-    var on = b>=0;
-    fadeGroup('#slide-0 .mark-big', on, {blur:true});
-    fadeGroup('#slide-0 .titular', on, {blur:true, delay:on?.1:0});
-    fadeGroup('#slide-0 .subtitulo', on, {blur:true, delay:on?.28:0, duration:D*1.1});
+  function renderPortada(b, n){
+    fadeGroup('#slide-'+n+' .titular', b>=0, {blur:true});
   }
+  var renderSlide0 = function(b){ renderPortada(b, 0); };
 
   function renderSlide1(b){
-    // beat0: keywords float in; beat1: destacada (words settle/fade back); beat2: cierre
-    Object.keys(s2Scatter).forEach(function(id, idx){
-      var visible = b>=0;
-      var settle  = b>=1;
-      gsap.to('#'+id, {
-        opacity: visible ? (settle?.5:1) : 0,
-        scale: settle?.85:1,
-        duration: D,
-        ease:'power2.out',
-        delay: b===0 ? idx*0.12 : 0
-      });
-    });
+    // beat0: badge + subtítulo, timeline line draws in + first milestone
+    // beat1: destacada + second milestone
+    // beat2: cierre + third milestone ("Hoy")
     fadeGroup('#slide-1 .badge', b>=0);
-    fadeGroup('#slide-1 .destacada', b>=1, {blur:true, delay:b===1?.1:0});
-    gsap.to('.hl-bg', {scaleX:b>=1?1:0, duration:reduced?.01:.7, ease:'power3.inOut', delay:b>=1?.5:0});
-    fadeGroup('#slide-1 .cierre', b>=2, {duration:D*1.05});
+    fadeGroup('#slide-1 .subtitulo', b>=0, {delay:.15});
+    gsap.to('#timeline1 .tl-line', {scaleY:b>=0?1:0, duration:reduced?.01:1, ease:'power2.inOut', delay:b>=0?.2:0});
+    tl1.points.forEach(function(pt, i){
+      gsap.to(pt, {opacity:b>=i?1:0, duration:D, delay:b>=i?.3+i*.15:0});
+    });
+    fadeGroup('#slide-1 .destacada', b>=1, {blur:true});
+    fadeGroup('#slide-1 .cierre', b>=2);
   }
 
   function renderSlide2(b){
+    // beat0: badge + ring/67% (count-up fires once on enter, not here) + subtítulo
+    // beat1: frase de cierre
     fadeGroup('#slide-2 .badge', b>=0);
     fadeGroup('#slide-2 .num', b>=0, {scaleFrom:.92});
-    fadeGroup('#slide-2 .subtitulo', b>=0, {delay:b===0?.25:0});
-    fadeGroup('#slide-2 .destacada', b>=1);
-    fadeGroup('#slide-2 .cierre', b>=2);
+    fadeGroup('#slide-2 .subtitulo', b>=0, {delay:.25});
+    fadeGroup('#slide-2 .cierre', b>=1);
   }
 
   function renderSlide3(b){
-    // beat0: badge + the real photo arrive, floating, held still a moment
-    // beat1: "opens" — the margins become the protagonist (their own glow,
-    //        more weight than the central text), the titular keywords enter
-    //        one by one, and the photo itself settles with a small scale
-    //        beat — no second/fabricated cover photo, just the one real image
-    // beat2: "Nació…" + the two extra lines, after a brief pause
+    // beat0: badge + phone mockup (video already looping) + título
+    // beat1: primera fila de chips (modos de estudio)
+    // beat2: segunda fila de chips (público ampliado)
     fadeGroup('#slide-3 .badge', b>=0);
+    gsap.to('#phoneMock', {opacity:b>=0?1:0, scale:b>=0?1:.94, duration:reduced?.01:.9, ease:'power2.out'});
+    fadeGroup('#slide-3 .titular', b>=0, {delay:.15});
+    fadeGroup('#chipGroup1', b>=1);
+    fadeGroup('#chipGroup1 .chip', b>=1, {stagger:.08, delay:.1});
+    fadeGroup('#chipGroup2', b>=2);
+    fadeGroup('#chipGroup2 .chip', b>=2, {stagger:.06, delay:.1});
+  }
+
+  function renderSlide4(b){
+    // beat0: badge + la foto real llega y se sostiene
+    // beat1: se abre — márgenes protagonistas + texto
+    fadeGroup('#slide-4 .badge', b>=0);
     var opening = b>=1;
     gsap.to('#bookOpen', {opacity:1, scale:opening?1.025:1, duration:reduced?.01:.9, ease:'power2.out', delay:opening?.15:0});
     gsap.to('#bookShadow', {opacity:1, duration:reduced?.01:.9, ease:'power2.out', delay:.1});
     gsap.to('#marginL, #marginR', {opacity:opening?1:0, duration:reduced?.01:.9, stagger:.12, delay:opening?.35:0});
-    fadeGroup('#slide-3 .s4-word', opening, {stagger:.18, delay:opening?.5:0});
-
-    fadeGroup('#slide-3 .cierre', b>=2);
-    fadeGroup('#slide-3 .s4-extra', b>=2, {stagger:.1, delay:.14});
-  }
-
-  function renderSlide4(b){
-    // beat0: badge + subtítulo set the scene, phone mockup fades/scales in
-    // and its video plays continuously throughout. beats1-5: each mode gets
-    // a solo "spotlight" turn within the left column, while every mode
-    // already shown has quietly settled into its stacked slot. beat6: the
-    // last mode joins the stack too — completed as destacada+cierre arrive.
-    fadeGroup('#slide-4 .badge', b>=0);
-    gsap.to('#phoneMock', {opacity:b>=0?1:0, scale:b>=0?1:.94, duration:reduced?.01:.9, ease:'power2.out'});
-    fanCoords.forEach(function(c, idx){
-      var i = idx + 1;
-      var spotlight = (b === i);
-      var introduced = (b >= i);
-      var target = spotlight
-        ? {x:380, y:330, rotate:0, scale:1.4, opacity:1, zIndex:10}
-        : introduced
-          ? {x:c.x, y:c.y, rotate:c.r, scale:1, opacity:1, zIndex:1}
-          : {x:c.x, y:c.y, rotate:c.r, scale:.85, opacity:0, zIndex:1};
-      gsap.to('#'+c.id, Object.assign({duration:reduced?.01:.85, ease:'power2.inOut'}, target));
-    });
-    fadeGroup('#slide-4 .subtitulo', b>=0, {delay:.15});
-    fadeGroup('#slide-4 .destacada', b>=6);
-    fadeGroup('#slide-4 .cierre', b>=6, {delay:.15});
+    fadeGroup('#slide-4 .cierre', opening, {delay:.5});
   }
 
   function renderSlide5(b){
-    fadeGroup('#slide-5 .badge', b>=0);
     fadeGroup('#slide-5 .titular', b>=0, {delay:.06});
     fadeGroup('#slide-5 .subtitulo', b>=0, {delay:.14});
     fadeGroup('#card-claudia', b>=1);
@@ -1021,73 +814,69 @@
   }
 
   function renderSlide6(b){
+    // beat0: badge + los dos primeros bloques
+    // beat1: bloque México, resaltado
+    // beat2: frase de cierre
     fadeGroup('#slide-6 .badge', b>=0);
-    fadeGroup('#slide-6 .num', b>=0);
-    fadeGroup('#slide-6 .num-label', b>=0, {delay:.08});
-    gsap.to('.map-dot', {opacity:b>=0?.75:0, scale:b>=0?1:0, duration:D, stagger:0.012, delay:b>=0?.15:0});
-    gsap.to('#mapDots text', {opacity:b>=0?1:0, duration:D, delay:b>=0?.5:0});
-    fadeGroup('#slide-6 .subtitulo', b>=1);
+    fadeGroup('#stat1', b>=0, {delay:.15});
+    fadeGroup('#stat2', b>=0, {delay:.28});
+    fadeGroup('#stat3', b>=1);
     fadeGroup('#slide-6 .destacada', b>=2);
-    fadeGroup('.dot-tag', b>=2, {stagger:.05, delay:.15});
-    fadeGroup('.sources', b>=2, {delay:.4});
   }
 
   function renderSlide7(b){
-    fadeGroup('#s8-badge', b>=0);
-    fadeGroup('#slide-7 .titular', b>=0, {delay:.06});
-    fadeGroup('#col-left', b>=1);
-    fadeGroup('#col-right', b>=1, {delay:.08});
-    fadeGroup('#slide-7 .destacada', b>=2);
+    // una tarjeta por beat, para poder narrar cada una en el pitch en vivo
+    fadeGroup('#slide-7 .badge', b>=0);
+    fadeGroup('#reach1', b>=1);
+    fadeGroup('#reach2', b>=2);
+    fadeGroup('#reach3', b>=3);
   }
 
   function renderSlide8(b){
-    // beat0: badge + divider + both titulares; the six real bars in each
-    //        chart grow from 0 to their value, lightly staggered
-    // beat1: subtítulo + frase destacada per column
-    // beat2: cierre
-    gsap.to('#slide-8 .badge', {opacity:b>=0?1:0, duration:D});
-    gsap.to('#slide-8 .divider', {scaleY:b>=0?1:0, duration:reduced?.01:1, ease:'power2.inOut'});
-    fadeGroup('#s9-left .titular, #s9-right .titular', b>=0);
-    fadeGroup('#s9barsCons .chart-legend, #s9barsBase .chart-legend', b>=0, {delay:.15});
-    [s9barsCons, s9barsBase].forEach(function(bars){
-      bars.forEach(function(el, i){
-        var pct = el.getAttribute('data-pct');
-        gsap.to(el, {height:(b>=0?pct+'%':'0%'), duration:reduced?.01:(b>=0?.7:.35), ease:'power2.out', delay:b>=0?.25+i*.07:0});
-      });
-    });
-    fadeGroup('#s9-left .subtitulo, #s9-right .subtitulo', b>=1);
-    fadeGroup('#s9-left .destacada, #s9-right .destacada', b>=1, {delay:.1});
-    fadeGroup('#slide-8 .cierre', b>=2);
+    // secuencia, no simultaneidad: cada bloque + su flecha llega por su cuenta
+    fadeGroup('#slide-8 .badge', b>=0);
+    fadeGroup('#flow1', b>=0, {delay:.15});
+    fadeGroup('#arrow1', b>=1);
+    fadeGroup('#flow2', b>=1, {delay:.1});
+    fadeGroup('#arrow2', b>=2);
+    fadeGroup('#flow3', b>=2, {delay:.1});
+    fadeGroup('#modelNote', b>=3);
   }
 
   function renderSlide9(b){
-    // beat0: the investment counter (200.000€) + its subtítulo — the ask
-    // beat1: the breakdown enters as its own unit — label first, then the
-    //        bars fill in one after another, left to right; a separate
-    //        figure with a separate purpose, never merged into the first
+    // beat0: badge + cifra (80.000€, cuenta una sola vez al entrar)
+    // beat1: la barra segmentada se despliega, categoría a categoría
+    // beat2: texto de apoyo
     fadeGroup('#slide-9 .badge', b>=0);
-    fadeGroup('#slide-9 .num', b>=0, {scaleFrom:.92});
-    fadeGroup('#slide-9 .subtitulo', b>=0, {delay:.3});
-    gsap.to('#s10breakdown', {opacity:b>=1?1:0, y:b>=1?0:18, duration:reduced?.01:.9, ease:'power2.out'});
-    gsap.to('#s10breakdown .bd-label', {opacity:b>=1?1:0, y:b>=1?0:8, duration:reduced?.01:.7, delay:b>=1?.15:0});
-    Array.prototype.forEach.call(document.querySelectorAll('#s10breakdown .bd-fill'), function(el, i){
-      var pct = el.getAttribute('data-pct');
-      gsap.to(el, {width:(b>=1?pct+'%':'0%'), duration:reduced?.01:(b>=1?.8:.4), ease:'power2.out', delay:b>=1?.4+i*.13:0});
-    });
-    gsap.to('#s10breakdown .bd-close', {opacity:b>=1?1:0, y:b>=1?0:8, duration:reduced?.01:.7, delay:b>=1?1.15:0});
+    gsap.to(spendSegs, {scaleX:b>=1?1:0, transformOrigin:'left center', duration:reduced?.01:.9, ease:'power2.out', stagger:.06, delay:b>=1?.1:0});
+    gsap.to('#spendLabels span', {opacity:b>=1?1:0, duration:D, stagger:.06, delay:b>=1?.35:0});
+    fadeGroup('#slide-9 .support', b>=2);
   }
 
   function renderSlide10(b){
-    fadeGroup('#slide-10 .subtitulo', b>=0, {blur:true});
-    fadeGroup('#slide-10 .titular', b>=1, {blur:true});
-    fadeGroup('#slide-10 .destacada', b>=2, {blur:true, delay:.35});
-    fadeGroup('#slide-10 .mark-big', b>=2, {delay:.9});
+    // beat0: badge + línea de tiempo protagonista, los 4 hitos
+    // beat1: frase de apoyo
+    fadeGroup('#slide-10 .badge', b>=0);
+    gsap.to('#timeline10 .tl-line', {scaleY:b>=0?1:0, duration:reduced?.01:1.1, ease:'power2.inOut', delay:b>=0?.15:0});
+    tl10.points.forEach(function(pt, i){
+      gsap.to(pt, {opacity:b>=0?1:0, duration:D, delay:b>=0?.3+i*.14:0});
+    });
+    fadeGroup('#slide-10 .support', b>=1);
   }
 
-  var renderers = [renderSlide0, renderSlide1, renderSlide2, renderSlide3, renderSlide4, renderSlide5, renderSlide6, renderSlide7, renderSlide8, renderSlide9, renderSlide10];
+  function renderSlide11(b){
+    fadeGroup('#slide-11 .titular', b>=0, {blur:true});
+    fadeGroup('#slide-11 .destacada', b>=1, {blur:true, delay:.2});
+  }
 
-  /* ---------- distinct per-slide entrance/exit motion for the slide's own root ---------- */
-  var motionPreset = ['dissolve','rise','zoomIn','zoomSlow','fanIn','riseCards','panDrift','mirrorIn','drawIn','zoomInR','dissolve'];
+  var renderSlide12 = function(b){ renderPortada(b, 12); };
+
+  var renderers = [renderSlide0, renderSlide1, renderSlide2, renderSlide3, renderSlide4, renderSlide5, renderSlide6, renderSlide7, renderSlide8, renderSlide9, renderSlide10, renderSlide11, renderSlide12];
+
+  /* ---------- distinct per-slide entrance/exit motion for the slide's own
+     root — no two consecutive slides share a movement, except the
+     deliberate echo: slide 0 (portada) and slide 12 (its exact copy) ---- */
+  var motionPreset = ['dissolve','rise','zoomIn','zoomInR','panDrift','riseCards','fanIn','zoomSlow','drawIn','mirrorIn','rise','zoomIn','dissolve'];
   function motionVars(preset, entering){
     switch(preset){
       case 'rise':      return entering ? {y:0, opacity:1} : {y:-26, opacity:0};
@@ -1103,18 +892,21 @@
     }
   }
   var slideEls = [];
-  for (var si=0; si<11; si++) slideEls.push(document.getElementById('slide-'+si));
+  for (var si=0; si<SLIDE_COUNT; si++) slideEls.push(document.getElementById('slide-'+si));
   slideEls.forEach(function(el, idx){
     gsap.set(el, Object.assign({opacity:0, pointerEvents:'none'}, motionVars(motionPreset[idx], false)));
   });
 
   var currentSlide = -1;
   /* fired exactly once, the instant a slide is entered from a different slide —
-     used for one-shot effects (count-up numbers) that must never restart on
-     later beats of the same slide. */
+     used for one-shot effects (count-up numbers, the 67% ring) that must
+     never restart on later beats of the same slide. */
   var slideEnterHooks = {
-    2: function(){ countUp(document.getElementById('num67'), 67, '%', 0, false); },
-    9: function(){ countUp(document.getElementById('num200k'), 200000, '€', 0, true); }
+    2: function(){
+      countUp(document.getElementById('num67'), 67, '%', 0, false);
+      gsap.to('#slide-2 .ring-fill', {strokeDashoffset: 1-0.67, duration: reduced?.01:1.3, ease:'power2.out'});
+    },
+    9: function(){ countUp(document.getElementById('numInversion'), 80000, '€', 0, true); }
   };
   function goToSlideRoot(newSlide, oldSlide){
     if (oldSlide>=0 && oldSlide!==newSlide){
@@ -1136,6 +928,8 @@
 
     segs.forEach(function(em, idx){ gsap.to(em, {scaleX: idx<=slideIdx?1:0, duration:.5, ease:'power2.out'}); });
     document.getElementById('chromeRun').innerHTML = '<b>'+slideNames[slideIdx]+'</b>';
+    // Slide 11 (cierre contemplativo) hides the footer for maximum white space
+    gsap.to('#chromeFooter', {opacity: slideIdx===11 ? 0 : 1, duration:D});
 
     var bs = blobStates[slideIdx];
     gsap.to('#blobA', {x:bs.a.x, y:bs.a.y, scale:bs.a.s, duration: reduced?.01:1.6, ease:'power2.inOut'});
