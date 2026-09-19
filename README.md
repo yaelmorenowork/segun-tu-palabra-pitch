@@ -34,31 +34,45 @@ final (slide 13, copia exacta de la portada).
 
 1. **Portada** — sin badge. "La Palabra es " + efecto typewriter en bucle
    continuo (vida, camino, verdad, alimento, promesa, dirección, Cristo).
-2. **01 — El plano** — texto a la izquierda; línea de tiempo vertical
-   decorativa a la derecha (redacción de los textos bíblicos → primera
-   traducción → hoy).
+2. **01 — El plano** — texto a la izquierda; el lado derecho queda en
+   blanco a propósito (vacío intencional, sin línea de tiempo ni ningún
+   otro elemento de relleno).
 3. **02 — El problema** — el 67% en un anillo circular (mismo lenguaje
-   visual que la barra de progreso superior, en redondo).
+   visual que la barra de progreso superior, en redondo); subtítulo a
+   tamaño grande, a la par visual de la cifra.
 4. **03 — La solución** — mockup del móvil con el vídeo real de la app en
-   bucle; título + dos filas de chips (modos de estudio / público
-   ampliado).
+   bucle; los modos de estudio son el elemento protagonista — cuatro en
+   total (Histórico, Teológico, Etimológico, Pastoral) — con una
+   animación tipo "ventana": cada uno aparece y se asienta antes de que
+   aparezca el siguiente, dejando una pausa real entre cada uno para
+   marcar el ritmo en un pitch en vivo.
 5. **03 — La solución** (biblia física) — mismo mockup fotográfico de la
    Biblia que la versión anterior del mazo, con un texto breve al lado.
 6. **Primeras pruebas** — testimonios + QR, reutilizada tal cual (sin
    badge, para no repetir "03" una tercera vez seguida).
-7. **04 — El mercado** — grid de tres cifras (Hallow en Latinoamérica,
-   Colombia, México resaltado en el acento azul/lavanda).
+7. **04 — Propuesta de valor** — flujo horizontal animado con flechas,
+   en secuencia: Leer → Entender → Reflexionar → Preguntar → Escribir →
+   Compartir → Vivir. Debajo, con menor protagonismo (tipografía más
+   pequeña, menor contraste), una comparación de tres: Hallow (oración),
+   Magisterium (conocimiento/IA), Según tu Palabra (Biblia + comunidad +
+   herramientas + distribución).
 8. **05 — Cómo llegamos** — tres tarjetas iguales con icono simple
-   (diócesis, creadores de contenido, ocasiones de regalo).
-9. **06 — El modelo** — flujo horizontal con flechas: suscripción → Biblia
-   física → licencias B2B, con nota sobre el margen del canal tradicional.
-10. **07 — La inversión** — 80.000€ + la barra segmentada del header
-    reutilizada a mayor escala, mostrando las seis categorías del reparto.
-    Las categorías se dieron sin proporciones individuales, así que los
-    segmentos son deliberadamente iguales — una lista, nunca una cifra
-    inventada.
+   (diócesis/ministerio hispano, creadores de contenido, ocasiones de
+   regalo).
+9. **06 — El modelo** — tres piezas que se complementan (no un flujo
+   secuencial): App (el corazón, el hábito diario), Biblia física (la
+   puerta de entrada), Plataforma/comunidad (el canal y el motor
+   económico); debajo, compacta, la monetización de cada capa
+   (suscripción parroquia, contrato diócesis/colegio, transacciones,
+   funciones premium con IA).
+10. **07 — La inversión** — 100.000€ + la barra segmentada del header
+    reutilizada a mayor escala, mostrando las ocho categorías del
+    reparto. Las categorías se dieron sin proporciones individuales, así
+    que los segmentos son deliberadamente iguales — una lista, nunca una
+    cifra inventada.
 11. **08 — El recorrido** — línea de tiempo vertical protagonista (mismo
-    componente que la slide 2), 4 hitos personales.
+    componente que se usaba antes en la slide 2, ahora sólo aquí), 4
+    hitos personales.
 12. **Cierre contemplativo** — sin badge, sin footer, centrado, mucho
     espacio en blanco. Dos citas, nada más.
 13. **Portada (cierre)** — copia exacta de la slide 1: mismo marcado,
@@ -78,12 +92,19 @@ nuevo orden, nunca su asset, su animación o su código:
 ## Pendiente / decisiones a validar
 
 - **Slide 6 — QR de prueba** (dentro de "Primeras pruebas"): el PNG del
-  QR sigue sin fondo transparente real (confirmado en una pasada
-  anterior) — mantiene su tarjeta con sombra suave.
+  QR es el que subiste (`qr-code.png`) — verificado con inspección
+  directa de píxeles (PIL/numpy): es modo RGB, **sin canal alfa real**,
+  100% opaco. No es transparente, así que se mantiene con su tarjeta y
+  sombra suave existentes en vez de fingir transparencia o añadirle un
+  fondo propio. Si me pasas una versión con transparencia real, la
+  cambio para que flote sin tarjeta.
 - **Slide "El recorrido"**: el badge "08 — El recorrido" es una etiqueta
   propia (el mensaje original no especificaba el texto exacto del
   badge para esta slide) — cámbialo si prefieres otro.
-- **Slide "La inversión"**: las seis categorías del reparto de 80.000€
+- **Slide "Propuesta de valor"**: el badge "04 — Propuesta de valor" es
+  una etiqueta propia (tampoco se especificó el texto exacto) — cámbialo
+  si prefieres otro.
+- **Slide "La inversión"**: las ocho categorías del reparto de 100.000€
   se muestran como segmentos iguales porque no se me dieron proporciones
   o cifras individuales por categoría — si tienes esos números, dímelos
   y ajusto los anchos de cada segmento a la proporción real.
