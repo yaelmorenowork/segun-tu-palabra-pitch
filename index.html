@@ -148,8 +148,8 @@
   /* ================= PER-SLIDE LAYOUT ================= */
   .slide{position:absolute; inset:0; z-index:1;}
 
-  /* ---- Slide 0 & 12 · Portada — centrado puro, frase con efecto
-     typewriter en bucle. La slide 12 es una copia exacta: mismo
+  /* ---- Slide 0 & 13 · Portada — centrado puro, frase con efecto
+     typewriter en bucle. La slide 13 es una copia exacta: mismo
      marcado, mismo código, mismo bucle de palabras. ---- */
   .portada-col{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:1200px; text-align:center;}
   .portada-col .titular{font-size:62px; font-weight:800; letter-spacing:-.02em; color:var(--navy); margin:0; line-height:1.3;}
@@ -256,75 +256,103 @@
   #slide-5 .qr-block img{width:210px; height:210px; display:block; margin:0 auto 18px; border-radius:25px; box-shadow:var(--glass-shadow);}
   #slide-5 .qr-block p{margin:0; font-size:21px; font-weight:700; color:var(--navy-70); line-height:1.35;}
 
-  /* ---- Slide 6 · Propuesta de valor — flujo horizontal animado (el
-     recorrido de lectura) protagonista arriba; debajo, con menor peso
-     visual, la comparación de tres frente a la competencia ---- */
-  #slide-6 .badge{position:absolute; left:96px; top:150px;}
-  #slide-6 .value-flow{position:absolute; left:96px; top:290px; width:1408px; display:flex; align-items:center; justify-content:space-between;}
-  #slide-6 .value-step{
-    padding:15px 22px; border-radius:16px; white-space:nowrap;
-    background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
-    border:1px solid var(--glass-line); box-shadow:var(--glass-shadow);
-    font-size:19px; font-weight:800; color:var(--navy);
+  /* ---- shared: "el camino" — la palabra protagonista ocupa el centro y
+     se encoge hacia un rastro superior cuando entra la siguiente (Slide 6
+     y 7 — el mismo mecanismo, continuado de una a otra) ---- */
+  .camino-stage{position:absolute; inset:0;}
+  .camino-word{
+    position:absolute; left:800px; top:560px;
+    font-size:100px; font-weight:900; letter-spacing:-.02em; color:var(--navy);
+    white-space:nowrap; text-align:center;
   }
-  #slide-6 .value-arrow{flex:none; color:var(--steel-dark); display:flex; align-items:center;}
-  #slide-6 .compare-row{position:absolute; left:96px; top:460px; width:1408px; display:flex; gap:40px;}
-  #slide-6 .compare-col{flex:1; padding-top:18px; border-top:1px solid var(--navy-16);}
-  #slide-6 .compare-name{font-size:16px; font-weight:800; color:var(--navy-55); margin:0; text-transform:uppercase; letter-spacing:.03em;}
-  #slide-6 .compare-desc{font-size:15px; font-weight:500; color:var(--navy-38); margin:8px 0 0 0; line-height:1.45;}
+  .camino-trail-item{
+    position:absolute; transform:translate(-50%,-50%);
+    font-size:20px; font-weight:700; color:var(--navy-38); white-space:nowrap;
+  }
 
-  /* ---- Slide 7 · Cómo llegamos — tres tarjetas iguales en horizontal,
-     un icono simple por tarjeta ---- */
+  /* ---- Slide 6 · El camino (1/2) — Leer, Entender, Reflexionar,
+     Preguntar: cada palabra protagonista antes de encogerse ---- */
+  #slide-6 .badge{position:absolute; left:96px; top:150px;}
+
+  /* ---- Slide 7 · El camino (2/2) + comparación — termina el recorrido
+     (rastro completo de 7 palabras) y, debajo, con menor protagonismo
+     pero tipografía notablemente mayor que antes, la comparación de tres
+     frente a la competencia ---- */
   #slide-7 .badge{position:absolute; left:96px; top:150px;}
-  #slide-7 .reach-grid{position:absolute; left:96px; top:290px; width:1408px; display:flex; gap:32px;}
-  #slide-7 .reach-card{flex:1; padding:38px 32px; border-radius:26px; background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-line); box-shadow:var(--glass-shadow);}
-  #slide-7 .reach-card svg{color:var(--navy);}
-  #slide-7 .reach-card p{font-size:20px; font-weight:600; line-height:1.5; color:var(--navy-70); margin:24px 0 0 0;}
+  #slide-7 .camino-trail-prior{position:absolute; inset:0;}
+  #slide-7 .compare-row{position:absolute; left:96px; top:660px; width:1408px; display:flex; gap:48px;}
+  #slide-7 .compare-col{flex:1; padding-top:20px; border-top:1px solid var(--navy-16);}
+  #slide-7 .compare-name{font-size:24px; font-weight:800; color:var(--navy-70); margin:0; text-transform:uppercase; letter-spacing:.03em;}
+  #slide-7 .compare-desc{font-size:19px; font-weight:500; color:var(--navy-55); margin:10px 0 0 0; line-height:1.45;}
 
-  /* ---- Slide 8 · El modelo — tres piezas que se complementan (no una
-     secuencia: sin flechas), con la monetización de cada capa debajo,
-     compacta ---- */
+  /* ---- Slide 8 · Cómo llegamos — secuencia numerada de 5 pasos,
+     reutilizando el mismo lenguaje visual de línea de tiempo del resto
+     del mazo (línea vertical + puntos), ahora con número y desarrollo
+     por paso en vez de una etiqueta corta ---- */
   #slide-8 .badge{position:absolute; left:96px; top:150px;}
-  #slide-8 .model-grid{position:absolute; left:96px; top:290px; width:1408px; display:flex; gap:32px;}
-  #slide-8 .model-card{flex:1; padding:34px 30px; border-radius:24px; background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-line); box-shadow:var(--glass-shadow); text-align:center;}
-  #slide-8 .model-label{font-size:23px; font-weight:800; color:var(--navy); margin:0;}
-  #slide-8 .model-desc{font-size:17px; font-weight:500; color:var(--navy-55); margin:12px 0 0 0; line-height:1.4;}
-  #slide-8 .monetize-row{position:absolute; left:96px; top:490px; width:1408px; display:flex; flex-wrap:wrap; gap:14px 26px; justify-content:center;}
+  #slide-8 .step-flow{position:absolute; left:96px; top:250px; width:1250px;}
+  #slide-8 .step-line{position:absolute; left:27px; width:2px; background:var(--navy-16); transform:scaleY(0); transform-origin:top;}
+  #slide-8 .step-item{position:relative; display:flex; gap:26px; align-items:flex-start; margin-bottom:24px;}
+  #slide-8 .step-num{
+    flex:none; width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:var(--glass-fill-2); border:1px solid var(--glass-line); box-shadow:var(--glass-shadow);
+    font-size:19px; font-weight:800; color:var(--navy); z-index:1;
+  }
+  #slide-8 .step-text{padding-top:6px;}
+  #slide-8 .step-text b{display:block; font-size:20px; font-weight:800; color:var(--navy); margin:0 0 6px 0;}
+  #slide-8 .step-text p{font-size:17px; font-weight:500; line-height:1.45; color:var(--navy-55); margin:0; max-width:1120px;}
 
-  /* ---- Slide 9 · La inversión — cifra dominante arriba; la barra
-     segmentada del header, reutilizada como protagonista, muestra el
-     reparto (categorías dadas sin proporción -> segmentos iguales,
-     nunca una cifra inventada por segmento) ---- */
-  #slide-9 .badge-wrap{position:absolute; left:50%; top:150px; transform:translateX(-50%);}
-  #slide-9 .num{position:absolute; left:50%; top:224px; transform:translateX(-50%); font-size:126px; font-weight:900; color:var(--navy); margin:0; letter-spacing:-.02em;}
-  #slide-9 .spend-bar{position:absolute; left:96px; top:452px; width:1408px; height:34px; display:flex; gap:5px;}
-  #slide-9 .spend-seg{flex:1; height:100%; border-radius:10px; background:var(--chip-fill); overflow:hidden; position:relative;}
-  #slide-9 .spend-seg em{display:block; position:absolute; inset:0; background:var(--navy); transform:scaleX(0); transform-origin:left; border-radius:10px;}
-  #slide-9 .spend-labels{position:absolute; left:96px; top:500px; width:1408px; display:flex; gap:5px;}
-  #slide-9 .spend-labels span{flex:1; text-align:center; font-size:12px; font-weight:600; line-height:1.35; color:var(--navy-55); padding:0 3px; opacity:0;}
-  #slide-9 .support-wrap{position:absolute; left:50%; top:620px; transform:translateX(-50%); width:900px; text-align:center;}
-  #slide-9 .support{font-size:23px; font-weight:600; line-height:1.5; color:var(--navy-55); margin:0;}
+  /* ---- Slide 9 · El modelo — tres piezas que se complementan; justo
+     debajo de cada una, quién paga por ella y cómo, con el mismo peso
+     visual que la descripción de la pieza ---- */
+  #slide-9 .badge{position:absolute; left:96px; top:150px;}
+  #slide-9 .model-grid{position:absolute; left:96px; top:270px; width:1408px; display:flex; gap:32px; align-items:flex-start;}
+  #slide-9 .model-card{flex:1; padding:34px 30px; border-radius:24px; background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-line); box-shadow:var(--glass-shadow); text-align:center;}
+  #slide-9 .model-label{font-size:23px; font-weight:800; color:var(--navy); margin:0;}
+  #slide-9 .model-desc{font-size:17px; font-weight:500; color:var(--navy-55); margin:12px 0 0 0; line-height:1.4;}
+  #slide-9 .model-money{margin-top:22px; padding-top:18px; border-top:1px solid var(--navy-16); display:flex; flex-direction:column; align-items:center; gap:10px;}
+  #slide-9 .model-money .dot-tag{font-size:19px; font-weight:800; color:var(--navy);}
+  #slide-9 .model-money .dot-tag i{width:9px; height:9px;}
 
-  /* ---- Slide 10 · El recorrido — línea de tiempo vertical protagonista
-     (mismo componente que la Slide 1), frase de apoyo al lado ---- */
-  #slide-10 .badge{position:absolute; left:96px; top:150px;}
-  #slide-10 .timeline-vert{position:absolute; left:230px; top:210px; width:420px; height:560px;}
-  #slide-10 .support{position:absolute; left:800px; top:440px; width:700px; font-size:26px; font-weight:700; font-style:italic; color:var(--steel-dark); margin:0; line-height:1.4;}
+  /* ---- Slide 10 · La inversión — cifra dominante arriba; debajo, un
+     desglose proporcional real (porcentajes dados por categoría) en un
+     donut, mismo lenguaje visual que el anillo de "El problema" — nunca
+     una cifra por segmento inventada ---- */
+  #slide-10 .badge-wrap{position:absolute; left:50%; top:150px; transform:translateX(-50%);}
+  #slide-10 .num{position:absolute; left:50%; top:224px; transform:translateX(-50%); font-size:126px; font-weight:900; color:var(--navy); margin:0; letter-spacing:-.02em;}
+  #slide-10 .donut-wrap{position:absolute; left:96px; top:404px; width:290px; height:290px;}
+  #slide-10 .donut-svg{width:100%; height:100%; display:block;}
+  #slide-10 .donut-track{fill:none; stroke:var(--chip-fill); stroke-width:26;}
+  #slide-10 .donut-seg{fill:none; stroke-width:26; transform:rotate(-90deg); transform-origin:100px 100px;}
+  #slide-10 .spend-legend{position:absolute; left:452px; top:404px; width:1052px; height:290px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px 32px; align-content:center;}
+  #slide-10 .legend-item{display:flex; align-items:flex-start; gap:10px;}
+  #slide-10 .legend-dot{width:14px; height:14px; border-radius:4px; flex:none; margin-top:4px;}
+  #slide-10 .legend-text{display:flex; flex-direction:column; gap:3px;}
+  #slide-10 .legend-pct{font-size:17px; font-weight:800; color:var(--navy);}
+  #slide-10 .legend-label{font-size:15px; font-weight:600; color:var(--navy-70); line-height:1.4;}
+  #slide-10 .support-wrap{position:absolute; left:50%; top:730px; transform:translateX(-50%); width:1000px; text-align:center;}
+  #slide-10 .support{font-size:23px; font-weight:600; line-height:1.5; color:var(--navy-55); margin:0;}
+
+  /* ---- Slide 11 · El recorrido — línea de tiempo vertical protagonista
+     (mismo componente que la Slide 1 antes de retirarla), frase de apoyo
+     al lado ---- */
+  #slide-11 .badge{position:absolute; left:96px; top:150px;}
+  #slide-11 .timeline-vert{position:absolute; left:230px; top:210px; width:420px; height:560px;}
+  #slide-11 .support{position:absolute; left:800px; top:440px; width:700px; font-size:26px; font-weight:700; font-style:italic; color:var(--steel-dark); margin:0; line-height:1.4;}
 
   /* ---- shared: línea de tiempo vertical — mismo componente reutilizado
-     en la Slide 1 (decorativa) y la Slide 10 (protagonista); sólo cambia
-     la posición/tamaño de su contenedor por slide ---- */
+     en la Slide 11 (única que queda) ---- */
   .timeline-vert{position:relative;}
   .timeline-vert .tl-line{position:absolute; left:6px; top:0; bottom:0; width:2px; background:var(--navy-16); transform:scaleY(0); transform-origin:top;}
   .timeline-vert .tl-point{position:absolute; left:0; display:flex; align-items:center; gap:18px; opacity:0;}
   .timeline-vert .tl-dot{width:14px; height:14px; border-radius:50%; background:var(--steel-dark); border:3px solid var(--paper); box-shadow:0 2px 8px rgba(27,39,64,.18); flex:none;}
   .timeline-vert .tl-label{font-size:19px; font-weight:700; color:var(--navy); line-height:1.3; white-space:nowrap;}
 
-  /* ---- Slide 11 · Cierre contemplativo — centrado, mucho espacio en
+  /* ---- Slide 12 · Cierre contemplativo — centrado, mucho espacio en
      blanco, sin badge (el footer también se oculta en esta slide) ---- */
-  #slide-11 .center-col{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:1000px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:32px;}
-  #slide-11 .titular{font-size:42px; font-weight:700; color:var(--navy); margin:0; max-width:860px; line-height:1.5;}
-  #slide-11 .destacada{font-size:28px; font-weight:600; font-style:italic; color:var(--steel-dark); margin:0; max-width:860px; line-height:1.5;}
+  #slide-12 .center-col{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:1000px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:32px;}
+  #slide-12 .titular{font-size:42px; font-weight:700; color:var(--navy); margin:0; max-width:860px; line-height:1.5;}
+  #slide-12 .destacada{font-size:28px; font-weight:600; font-style:italic; color:var(--steel-dark); margin:0; max-width:860px; line-height:1.5;}
 </style>
 </head>
 <body>
@@ -434,23 +462,25 @@
       </div>
     </section>
 
-    <!-- ============ SLIDE 7 · El mercado ============ -->
+    <!-- ============ SLIDE 7 · El camino (1/2) — Leer, Entender, Reflexionar, Preguntar ============ -->
     <section class="slide" id="slide-6">
       <div class="pill-tag badge">04 — Propuesta de valor</div>
-      <div class="value-flow" id="valueFlow">
-        <div class="value-step">Leer</div>
-        <div class="value-arrow"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></div>
-        <div class="value-step">Entender</div>
-        <div class="value-arrow"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></div>
-        <div class="value-step">Reflexionar</div>
-        <div class="value-arrow"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></div>
-        <div class="value-step">Preguntar</div>
-        <div class="value-arrow"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></div>
-        <div class="value-step">Escribir</div>
-        <div class="value-arrow"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></div>
-        <div class="value-step">Compartir</div>
-        <div class="value-arrow"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></div>
-        <div class="value-step">Vivir</div>
+      <div class="camino-stage" id="caminoStage1">
+        <div class="camino-word" id="cw0">Leer</div>
+        <div class="camino-word" id="cw1">Entender</div>
+        <div class="camino-word" id="cw2">Reflexionar</div>
+        <div class="camino-word" id="cw3">Preguntar</div>
+      </div>
+    </section>
+
+    <!-- ============ SLIDE 8 · El camino (2/2) + comparación — Escribir, Compartir, Vivir ============ -->
+    <section class="slide" id="slide-7">
+      <div class="pill-tag badge">04 — Propuesta de valor</div>
+      <div class="camino-trail-prior" id="caminoTrailPrior"></div>
+      <div class="camino-stage" id="caminoStage2">
+        <div class="camino-word" id="cw4">Escribir</div>
+        <div class="camino-word" id="cw5">Compartir</div>
+        <div class="camino-word" id="cw6">Vivir</div>
       </div>
       <div class="compare-row" id="compareRow">
         <div class="compare-col">
@@ -468,76 +498,67 @@
       </div>
     </section>
 
-    <!-- ============ SLIDE 8 · Cómo llegamos ============ -->
-    <section class="slide" id="slide-7">
+    <!-- ============ SLIDE 9 · Cómo llegamos ============ -->
+    <section class="slide" id="slide-8">
       <div class="pill-tag badge">05 — Cómo llegamos</div>
-      <div class="reach-grid">
-        <div class="reach-card" id="reach1">
-          <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V9l6-4.5L16 9v9M2 18h16M8 18v-5h4v5"/></svg>
-          <p>Más del 80% de las (arqui)diócesis de EE.UU. ya tienen personal dedicado al ministerio hispano — ahí empezamos a vender, no a repartir folletos.</p>
-        </div>
-        <div class="reach-card" id="reach2">
-          <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="16" height="11" rx="2"/><path d="M7 6l1.5-2h3L13 6"/><circle cx="10" cy="11.5" r="3.2"/></svg>
-          <p>Creadoras y creadores de contenido católico en español — un ecosistema activo.</p>
-        </div>
-        <div class="reach-card" id="reach3">
-          <svg width="34" height="34" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="14" height="9" rx="1.3"/><path d="M3 8h14M10 8v9"/><path d="M10 8c-.5-3-4-4.5-5.3-3S5.5 8 10 8Zm0 0c.5-3 4-4.5 5.3-3S14.5 8 10 8Z"/></svg>
-          <p>La Biblia física entra por las ocasiones de regalo: comunión, confirmación, bautizo.</p>
-        </div>
-      </div>
+      <div class="step-flow" id="stepFlow"></div>
     </section>
 
-    <!-- ============ SLIDE 9 · El modelo ============ -->
-    <section class="slide" id="slide-8">
+    <!-- ============ SLIDE 10 · El modelo ============ -->
+    <section class="slide" id="slide-9">
       <div class="pill-tag badge">06 — El modelo</div>
       <div class="model-grid" id="modelGrid">
         <div class="model-card" id="piece1">
           <p class="model-label">App</p>
           <p class="model-desc">El corazón, el hábito diario</p>
+          <div class="model-money"><span class="dot-tag"><i></i>Funciones premium con IA</span></div>
         </div>
         <div class="model-card" id="piece2">
           <p class="model-label">Biblia física</p>
           <p class="model-desc">La puerta de entrada</p>
+          <div class="model-money"><span class="dot-tag"><i></i>Contrato diócesis/colegio</span></div>
         </div>
         <div class="model-card" id="piece3">
           <p class="model-label">Plataforma / comunidad</p>
           <p class="model-desc">El canal y el motor económico</p>
+          <div class="model-money">
+            <span class="dot-tag"><i></i>Suscripción parroquia</span>
+            <span class="dot-tag"><i></i>Transacciones (cursos, retiros, donaciones)</span>
+          </div>
         </div>
-      </div>
-      <div class="monetize-row" id="monetizeRow">
-        <span class="dot-tag"><i></i>Suscripción parroquia</span>
-        <span class="dot-tag"><i></i>Contrato diócesis/colegio</span>
-        <span class="dot-tag"><i></i>Transacciones (cursos, retiros, donaciones)</span>
-        <span class="dot-tag"><i></i>Funciones premium con IA</span>
       </div>
     </section>
 
-    <!-- ============ SLIDE 10 · La inversión ============ -->
-    <section class="slide" id="slide-9">
+    <!-- ============ SLIDE 11 · La inversión ============ -->
+    <section class="slide" id="slide-10">
       <div class="badge-wrap"><div class="pill-tag badge">07 — La inversión</div></div>
       <p class="num" id="numInversion">0€</p>
-      <div class="spend-bar" id="spendBar"></div>
-      <div class="spend-labels" id="spendLabels"></div>
+      <div class="donut-wrap">
+        <svg class="donut-svg" id="donutSvg" viewBox="0 0 200 200">
+          <circle class="donut-track" cx="100" cy="100" r="80"/>
+        </svg>
+      </div>
+      <div class="spend-legend" id="spendLegend"></div>
       <div class="support-wrap"><p class="support">Para construir la app, sacar la primera tirada de 1.000 Biblias, constituir la empresa y sostener la operación durante los primeros 9 meses.</p></div>
     </section>
 
-    <!-- ============ SLIDE 11 · El recorrido ============ -->
-    <section class="slide" id="slide-10">
+    <!-- ============ SLIDE 12 · El recorrido ============ -->
+    <section class="slide" id="slide-11">
       <div class="pill-tag badge">08 — El recorrido</div>
       <div class="timeline-vert" id="timeline10"></div>
       <p class="support">Tardé años en encontrar el camino.</p>
     </section>
 
-    <!-- ============ SLIDE 12 · Cierre contemplativo ============ -->
-    <section class="slide" id="slide-11">
+    <!-- ============ SLIDE 13 · Cierre contemplativo ============ -->
+    <section class="slide" id="slide-12">
       <div class="center-col">
         <p class="titular">"Sed misioneros de la Palabra."<br>— León XIV</p>
         <p class="destacada">"Hágase en mí según tu palabra."<br>— Lucas 1:38</p>
       </div>
     </section>
 
-    <!-- ============ SLIDE 13 · Portada (copia exacta de la Slide 1) ============ -->
-    <section class="slide" id="slide-12">
+    <!-- ============ SLIDE 14 · Portada (copia exacta de la Slide 1) ============ -->
+    <section class="slide" id="slide-13">
       <div class="portada-col">
         <h1 class="titular">La Palabra es <span class="type-word" id="typeWord12"></span><span class="type-cursor"></span></h1>
       </div>
@@ -588,13 +609,13 @@
   var D = reduced ? .01 : .85;
 
   /* =====================================================================
-     DECK MAP — 13 slides, each with 1-4 "beats". A global state index
+     DECK MAP — 14 slides, each with 1-5 "beats". A global state index
      walks through every beat of every slide in order; the top progress
      bar reflects the SLIDE (one segment per slide), the bottom dots
      reflect the BEAT within the current slide.
      ===================================================================== */
-  var slideNames = ['PORTADA','EL PLANO','EL PROBLEMA','LA SOLUCIÓN','LA BIBLIA','PRUEBAS','PROPUESTA DE VALOR','CÓMO LLEGAMOS','EL MODELO','LA INVERSIÓN','EL RECORRIDO','CIERRE','PORTADA'];
-  var beatsPerSlide = [1, 3, 2, 5, 2, 2, 2, 4, 2, 3, 2, 2, 1];
+  var slideNames = ['PORTADA','EL PLANO','EL PROBLEMA','LA SOLUCIÓN','LA BIBLIA','PRUEBAS','EL CAMINO','PROPUESTA DE VALOR','CÓMO LLEGAMOS','EL MODELO','LA INVERSIÓN','EL RECORRIDO','CIERRE','PORTADA'];
+  var beatsPerSlide = [1, 3, 2, 5, 2, 2, 4, 4, 5, 2, 3, 2, 2, 1];
   var beatTable = []; // [slideIdx, localBeat] per global state
   beatsPerSlide.forEach(function(n, s){ for (var b=0;b<n;b++) beatTable.push([s,b]); });
   var TOTAL = beatTable.length;
@@ -617,13 +638,14 @@
     {a:{x:1300,y:700,s:1},   b:{x:180, y:200,s:.85}, c:{x:800, y:820,s:.75}},// 3 la solución
     {a:{x:1300,y:700,s:1},   b:{x:180, y:200,s:.85}, c:{x:800, y:820,s:.75}},// 4 la biblia física
     {a:{x:200, y:760,s:.9},  b:{x:1450,y:200,s:1},   c:{x:900, y:120,s:.7}}, // 5 pruebas
-    {a:{x:1450,y:150,s:1},   b:{x:200, y:800,s:.9},  c:{x:900, y:800,s:.75}},// 6 el mercado
-    {a:{x:150, y:150,s:.85}, b:{x:1450,y:150,s:.85}, c:{x:800, y:800,s:.8}}, // 7 cómo llegamos
-    {a:{x:800, y:120,s:.85}, b:{x:150, y:780,s:.9},  c:{x:1450,y:780,s:.9}}, // 8 el modelo
-    {a:{x:1400,y:700,s:1},   b:{x:200, y:180,s:.85}, c:{x:800, y:120,s:.7}}, // 9 la inversión
-    {a:{x:150, y:200,s:.85}, b:{x:1450,y:680,s:1},   c:{x:1300,y:150,s:.7}}, // 10 el recorrido
-    {a:{x:800, y:260,s:1},   b:{x:1300,y:700,s:.85}, c:{x:260, y:700,s:.8}}, // 11 cierre
-    {a:{x:800, y:260,s:1},   b:{x:1300,y:700,s:.85}, c:{x:260, y:700,s:.8}}  // 12 portada (= 0)
+    {a:{x:1450,y:150,s:1},   b:{x:200, y:800,s:.9},  c:{x:900, y:800,s:.75}},// 6 el camino 1/2
+    {a:{x:200, y:150,s:.9},  b:{x:1400,y:200,s:.85}, c:{x:800, y:800,s:.85}},// 7 el camino 2/2 + comparación
+    {a:{x:150, y:150,s:.85}, b:{x:1450,y:150,s:.85}, c:{x:800, y:800,s:.8}}, // 8 cómo llegamos
+    {a:{x:800, y:120,s:.85}, b:{x:150, y:780,s:.9},  c:{x:1450,y:780,s:.9}}, // 9 el modelo
+    {a:{x:1400,y:700,s:1},   b:{x:200, y:180,s:.85}, c:{x:800, y:120,s:.7}}, // 10 la inversión
+    {a:{x:150, y:200,s:.85}, b:{x:1450,y:680,s:1},   c:{x:1300,y:150,s:.7}}, // 11 el recorrido
+    {a:{x:800, y:260,s:1},   b:{x:1300,y:700,s:.85}, c:{x:260, y:700,s:.8}}, // 12 cierre
+    {a:{x:800, y:260,s:1},   b:{x:1300,y:700,s:.85}, c:{x:260, y:700,s:.8}}  // 13 portada (= 0)
   ];
   ['blobA','blobB','blobC'].forEach(function(id){ gsap.set('#'+id, {xPercent:-50, yPercent:-50}); });
   gsap.set('#blobA', {x:blobStates[0].a.x, y:blobStates[0].a.y, scale:blobStates[0].a.s});
@@ -658,9 +680,8 @@
     });
   }
 
-  /* ---------- shared: vertical timeline builder (Slide 1 & Slide 10 reuse
-     this exact component — only the milestone text and container
-     position/size differ) ---------- */
+  /* ---------- shared: vertical timeline builder (only Slide 11 uses this
+     now that Slide 1's decorative copy has been removed) ---------- */
   function buildTimeline(containerId, milestones){
     var el = document.getElementById(containerId);
     var line = document.createElement('div'); line.className = 'tl-line';
@@ -683,29 +704,108 @@
   }
   var tl10 = buildTimeline('timeline10', ['15 años — primer estudio bíblico', 'Literatura clásica y cristiana', 'Lenguas originales', 'Hoy']);
 
-  /* ---------- shared: spend bar builder (Slide 9 · La inversión) — reuses
-     the header's own segmented-bar mechanism (scaleX sweep from the left)
-     at a larger scale. The six categories were given without individual
-     amounts, so the segments are deliberately equal-width — a label list,
-     never a fabricated proportion. ---------- */
-  var SPEND_CATS = ['Desarrollo (app + Biblia digital + panel de comunidad)', 'Primera tirada de Biblias', 'Constitución + legal', 'Operación (9 meses)', 'Marketing / ventas institucional', 'Viajes', 'Tecnología', 'Contingencia'];
-  function buildSpendBar(barId, labelsId, cats){
-    var bar = document.getElementById(barId), labelsWrap = document.getElementById(labelsId);
-    var segEls = [];
-    cats.forEach(function(label){
-      var seg = document.createElement('div'); seg.className = 'spend-seg';
-      var em2 = document.createElement('em');
-      seg.appendChild(em2);
-      bar.appendChild(seg);
-      segEls.push(em2);
-      var lbl = document.createElement('span'); lbl.textContent = label;
-      labelsWrap.appendChild(lbl);
+  /* ---------- shared: proportional donut for La inversión — percentages
+     were given per category, so this is a real breakdown, not a
+     decorative equal split. Colors reuse alpha/hue steps already in the
+     palette (navy family + steel + sky) — no new colors introduced. ---- */
+  var SPEND_CATS = [
+    {label:'Desarrollo (app + Biblia digital + panel de comunidad)', pct:54,  color:'var(--navy)'},
+    {label:'Sueldo fundadora (9 meses)',                             pct:16,  color:'var(--navy-82)'},
+    {label:'Contingencia',                                           pct:14,  color:'var(--navy-70)'},
+    {label:'Primera tirada de Biblias',                              pct:4.5, color:'var(--navy-55)'},
+    {label:'Constitución + legal',                                   pct:3.5, color:'var(--navy-38)'},
+    {label:'Marketing / ventas institucional',                       pct:3,   color:'var(--steel-dark)'},
+    {label:'Gestoría',                                               pct:2,   color:'var(--navy-16)'},
+    {label:'Viajes institucionales',                                 pct:2,   color:'var(--steel)'},
+    {label:'Tecnología / hosting',                                   pct:1.2, color:'var(--sky)'}
+  ];
+  function buildDonut(svgId, legendId, cats){
+    var svg = document.getElementById(svgId), legend = document.getElementById(legendId);
+    var segEls = [], cum = 0;
+    cats.forEach(function(cat){
+      var f = cat.pct/100;
+      var circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      circle.setAttribute('class','donut-seg');
+      circle.setAttribute('cx','100'); circle.setAttribute('cy','100'); circle.setAttribute('r','80');
+      circle.setAttribute('pathLength','1');
+      circle.setAttribute('stroke-dasharray', f+' '+(1-f));
+      circle.setAttribute('stroke-dashoffset', String(-cum));
+      circle.style.stroke = cat.color;
+      svg.appendChild(circle);
+      segEls.push(circle);
+      cum += f;
+
+      var item = document.createElement('div'); item.className = 'legend-item';
+      var dot = document.createElement('span'); dot.className = 'legend-dot'; dot.style.background = cat.color;
+      var text = document.createElement('div'); text.className = 'legend-text';
+      var pctStr = (cat.pct % 1 === 0) ? String(cat.pct) : cat.pct.toFixed(1).replace('.', ',');
+      var pctEl = document.createElement('b'); pctEl.className = 'legend-pct'; pctEl.textContent = pctStr + '%';
+      var lblEl = document.createElement('span'); lblEl.className = 'legend-label'; lblEl.textContent = cat.label;
+      text.appendChild(pctEl); text.appendChild(lblEl);
+      item.appendChild(dot); item.appendChild(text);
+      legend.appendChild(item);
     });
     return segEls;
   }
-  var spendSegs = buildSpendBar('spendBar', 'spendLabels', SPEND_CATS);
+  var spendSegs = buildDonut('donutSvg', 'spendLegend', SPEND_CATS);
 
-  /* ---------- shared: typewriter (Slide 1 & Slide 13, i.e. index 0 & 12)
+  /* ---------- shared: numbered step sequence (Slide 8 · Cómo llegamos) —
+     reuses the same connecting-line visual language as the vertical
+     timeline, extended with a number and a short paragraph per step ---- */
+  var STEP_DATA = [
+    {title:'A quién nos dirigimos', desc:'Oficinas de ministerio hispano en diócesis de EE.UU. (más del 80% ya tienen personal dedicado), parroquias, colegios y movimientos católicos.'},
+    {title:'Cómo llegamos a ellos', desc:'Contacto directo — reuniones con quien ya gestiona la formación y la catequesis de su comunidad, no publicidad masiva.'},
+    {title:'Qué les ofrecemos', desc:'Acceso a la plataforma para lanzar su propio itinerario bíblico: un grupo, un calendario de lectura, seguimiento simple de quién participa.'},
+    {title:'Cómo lo usan sus miembros', desc:'Con la app y la Biblia física, dentro del itinerario que su propia comunidad ha creado.'},
+    {title:'El objetivo de esta fase', desc:'Diez comunidades pagando, antes de construir nada más.'}
+  ];
+  function buildStepFlow(containerId, steps){
+    var container = document.getElementById(containerId);
+    var line = document.createElement('div'); line.className = 'step-line';
+    container.appendChild(line);
+    var items = [];
+    steps.forEach(function(step, i){
+      var item = document.createElement('div'); item.className = 'step-item'; item.id = 'step'+(i+1);
+      var num = document.createElement('div'); num.className = 'step-num'; num.textContent = i<9 ? ('0'+(i+1)) : String(i+1);
+      var text = document.createElement('div'); text.className = 'step-text';
+      var b = document.createElement('b'); b.textContent = step.title;
+      var p = document.createElement('p'); p.textContent = step.desc;
+      text.appendChild(b); text.appendChild(p);
+      item.appendChild(num); item.appendChild(text);
+      container.appendChild(item);
+      items.push(item);
+    });
+    var firstNum = items[0].querySelector('.step-num');
+    var lastNum = items[items.length-1].querySelector('.step-num');
+    var top = firstNum.offsetTop + firstNum.offsetHeight/2;
+    var bottom = lastNum.offsetTop + lastNum.offsetHeight/2;
+    line.style.top = top + 'px';
+    line.style.height = (bottom-top) + 'px';
+    return items;
+  }
+  var stepItems = buildStepFlow('stepFlow', STEP_DATA);
+
+  /* ---------- shared: "el camino" word-by-word reveal (Slide 6 & 7) —
+     each word becomes the protagonist in turn, then shrinks into a small
+     trail at the top as the next one takes over ---- */
+  var CAMINO_WORDS = ['Leer','Entender','Reflexionar','Preguntar','Escribir','Compartir','Vivir'];
+  var CAMINO_HERO_X = 800, CAMINO_HERO_Y = 560, CAMINO_TRAIL_Y = 250;
+  function caminoSlotX(i){ return 96 + (1408/CAMINO_WORDS.length)*(i+0.5); }
+  function caminoTrailOffset(i){ return {x:caminoSlotX(i)-CAMINO_HERO_X, y:CAMINO_TRAIL_Y-CAMINO_HERO_Y}; }
+  function buildCaminoPriorTrail(containerId, indices){
+    var el = document.getElementById(containerId);
+    indices.forEach(function(i){
+      var span = document.createElement('span');
+      span.className = 'camino-trail-item';
+      span.textContent = CAMINO_WORDS[i];
+      span.style.left = caminoSlotX(i) + 'px';
+      span.style.top = CAMINO_TRAIL_Y + 'px';
+      el.appendChild(span);
+    });
+  }
+  buildCaminoPriorTrail('caminoTrailPrior', [0,1,2,3]);
+
+  /* ---------- shared: typewriter (Slide 1 & Slide 14, i.e. index 0 & 13)
      — "La Palabra es " + a continuous type/delete loop through the exact
      word list, in order. Two independent instances of the same function,
      one per portada element, so the closing slide is a true duplicate. ---------- */
@@ -734,7 +834,7 @@
   startTypewriter('typeWord12');
 
   /* ---------- initial hidden states ---------- */
-  gsap.set('#slide-0 .titular, #slide-12 .titular', {opacity:0, y:18, filter:'blur(6px)'});
+  gsap.set('#slide-0 .titular, #slide-13 .titular', {opacity:0, y:18, filter:'blur(6px)'});
 
   gsap.set('#slide-1 .badge, #slide-1 .subtitulo, #slide-1 .destacada, #slide-1 .cierre', {opacity:0, y:16});
   gsap.set('#slide-1 .destacada', {filter:'blur(6px)'});
@@ -755,20 +855,23 @@
   gsap.set('#card-claudia, #card-pablo', {opacity:0, y:26});
   gsap.set('#qrBlock', {opacity:0, y:16});
 
-  gsap.set('#slide-6 .badge, #slide-6 .value-step, #slide-6 .value-arrow', {opacity:0, y:16});
-  gsap.set('#slide-6 .compare-col', {opacity:0, y:12});
+  gsap.set('#slide-6 .badge, #slide-7 .badge', {opacity:0, y:16});
+  gsap.set('.camino-word', {xPercent:-50, yPercent:-50, x:0, y:24, scale:.62, opacity:0});
+  gsap.set('#slide-7 .compare-col', {opacity:0, y:12});
 
-  gsap.set('#reach1, #reach2, #reach3, #slide-7 .badge', {opacity:0, y:16});
+  gsap.set('#slide-8 .badge', {opacity:0, y:16});
+  gsap.set('#stepFlow .step-item', {opacity:0, y:14});
 
-  gsap.set('#slide-8 .badge, #slide-8 .model-card', {opacity:0, y:16});
-  gsap.set('#slide-8 .dot-tag', {opacity:0, y:12});
-
-  gsap.set('#slide-9 .badge, #slide-9 .support', {opacity:0, y:16});
-  gsap.set('#spendLabels span', {opacity:0});
+  gsap.set('#slide-9 .badge, #slide-9 .model-card', {opacity:0, y:16});
+  gsap.set('#slide-9 .model-money', {opacity:0, y:12});
 
   gsap.set('#slide-10 .badge, #slide-10 .support', {opacity:0, y:16});
+  gsap.set('#slide-10 .donut-seg', {opacity:0});
+  gsap.set('#slide-10 .legend-item', {opacity:0, y:10});
 
-  gsap.set('#slide-11 .titular, #slide-11 .destacada', {opacity:0, y:16});
+  gsap.set('#slide-11 .badge, #slide-11 .support', {opacity:0, y:16});
+
+  gsap.set('#slide-12 .titular, #slide-12 .destacada', {opacity:0, y:16});
 
   /* continuous idle motion (independent of beats) */
   if (!reduced){
@@ -841,64 +944,94 @@
   }
 
   function renderSlide6(b){
-    // beat0: badge + el flujo de lectura (7 pasos + flechas), en secuencia
-    // beat1: la comparación de tres, con menor protagonismo
+    // "el camino" (1/2): Leer, Entender, Reflexionar, Preguntar — cada
+    // palabra es protagonista en su beat; la anterior se encoge y se
+    // atenúa hasta su lugar en el rastro superior
     fadeGroup('#slide-6 .badge', b>=0);
-    fadeGroup('#slide-6 .value-step', b>=0, {stagger:.12, delay:.15});
-    fadeGroup('#slide-6 .value-arrow', b>=0, {stagger:.12, delay:.32});
-    fadeGroup('#slide-6 .compare-col', b>=1, {stagger:.08});
+    [0,1,2,3].forEach(function(i){
+      var el = '#cw'+i;
+      if (b > i){
+        var off = caminoTrailOffset(i);
+        gsap.to(el, {x:off.x, y:off.y, scale:.2, opacity:.4, duration:reduced?.01:.7, ease:'power2.inOut'});
+      } else if (b === i){
+        gsap.to(el, {x:0, y:0, scale:1, opacity:1, duration:reduced?.01:.7, ease:'back.out(1.5)'});
+      } else {
+        gsap.to(el, {x:0, y:24, scale:.62, opacity:0, duration:reduced?.01:.4, ease:'power2.in'});
+      }
+    });
   }
 
   function renderSlide7(b){
-    // una tarjeta por beat, para poder narrar cada una en el pitch en vivo
+    // "el camino" (2/2): Escribir, Compartir, Vivir — mismo mecanismo,
+    // continuado (el rastro ya trae las 4 palabras previas). En el
+    // último beat el camino queda completo y aparece la comparación, con
+    // menor protagonismo pero tipografía notablemente mayor que antes
     fadeGroup('#slide-7 .badge', b>=0);
-    fadeGroup('#reach1', b>=1);
-    fadeGroup('#reach2', b>=2);
-    fadeGroup('#reach3', b>=3);
+    [4,5,6].forEach(function(gi, idx){
+      var el = '#cw'+gi;
+      if (b > idx){
+        var off = caminoTrailOffset(gi);
+        gsap.to(el, {x:off.x, y:off.y, scale:.2, opacity:.4, duration:reduced?.01:.7, ease:'power2.inOut'});
+      } else if (b === idx){
+        gsap.to(el, {x:0, y:0, scale:1, opacity:1, duration:reduced?.01:.7, ease:'back.out(1.5)'});
+      } else {
+        gsap.to(el, {x:0, y:24, scale:.62, opacity:0, duration:reduced?.01:.4, ease:'power2.in'});
+      }
+    });
+    fadeGroup('#slide-7 .compare-col', b>=3, {stagger:.1});
   }
 
   function renderSlide8(b){
-    // beat0: badge + las tres piezas que se complementan, juntas
-    // beat1: la monetización de cada capa, compacta
+    // un paso por beat, para narrar la secuencia completa en el pitch en vivo
     fadeGroup('#slide-8 .badge', b>=0);
-    fadeGroup('#slide-8 .model-card', b>=0, {stagger:.1, delay:.15});
-    fadeGroup('#slide-8 .dot-tag', b>=1, {stagger:.06});
+    gsap.to('#stepFlow .step-line', {scaleY:b>=0?1:0, duration:reduced?.01:1.1, ease:'power2.inOut', delay:b>=0?.1:0});
+    for (var i=1;i<=5;i++){
+      fadeGroup('#step'+i, b>=(i-1), {hideY:14});
+    }
   }
 
   function renderSlide9(b){
-    // beat0: badge + cifra (80.000€, cuenta una sola vez al entrar)
-    // beat1: la barra segmentada se despliega, categoría a categoría
-    // beat2: texto de apoyo
+    // beat0: badge + las tres piezas que se complementan
+    // beat1: justo debajo de cada una, quién paga por ella y cómo
     fadeGroup('#slide-9 .badge', b>=0);
-    gsap.to(spendSegs, {scaleX:b>=1?1:0, transformOrigin:'left center', duration:reduced?.01:.9, ease:'power2.out', stagger:.06, delay:b>=1?.1:0});
-    gsap.to('#spendLabels span', {opacity:b>=1?1:0, duration:D, stagger:.06, delay:b>=1?.35:0});
-    fadeGroup('#slide-9 .support', b>=2);
+    fadeGroup('#slide-9 .model-card', b>=0, {stagger:.1, delay:.15});
+    fadeGroup('#slide-9 .model-money', b>=1, {stagger:.1});
   }
 
   function renderSlide10(b){
+    // beat0: badge + cifra (100.000€, cuenta una sola vez al entrar)
+    // beat1: el desglose proporcional real se revela, categoría a categoría
+    // beat2: texto de apoyo
+    fadeGroup('#slide-10 .badge', b>=0);
+    gsap.to(spendSegs, {opacity:b>=1?1:0, duration:reduced?.01:.6, ease:'power2.out', stagger:.07, delay:b>=1?.1:0});
+    fadeGroup('#slide-10 .legend-item', b>=1, {stagger:.07, delay:.35});
+    fadeGroup('#slide-10 .support', b>=2);
+  }
+
+  function renderSlide11(b){
     // beat0: badge + línea de tiempo protagonista, los 4 hitos
     // beat1: frase de apoyo
-    fadeGroup('#slide-10 .badge', b>=0);
+    fadeGroup('#slide-11 .badge', b>=0);
     gsap.to('#timeline10 .tl-line', {scaleY:b>=0?1:0, duration:reduced?.01:1.1, ease:'power2.inOut', delay:b>=0?.15:0});
     tl10.points.forEach(function(pt, i){
       gsap.to(pt, {opacity:b>=0?1:0, duration:D, delay:b>=0?.3+i*.14:0});
     });
-    fadeGroup('#slide-10 .support', b>=1);
+    fadeGroup('#slide-11 .support', b>=1);
   }
 
-  function renderSlide11(b){
-    fadeGroup('#slide-11 .titular', b>=0, {blur:true});
-    fadeGroup('#slide-11 .destacada', b>=1, {blur:true, delay:.2});
+  function renderSlide12(b){
+    fadeGroup('#slide-12 .titular', b>=0, {blur:true});
+    fadeGroup('#slide-12 .destacada', b>=1, {blur:true, delay:.2});
   }
 
-  var renderSlide12 = function(b){ renderPortada(b, 12); };
+  var renderSlide13 = function(b){ renderPortada(b, 13); };
 
-  var renderers = [renderSlide0, renderSlide1, renderSlide2, renderSlide3, renderSlide4, renderSlide5, renderSlide6, renderSlide7, renderSlide8, renderSlide9, renderSlide10, renderSlide11, renderSlide12];
+  var renderers = [renderSlide0, renderSlide1, renderSlide2, renderSlide3, renderSlide4, renderSlide5, renderSlide6, renderSlide7, renderSlide8, renderSlide9, renderSlide10, renderSlide11, renderSlide12, renderSlide13];
 
   /* ---------- distinct per-slide entrance/exit motion for the slide's own
      root — no two consecutive slides share a movement, except the
-     deliberate echo: slide 0 (portada) and slide 12 (its exact copy) ---- */
-  var motionPreset = ['dissolve','rise','zoomIn','zoomInR','panDrift','riseCards','fanIn','zoomSlow','drawIn','mirrorIn','rise','zoomIn','dissolve'];
+     deliberate echo: slide 0 (portada) and slide 13 (its exact copy) ---- */
+  var motionPreset = ['dissolve','rise','zoomIn','zoomInR','panDrift','riseCards','fanIn','zoomSlow','drawIn','mirrorIn','rise','zoomIn','panDrift','dissolve'];
   function motionVars(preset, entering){
     switch(preset){
       case 'rise':      return entering ? {y:0, opacity:1} : {y:-26, opacity:0};
@@ -928,7 +1061,7 @@
       countUp(document.getElementById('num67'), 67, '%', 0, false);
       gsap.to('#slide-2 .ring-fill', {strokeDashoffset: 1-0.67, duration: reduced?.01:1.3, ease:'power2.out'});
     },
-    9: function(){ countUp(document.getElementById('numInversion'), 100000, '€', 0, true); }
+    10: function(){ countUp(document.getElementById('numInversion'), 100000, '€', 0, true); }
   };
   function goToSlideRoot(newSlide, oldSlide){
     if (oldSlide>=0 && oldSlide!==newSlide){
