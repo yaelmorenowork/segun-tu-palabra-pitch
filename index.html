@@ -149,44 +149,53 @@
   .slide{position:absolute; inset:0; z-index:1;}
 
   /* ---- Slide 0 & 12 · Portada — centrado puro, frase con efecto
-     typewriter en bucle. La slide 12 es una copia exacta: mismo
-     marcado, mismo código, mismo bucle de palabras. ---- */
+     typewriter en bucle, con el nombre del proyecto debajo. La slide 12
+     es una copia exacta: mismo marcado, mismo código, mismo bucle de
+     palabras. ---- */
   .portada-col{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:1200px; text-align:center;}
   .portada-col .titular{font-size:62px; font-weight:800; letter-spacing:-.02em; color:var(--navy); margin:0; line-height:1.3;}
+  .portada-col .portada-title{font-size:20px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--navy-55); margin:28px 0 0 0;}
   .type-word{color:var(--steel-dark);}
   .type-cursor{display:inline-block; width:3px; height:.85em; background:var(--steel-dark); margin-left:3px; vertical-align:-.08em; animation:caretBlink 1s step-end infinite;}
   @keyframes caretBlink{ 50%{ opacity:0; } }
 
-  /* ---- Slide 1 · El plano — asimétrico: texto a la izquierda; el lado
-     derecho queda deliberadamente en blanco (sin línea de tiempo) ---- */
+  /* ---- Slide 1 · El plano — asimétrico: texto a la izquierda; a la
+     derecha, la idea central de la slide, con más peso tipográfico que
+     cualquier otro texto en ella ---- */
   #slide-1 .badge{position:absolute; left:96px; top:190px;}
   #slide-1 .text-col{position:absolute; left:96px; top:290px; width:780px;}
   #slide-1 .subtitulo{font-size:26px; font-weight:600; color:var(--navy-55); margin:0;}
   #slide-1 .destacada{font-size:36px; font-weight:800; line-height:1.32; color:var(--navy); margin:26px 0 0 0;}
   #slide-1 .cierre{font-size:22px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:26px 0 0 0; max-width:660px;}
+  #slide-1 .cierre-final{font-size:22px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:14px 0 0 0; max-width:660px;}
+  #slide-1 .side-line{position:absolute; left:940px; top:340px; width:520px; font-size:46px; font-weight:800; line-height:1.28; color:var(--navy); margin:0;}
 
-  /* ---- Slide 2 · El problema — centrado, foco único: anillo circular
-     (mismo lenguaje visual que la barra segmentada superior, en redondo) ---- */
-  /* centering wrappers stay static/un-animated on purpose — GSAP overwrites
-     the whole inline transform on any x/y/rotate/scale tween, which would
-     silently clobber a CSS translateX(-50%) centering trick if applied to
-     the same element being animated */
-  #slide-2 .badge-wrap{position:absolute; left:50%; top:150px; transform:translateX(-50%);}
-  #slide-2 .ring-wrap{position:absolute; left:50%; top:222px; transform:translateX(-50%); width:300px; height:300px;}
+  /* ---- Slide 2 · El problema — grid de dos columnas: el anillo y el
+     texto a la izquierda; a la derecha, la lista de apps católicas con
+     Según tu Palabra en medio, destacada con el acento del sistema. La
+     lista se reproduce sola al entrar (ver playAppListSequence), tipo
+     carrusel vertical ---- */
+  #slide-2 .badge{position:absolute; left:96px; top:150px;}
+  #slide-2 .ring-wrap{position:absolute; left:220px; top:250px; width:300px; height:300px;}
   #slide-2 .ring-inner{position:relative; width:100%; height:100%;}
   #slide-2 .ring-svg{width:100%; height:100%; display:block;}
   #slide-2 .ring-track{fill:none; stroke:var(--chip-fill); stroke-width:16;}
   #slide-2 .ring-fill{fill:none; stroke:var(--navy); stroke-width:16; stroke-linecap:round; stroke-dasharray:1; stroke-dashoffset:1; transform:rotate(-90deg); transform-origin:100px 100px;}
   #slide-2 .num-wrap{position:absolute; left:0; top:50%; width:100%; transform:translateY(-50%); text-align:center;}
   #slide-2 .num{font-size:72px; font-weight:900; color:var(--navy); margin:0; letter-spacing:-.02em;}
-  #slide-2 .text-col{position:absolute; left:50%; top:558px; transform:translateX(-50%); width:760px; text-align:center;}
-  #slide-2 .subtitulo{font-size:30px; font-weight:500; line-height:1.4; color:var(--navy-55); margin:0;}
-  #slide-2 .cierre{font-size:26px; font-weight:700; color:var(--steel-dark); margin:22px 0 0 0;}
+  #slide-2 .text-col{position:absolute; left:96px; top:590px; width:600px;}
+  #slide-2 .subtitulo{font-size:26px; font-weight:500; line-height:1.4; color:var(--navy-55); margin:0;}
+  #slide-2 .subtitulo .nowrap{white-space:nowrap;}
+  #slide-2 .cierre{font-size:24px; font-weight:700; color:var(--steel-dark); margin:18px 0 0 0;}
+  #slide-2 .app-list{position:absolute; left:820px; top:260px; width:600px; display:flex; flex-direction:column; gap:22px;}
+  #slide-2 .app-item{font-size:27px; font-weight:600; color:var(--navy-38);}
+  #slide-2 .app-item.accent{color:var(--steel-dark); font-weight:800;}
 
   /* ---- Slide 3 · La solución — mockup del móvil (reutilizado tal cual)
-     a la derecha; título + los modos de estudio, ahora protagonistas,
-     a la izquierda — cada uno entra, se desplaza y se asienta antes de
-     que aparezca el siguiente (ver renderSlide3) ---- */
+     a la derecha, con controles nativos visibles para poder pausarlo y
+     reiniciarlo en directo; título + los modos de estudio, ahora
+     protagonistas, a la izquierda — cada uno entra, se desplaza y se
+     asienta antes de que aparezca el siguiente (ver renderSlide3) ---- */
   #slide-3 .badge{position:absolute; left:96px; top:168px;}
   #slide-3 .text-col{position:absolute; left:96px; top:290px; width:760px;}
   #slide-3 .titular{font-size:58px; font-weight:800; color:var(--navy); margin:0; letter-spacing:-.01em;}
@@ -206,7 +215,7 @@
   }
   #slide-3 .phone-screen{position:relative; width:100%; height:100%; border-radius:44px; overflow:hidden; background:#000;}
   #slide-3 .phone-screen video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;}
-  #slide-3 .phone-island{position:absolute; top:14px; left:50%; transform:translateX(-50%); width:90px; height:26px; border-radius:16px; background:#000; z-index:2;}
+  #slide-3 .phone-island{position:absolute; top:14px; left:50%; transform:translateX(-50%); width:90px; height:26px; border-radius:16px; background:#000; z-index:2; pointer-events:none;}
 
   /* ---- Slide 4 · La Biblia física — mockup fotográfico (reutilizado tal
      cual: misma foto, mismo flotado, misma sombra despegada) protagonista,
@@ -260,7 +269,9 @@
      reproduce SOLO, con temporización fija (ver playCaminoSequence),
      sin que el usuario tenga que hacer clic para avanzar cada palabra;
      al terminar, la fila entera crece a su tamaño final, grande y fijo.
-     Debajo, con menor protagonismo, la comparación de tres ---- */
+     Debajo, con menor protagonismo, la comparación de tres — Según tu
+     Palabra lleva el acento del sistema para leerse como la opción
+     destacada, no como una tercera columna igual a las otras dos ---- */
   #slide-6 .badge{position:absolute; left:96px; top:150px;}
   #slide-6 .value-flow{position:absolute; left:96px; top:340px; width:1408px; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:14px 16px;}
   #slide-6 .value-word{font-size:22px; font-weight:700; color:var(--navy-38); white-space:nowrap;}
@@ -269,6 +280,9 @@
   #slide-6 .compare-col{flex:1; padding-top:20px; border-top:1px solid var(--navy-16);}
   #slide-6 .compare-name{font-size:24px; font-weight:800; color:var(--navy-70); margin:0; text-transform:uppercase; letter-spacing:.03em;}
   #slide-6 .compare-desc{font-size:19px; font-weight:500; color:var(--navy-55); margin:10px 0 0 0; line-height:1.45;}
+  #slide-6 .compare-col.accent{border-top-color:var(--steel-dark);}
+  #slide-6 .compare-col.accent .compare-name{color:var(--steel-dark);}
+  #slide-6 .compare-col.accent .compare-desc{color:var(--steel-dark);}
 
   /* ---- Slide 7 · Cómo llegamos — secuencia numerada de 5 pasos,
      reutilizando el mismo lenguaje visual de línea de tiempo del resto
@@ -289,8 +303,9 @@
   #slide-7 .step-text p{font-size:19px; font-weight:500; line-height:1.5; color:var(--navy-55); margin:0; max-width:1180px;}
 
   /* ---- Slide 8 · El modelo — tres piezas que se complementan; justo
-     debajo de cada una, quién paga por ella y cómo, con el mismo peso
-     visual que la descripción de la pieza ---- */
+     debajo de cada una, quién paga por ella y cómo. Debajo de todo, sin
+     jerarquía entre sí, el esqueleto del proceso operativo — misma
+     tipografía en cada paso, una cadena, no una escalera ---- */
   #slide-8 .badge{position:absolute; left:96px; top:150px;}
   #slide-8 .model-grid{position:absolute; left:96px; top:270px; width:1408px; display:flex; gap:32px; align-items:flex-start;}
   #slide-8 .model-card{flex:1; padding:34px 30px; border-radius:24px; background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-line); box-shadow:var(--glass-shadow); text-align:center;}
@@ -299,40 +314,47 @@
   #slide-8 .model-money{margin-top:22px; padding-top:18px; border-top:1px solid var(--navy-16); display:flex; flex-direction:column; align-items:center; gap:10px;}
   #slide-8 .model-money .dot-tag{font-size:19px; font-weight:800; color:var(--navy);}
   #slide-8 .model-money .dot-tag i{width:9px; height:9px;}
+  #slide-8 .process-row{position:absolute; left:96px; top:640px; width:1408px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px 10px;}
+  #slide-8 .process-step{padding:12px 20px; border-radius:14px; white-space:nowrap; background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-line); box-shadow:var(--glass-shadow); font-size:17px; font-weight:700; color:var(--navy);}
+  #slide-8 .process-arrow{flex:none; color:var(--steel-dark); display:flex; align-items:center;}
 
-  /* ---- Slide 9 · La inversión — cifra dominante arriba; debajo, un
-     desglose proporcional real (porcentajes dados por categoría) en un
-     donut, mismo lenguaje visual que el anillo de "El problema" — nunca
-     una cifra por segmento inventada ---- */
-  #slide-9 .badge-wrap{position:absolute; left:50%; top:150px; transform:translateX(-50%);}
-  #slide-9 .num{position:absolute; left:50%; top:224px; transform:translateX(-50%); font-size:126px; font-weight:900; color:var(--navy); margin:0; letter-spacing:-.02em;}
-  #slide-9 .donut-wrap{position:absolute; left:96px; top:404px; width:290px; height:290px;}
+  /* ---- Slide 9 · La inversión — badge + cifra apilados a la izquierda,
+     justo encima del donut (que se queda en su sitio); leyenda en dos
+     columnas; a la derecha, tres tarjetas con lo que consigue esa
+     inversión — nunca una cifra por segmento inventada ---- */
+  #slide-9 .badge{position:absolute; left:96px; top:150px;}
+  #slide-9 .num{position:absolute; left:96px; top:210px; font-size:126px; font-weight:900; color:var(--navy); margin:0; letter-spacing:-.02em;}
+  #slide-9 .donut-wrap{position:absolute; left:96px; top:420px; width:290px; height:290px;}
   #slide-9 .donut-svg{width:100%; height:100%; display:block;}
   #slide-9 .donut-track{fill:none; stroke:var(--chip-fill); stroke-width:26;}
   #slide-9 .donut-seg{fill:none; stroke-width:26; transform:rotate(-90deg); transform-origin:100px 100px;}
-  #slide-9 .spend-legend{position:absolute; left:452px; top:404px; width:1052px; height:290px; display:grid; grid-template-columns:repeat(3,1fr); gap:20px 32px; align-content:center;}
+  #slide-9 .spend-legend{position:absolute; left:420px; top:420px; width:520px; display:grid; grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(3,auto); grid-auto-flow:column; gap:22px 36px;}
   #slide-9 .legend-item{display:flex; align-items:flex-start; gap:10px;}
   #slide-9 .legend-dot{width:14px; height:14px; border-radius:4px; flex:none; margin-top:4px;}
   #slide-9 .legend-text{display:flex; flex-direction:column; gap:3px;}
   #slide-9 .legend-pct{font-size:17px; font-weight:800; color:var(--navy);}
   #slide-9 .legend-label{font-size:15px; font-weight:600; color:var(--navy-70); line-height:1.4;}
-  #slide-9 .support-wrap{position:absolute; left:50%; top:730px; transform:translateX(-50%); width:1000px; text-align:center;}
+  #slide-9 .outcome-col{position:absolute; left:1000px; top:420px; width:504px; display:flex; flex-direction:column; gap:20px;}
+  #slide-9 .outcome-card{padding:26px 28px; border-radius:20px; background:var(--glass-fill-2); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border:1px solid var(--glass-line); box-shadow:var(--glass-shadow);}
+  #slide-9 .outcome-title{font-size:20px; font-weight:800; color:var(--navy); margin:0;}
+  #slide-9 .support-wrap{position:absolute; left:50%; top:760px; transform:translateX(-50%); width:1100px; text-align:center;}
   #slide-9 .support{font-size:23px; font-weight:600; line-height:1.5; color:var(--navy-55); margin:0;}
 
-  /* ---- Slide 10 · El recorrido — línea de tiempo vertical protagonista
-     (mismo componente que usaba antes la Slide "El plano"), frase de
-     apoyo al lado ---- */
+  /* ---- Slide 10 · El recorrido — línea de tiempo horizontal
+     protagonista, los cuatro hitos de izquierda a derecha; frase de
+     apoyo debajo, centrada ---- */
   #slide-10 .badge{position:absolute; left:96px; top:150px;}
-  #slide-10 .timeline-vert{position:absolute; left:230px; top:210px; width:420px; height:560px;}
-  #slide-10 .support{position:absolute; left:800px; top:440px; width:700px; font-size:26px; font-weight:700; font-style:italic; color:var(--steel-dark); margin:0; line-height:1.4;}
+  #slide-10 .timeline-horiz{position:absolute; left:96px; top:420px; width:1408px; height:150px;}
+  #slide-10 .support-wrap{position:absolute; left:50%; top:640px; transform:translateX(-50%); width:800px; text-align:center;}
+  #slide-10 .support{font-size:26px; font-weight:700; font-style:italic; color:var(--steel-dark); margin:0; line-height:1.4;}
 
-  /* ---- shared: línea de tiempo vertical — mismo componente reutilizado
-     en la Slide 10 (única que queda) ---- */
-  .timeline-vert{position:relative;}
-  .timeline-vert .tl-line{position:absolute; left:6px; top:0; bottom:0; width:2px; background:var(--navy-16); transform:scaleY(0); transform-origin:top;}
-  .timeline-vert .tl-point{position:absolute; left:0; display:flex; align-items:center; gap:18px; opacity:0;}
-  .timeline-vert .tl-dot{width:14px; height:14px; border-radius:50%; background:var(--steel-dark); border:3px solid var(--paper); box-shadow:0 2px 8px rgba(27,39,64,.18); flex:none;}
-  .timeline-vert .tl-label{font-size:19px; font-weight:700; color:var(--navy); line-height:1.3; white-space:nowrap;}
+  /* ---- shared: línea de tiempo horizontal — único componente de
+     recorrido que queda en el mazo (Slide 10) ---- */
+  .timeline-horiz{position:relative;}
+  .timeline-horiz .tlh-line{position:absolute; left:5%; right:5%; top:7px; height:2px; background:var(--navy-16); transform:scaleX(0); transform-origin:left;}
+  .timeline-horiz .tlh-point{position:absolute; top:0; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:16px; opacity:0; width:220px;}
+  .timeline-horiz .tlh-dot{width:14px; height:14px; border-radius:50%; background:var(--steel-dark); border:3px solid var(--paper); box-shadow:0 2px 8px rgba(27,39,64,.18); flex:none;}
+  .timeline-horiz .tlh-label{font-size:19px; font-weight:700; color:var(--navy); line-height:1.35; text-align:center;}
 
   /* ---- Slide 11 · Cierre contemplativo — centrado, mucho espacio en
      blanco, sin badge (el footer también se oculta en esta slide) ---- */
@@ -364,6 +386,7 @@
     <section class="slide" id="slide-0">
       <div class="portada-col">
         <h1 class="titular">La Palabra es <span class="type-word" id="typeWord0"></span><span class="type-cursor"></span></h1>
+        <p class="portada-title">Según tu Palabra</p>
       </div>
     </section>
 
@@ -374,12 +397,14 @@
         <p class="subtitulo">La Biblia es el libro más vendido de la historia.</p>
         <p class="destacada">Más de 3.900 millones de copias. Y aun así, es de los menos leídos.</p>
         <p class="cierre">No es un problema de fe. Es un problema de plano.</p>
+        <p class="cierre-final">Nos quedamos a la puerta de un edificio enorme.</p>
       </div>
+      <p class="side-line">Según tu Palabra quiere ser esa puerta.</p>
     </section>
 
     <!-- ============ SLIDE 3 · El problema ============ -->
     <section class="slide" id="slide-2">
-      <div class="badge-wrap"><div class="pill-tag badge">02 — El problema</div></div>
+      <div class="pill-tag badge">02 — El problema</div>
       <div class="ring-wrap">
         <div class="ring-inner">
           <svg class="ring-svg" viewBox="0 0 200 200">
@@ -390,8 +415,16 @@
         </div>
       </div>
       <div class="text-col">
-        <p class="subtitulo">de los católicos rara vez o nunca lee la Biblia (Pew Research)</p>
+        <p class="subtitulo">de los católicos rara vez o nunca lee la Biblia <span class="nowrap">(Pew Research)</span></p>
         <p class="cierre">Rezar y entender son cosas distintas.</p>
+      </div>
+      <div class="app-list" id="appList">
+        <div class="app-item" id="app0">Hallow</div>
+        <div class="app-item" id="app1">iBreviary</div>
+        <div class="app-item" id="app2">ePrex</div>
+        <div class="app-item accent" id="app3">Según tu Palabra</div>
+        <div class="app-item" id="app4">Rezando Voy</div>
+        <div class="app-item" id="app5">Laudate</div>
       </div>
     </section>
 
@@ -403,14 +436,14 @@
         <p class="chip-label">Modos de estudio</p>
         <div class="mode-list" id="modeList">
           <div class="mode-item" id="mode1">Histórico</div>
-          <div class="mode-item" id="mode2">Teológico</div>
+          <div class="mode-item" id="mode2">Cristológico</div>
           <div class="mode-item" id="mode3">Etimológico</div>
           <div class="mode-item" id="mode4">Pastoral</div>
         </div>
       </div>
       <div class="phone-mock" id="phoneMock">
         <div class="phone-screen">
-          <video id="appDemoVideo" autoplay loop muted playsinline></video>
+          <video id="appDemoVideo" autoplay loop muted playsinline controls></video>
           <div class="phone-island"></div>
         </div>
       </div>
@@ -475,7 +508,7 @@
           <p class="compare-name">Magisterium</p>
           <p class="compare-desc">Conocimiento / IA</p>
         </div>
-        <div class="compare-col">
+        <div class="compare-col accent">
           <p class="compare-name">Según tu Palabra</p>
           <p class="compare-desc">Biblia + comunidad + herramientas + distribución</p>
         </div>
@@ -511,11 +544,26 @@
           </div>
         </div>
       </div>
+      <div class="process-row" id="processRow">
+        <span class="process-step" id="proc0">Contacto</span>
+        <span class="process-arrow" id="parr0"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></span>
+        <span class="process-step" id="proc1">Acuerdo piloto</span>
+        <span class="process-arrow" id="parr1"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></span>
+        <span class="process-step" id="proc2">Configuración</span>
+        <span class="process-arrow" id="parr2"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></span>
+        <span class="process-step" id="proc3">Uso</span>
+        <span class="process-arrow" id="parr3"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></span>
+        <span class="process-step" id="proc4">Seguimiento</span>
+        <span class="process-arrow" id="parr4"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></span>
+        <span class="process-step" id="proc5">Pago</span>
+        <span class="process-arrow" id="parr5"><svg width="20" height="12" viewBox="0 0 28 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h22M18 2l6 6-6 6"/></svg></span>
+        <span class="process-step" id="proc6">Transacciones</span>
+      </div>
     </section>
 
     <!-- ============ SLIDE 10 · La inversión ============ -->
     <section class="slide" id="slide-9">
-      <div class="badge-wrap"><div class="pill-tag badge">07 — La inversión</div></div>
+      <div class="pill-tag badge">07 — La inversión</div>
       <p class="num" id="numInversion">0€</p>
       <div class="donut-wrap">
         <svg class="donut-svg" id="donutSvg" viewBox="0 0 200 200">
@@ -523,14 +571,19 @@
         </svg>
       </div>
       <div class="spend-legend" id="spendLegend"></div>
+      <div class="outcome-col" id="outcomeCol">
+        <div class="outcome-card"><p class="outcome-title">Producto en el mercado</p></div>
+        <div class="outcome-card"><p class="outcome-title">Empresa operativa</p></div>
+        <div class="outcome-card"><p class="outcome-title">Modelo validado</p></div>
+      </div>
       <div class="support-wrap"><p class="support">Para construir la app, sacar la primera tirada de 1.000 Biblias, constituir la empresa y sostener la operación durante los primeros 9 meses.</p></div>
     </section>
 
     <!-- ============ SLIDE 11 · El recorrido ============ -->
     <section class="slide" id="slide-10">
       <div class="pill-tag badge">08 — El recorrido</div>
-      <div class="timeline-vert" id="timeline10"></div>
-      <p class="support">Tardé años en encontrar el camino.</p>
+      <div class="timeline-horiz" id="timeline10"></div>
+      <div class="support-wrap"><p class="support">Tardé años en encontrar el camino.</p></div>
     </section>
 
     <!-- ============ SLIDE 12 · Cierre contemplativo ============ -->
@@ -545,6 +598,7 @@
     <section class="slide" id="slide-12">
       <div class="portada-col">
         <h1 class="titular">La Palabra es <span class="type-word" id="typeWord12"></span><span class="type-cursor"></span></h1>
+        <p class="portada-title">Según tu Palabra</p>
       </div>
     </section>
 
@@ -599,7 +653,7 @@
      reflect the BEAT within the current slide.
      ===================================================================== */
   var slideNames = ['PORTADA','EL PLANO','EL PROBLEMA','LA SOLUCIÓN','LA BIBLIA','PRUEBAS','PROPUESTA DE VALOR','CÓMO LLEGAMOS','EL MODELO','LA INVERSIÓN','EL RECORRIDO','CIERRE','PORTADA'];
-  var beatsPerSlide = [1, 3, 2, 5, 2, 2, 2, 5, 2, 3, 2, 2, 1];
+  var beatsPerSlide = [1, 4, 2, 5, 2, 2, 2, 5, 3, 4, 2, 2, 1];
   var beatTable = []; // [slideIdx, localBeat] per global state
   beatsPerSlide.forEach(function(n, s){ for (var b=0;b<n;b++) beatTable.push([s,b]); });
   var TOTAL = beatTable.length;
@@ -663,22 +717,21 @@
     });
   }
 
-  /* ---------- shared: vertical timeline builder (only Slide 10 uses this
-     now that Slide 1's decorative copy has been removed) ---------- */
+  /* ---------- shared: horizontal timeline builder (Slide 10 · El
+     recorrido — the only timeline left in the deck) ---------- */
   function buildTimeline(containerId, milestones){
     var el = document.getElementById(containerId);
-    var line = document.createElement('div'); line.className = 'tl-line';
+    var line = document.createElement('div'); line.className = 'tlh-line';
     el.appendChild(line);
     var points = [];
     var n = milestones.length;
     milestones.forEach(function(label, i){
-      var pct = n>1 ? (i/(n-1))*100 : 0;
+      var pct = n>1 ? 5 + (i/(n-1))*90 : 50;
       var pt = document.createElement('div');
-      pt.className = 'tl-point';
-      pt.style.top = pct + '%';
-      pt.style.transform = 'translateY(-50%)';
-      var dot = document.createElement('span'); dot.className = 'tl-dot';
-      var lbl = document.createElement('span'); lbl.className = 'tl-label'; lbl.textContent = label;
+      pt.className = 'tlh-point';
+      pt.style.left = pct + '%';
+      var dot = document.createElement('span'); dot.className = 'tlh-dot';
+      var lbl = document.createElement('span'); lbl.className = 'tlh-label'; lbl.textContent = label;
       pt.appendChild(dot); pt.appendChild(lbl);
       el.appendChild(pt);
       points.push(pt);
@@ -690,17 +743,17 @@
   /* ---------- shared: proportional donut for La inversión — percentages
      were given per category, so this is a real breakdown, not a
      decorative equal split. Colors reuse alpha/hue steps already in the
-     palette (navy family + steel + sky) — no new colors introduced. ---- */
+     palette (navy family + steel) — no new colors introduced. The minor
+     line items (gestoría, viajes, marketing, tecnología) are grouped
+     into a single "Operación y lanzamiento" slice to keep the legend to
+     two clean columns. ---- */
   var SPEND_CATS = [
     {label:'Desarrollo (app + Biblia digital + panel de comunidad)', pct:54,  color:'var(--navy)'},
     {label:'Sueldo fundadora (9 meses)',                             pct:16,  color:'var(--navy-82)'},
     {label:'Contingencia',                                           pct:14,  color:'var(--navy-70)'},
     {label:'Primera tirada de Biblias',                              pct:4.5, color:'var(--navy-55)'},
     {label:'Constitución + legal',                                   pct:3.5, color:'var(--navy-38)'},
-    {label:'Marketing / ventas institucional',                       pct:3,   color:'var(--steel-dark)'},
-    {label:'Gestoría',                                               pct:2,   color:'var(--navy-16)'},
-    {label:'Viajes institucionales',                                 pct:2,   color:'var(--steel)'},
-    {label:'Tecnología / hosting',                                   pct:1.2, color:'var(--sky)'}
+    {label:'Operación y lanzamiento (gestoría, viajes institucionales, marketing/ventas, tecnología)', pct:8, color:'var(--steel-dark)'}
   ];
   function buildDonut(svgId, legendId, cats){
     var svg = document.getElementById(svgId), legend = document.getElementById(legendId);
@@ -835,10 +888,30 @@
     }, CAMINO_WORDS.length*CAMINO_STEP_MS + 300);
   }
 
+  /* ---------- shared: app-name "carousel" auto-play (Slide 2 · El
+     problema) — each competitor name enters from below and settles
+     before the next one enters; once all six are in, the list stays put.
+     Same re-entry-safe generation-token pattern as playCaminoSequence. ---- */
+  var APP_LIST = ['Hallow','iBreviary','ePrex','Según tu Palabra','Rezando Voy','Laudate'];
+  var APP_STEP_MS = 420;
+  var appListGen = 0;
+  function playAppListSequence(){
+    var gen = ++appListGen;
+    gsap.set('.app-item', {opacity:0, y:30});
+    if (reduced){ gsap.set('.app-item', {opacity:1, y:0}); return; }
+    APP_LIST.forEach(function(w, i){
+      setTimeout(function(){
+        if (gen !== appListGen) return;
+        gsap.to('#app'+i, {opacity:1, y:0, duration:.45, ease:'power3.out'});
+      }, i*APP_STEP_MS);
+    });
+  }
+
   /* ---------- initial hidden states ---------- */
   gsap.set('#slide-0 .titular, #slide-12 .titular', {opacity:0, y:18, filter:'blur(6px)'});
+  gsap.set('#slide-0 .portada-title, #slide-12 .portada-title', {opacity:0, y:14});
 
-  gsap.set('#slide-1 .badge, #slide-1 .subtitulo, #slide-1 .destacada, #slide-1 .cierre', {opacity:0, y:16});
+  gsap.set('#slide-1 .badge, #slide-1 .subtitulo, #slide-1 .destacada, #slide-1 .cierre, #slide-1 .cierre-final, #slide-1 .side-line', {opacity:0, y:16});
   gsap.set('#slide-1 .destacada', {filter:'blur(6px)'});
 
   gsap.set('#slide-2 .badge, #slide-2 .subtitulo, #slide-2 .cierre', {opacity:0, y:16});
@@ -867,10 +940,12 @@
 
   gsap.set('#slide-8 .badge, #slide-8 .model-card', {opacity:0, y:16});
   gsap.set('#slide-8 .model-money', {opacity:0, y:12});
+  gsap.set('#slide-8 .process-step, #slide-8 .process-arrow', {opacity:0, y:12});
 
   gsap.set('#slide-9 .badge, #slide-9 .support', {opacity:0, y:16});
   gsap.set('#slide-9 .donut-seg', {opacity:0});
   gsap.set('#slide-9 .legend-item', {opacity:0, y:10});
+  gsap.set('#slide-9 .outcome-card', {opacity:0, y:14});
 
   gsap.set('#slide-10 .badge, #slide-10 .support', {opacity:0, y:16});
 
@@ -892,20 +967,25 @@
      ===================================================================== */
   function renderPortada(b, n){
     fadeGroup('#slide-'+n+' .titular', b>=0, {blur:true});
+    fadeGroup('#slide-'+n+' .portada-title', b>=0, {delay:.35});
   }
   var renderSlide0 = function(b){ renderPortada(b, 0); };
 
   function renderSlide1(b){
     // beat0: badge + subtítulo. beat1: destacada. beat2: cierre.
-    // The right side of the slide is intentionally left blank.
+    // beat3: la frase final de la izquierda + la idea protagonista de la
+    // derecha, juntas, como remate de la slide.
     fadeGroup('#slide-1 .badge', b>=0);
     fadeGroup('#slide-1 .subtitulo', b>=0, {delay:.15});
     fadeGroup('#slide-1 .destacada', b>=1, {blur:true});
     fadeGroup('#slide-1 .cierre', b>=2);
+    fadeGroup('#slide-1 .cierre-final', b>=3);
+    fadeGroup('#slide-1 .side-line', b>=3, {delay:.15});
   }
 
   function renderSlide2(b){
-    // beat0: badge + ring/67% (count-up fires once on enter, not here) + subtítulo
+    // beat0: badge + ring/67% (count-up y la lista de apps disparan una
+    // sola vez al entrar, no aquí) + subtítulo
     // beat1: frase de cierre
     fadeGroup('#slide-2 .badge', b>=0);
     fadeGroup('#slide-2 .num', b>=0, {scaleFrom:.92});
@@ -967,26 +1047,31 @@
   function renderSlide8(b){
     // beat0: badge + las tres piezas que se complementan
     // beat1: justo debajo de cada una, quién paga por ella y cómo
+    // beat2: el esqueleto del proceso operativo, debajo de todo
     fadeGroup('#slide-8 .badge', b>=0);
     fadeGroup('#slide-8 .model-card', b>=0, {stagger:.1, delay:.15});
     fadeGroup('#slide-8 .model-money', b>=1, {stagger:.1});
+    fadeGroup('#slide-8 .process-step', b>=2, {stagger:.08});
+    fadeGroup('#slide-8 .process-arrow', b>=2, {stagger:.08, delay:.2});
   }
 
   function renderSlide9(b){
     // beat0: badge + cifra (100.000€, cuenta una sola vez al entrar)
     // beat1: el desglose proporcional real se revela, categoría a categoría
-    // beat2: texto de apoyo
+    // beat2: las tres tarjetas de lo que se consigue con la inversión
+    // beat3: texto de apoyo
     fadeGroup('#slide-9 .badge', b>=0);
     gsap.to(spendSegs, {opacity:b>=1?1:0, duration:reduced?.01:.6, ease:'power2.out', stagger:.07, delay:b>=1?.1:0});
     fadeGroup('#slide-9 .legend-item', b>=1, {stagger:.07, delay:.35});
-    fadeGroup('#slide-9 .support', b>=2);
+    fadeGroup('#slide-9 .outcome-card', b>=2, {stagger:.1});
+    fadeGroup('#slide-9 .support', b>=3);
   }
 
   function renderSlide10(b){
-    // beat0: badge + línea de tiempo protagonista, los 4 hitos
+    // beat0: badge + línea de tiempo horizontal protagonista, los 4 hitos
     // beat1: frase de apoyo
     fadeGroup('#slide-10 .badge', b>=0);
-    gsap.to('#timeline10 .tl-line', {scaleY:b>=0?1:0, duration:reduced?.01:1.1, ease:'power2.inOut', delay:b>=0?.15:0});
+    gsap.to('#timeline10 .tlh-line', {scaleX:b>=0?1:0, duration:reduced?.01:1.1, ease:'power2.inOut', delay:b>=0?.15:0});
     tl10.points.forEach(function(pt, i){
       gsap.to(pt, {opacity:b>=0?1:0, duration:D, delay:b>=0?.3+i*.14:0});
     });
@@ -1028,13 +1113,15 @@
 
   var currentSlide = -1;
   /* fired exactly once, the instant a slide is entered from a different slide —
-     used for one-shot effects (count-up numbers, the 67% ring, the
-     camino auto-play) that must never restart on later beats of the same
-     slide, but do restart cleanly on a fresh re-entry. */
+     used for one-shot effects (count-up numbers, the 67% ring, the app
+     list carousel, the camino auto-play) that must never restart on
+     later beats of the same slide, but do restart cleanly on a fresh
+     re-entry. */
   var slideEnterHooks = {
     2: function(){
       countUp(document.getElementById('num67'), 67, '%', 0, false);
       gsap.to('#slide-2 .ring-fill', {strokeDashoffset: 1-0.67, duration: reduced?.01:1.3, ease:'power2.out'});
+      playAppListSequence();
     },
     6: function(){ playCaminoSequence(); },
     9: function(){ countUp(document.getElementById('numInversion'), 100000, '€', 0, true); }
