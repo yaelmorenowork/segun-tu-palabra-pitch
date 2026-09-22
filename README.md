@@ -4,6 +4,21 @@ Mazo interactivo de 13 slides en una sola página HTML autocontenida
 (`index.html`). Ábrelo directamente en el navegador, o sirve la carpeta
 (`npx http-server .`).
 
+## Versión en inglés
+
+`index-en.html` es la misma presentación, traducida al inglés — mismo
+sistema visual, misma estructura, mismos 35 beats, mismos assets
+(mockup de la Biblia, vídeo del móvil, QR) sin tocar. El nombre del
+producto, "Según tu Palabra", y los nombres reales de las apps
+competidoras (Hallow, iBreviary, ePrex, Rezando Voy, Laudate) se
+mantienen en español/su idioma original en ambas versiones — no se
+traducen nombres propios. La cita de Lucas 1:38 sí se tradujo al inglés
+estándar ("Let it be done to me according to your word."), lo que
+significa que el juego de palabras con el nombre del producto que
+existe en español no es evidente en la versión inglesa — es una
+consecuencia inevitable de mantener el nombre del producto sin
+traducir.
+
 ## Navegación
 
 - Clic en la mitad derecha/izquierda de la pantalla, botones ‹ ›, o
